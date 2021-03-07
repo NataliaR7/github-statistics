@@ -1,0 +1,32 @@
+.mainInfo {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(189, 187, 187);
+    grid-template-columns: 1fr 1.2fr;
+    grid-template-rows: 3fr 2fr 3fr;
+    grid-template-areas: 
+    "languages activity"
+    "languages recentActivity"
+    "repositories repositories";
+}
+
+.userLanguages {
+    grid-area: languages;
+    background-color: red;
+}
+
+.userActivity {
+    grid-area: activity;
+    background-color: blue;
+}
+
+.userRecentActivity {
+    grid-area: recentActivity;
+    background-color: green;
+}
+
+.userRepositories {
+    grid-area: repositories;
+    background-color: pink;
+}
