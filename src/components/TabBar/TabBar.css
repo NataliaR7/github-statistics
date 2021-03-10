@@ -1,0 +1,19 @@
+.tabBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right: 10px;
+}
+
+.tabBar .lineBar:first-child {
+    background-color: #F9DE59;
+    flex-grow: 2;
+    height: 1.4vh;
+}
+
+.tabBar .lineBar:first-child + div {
+    background-color: #E8A628;
+    flex-grow: 2;
+    height: 1.4vh;
+}

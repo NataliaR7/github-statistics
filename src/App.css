@@ -1,19 +1,30 @@
 .App {
-  text-align: center;
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 1fr 15fr;
+    grid-template-areas: 
+    "tabBar tabBar"
+    "userPanel mainInfo"
+    "userPanel mainInfo";
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.tabBar {
+  grid-area: tabBar;
+  background-color: #454545;
+}
+
+.userPanel {
+  grid-area: userPanel;
+  background-color: #575656;
+}
+
+.mainInfo {
+  grid-area: mainInfo;
+  background-color: rgb(230, 246, 255);
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
-
