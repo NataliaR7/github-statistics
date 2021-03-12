@@ -1,0 +1,65 @@
+.userHead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 15vw;
+}
+.userHead img {
+    width: 80%;
+    border-radius: 50%;
+    margin-top: 10%;
+}
+.username {
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #f4f4f4;
+    text-align: center;
+    font-size: 1.7vw;
+    margin: 5% 0;
+}
+
+.separatorLine {
+    border-bottom:  0.2vh solid #f4f4f4;
+    width: 60%;
+}
+
+.commonInfo {
+    display: grid;
+    grid-template-columns: 2fr 0.3fr 0.5fr 0.5fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    "follower empty star count"
+    "following empty star count";
+    margin: 1vw;
+    align-items: center;
+}
+.follower {
+    grid-area: follower;
+    font-size: 1.2vw;
+}
+.following {
+    grid-area: following;
+    font-size: 1.2vw;
+}
+
+.star {
+    fill: #989898;
+    grid-area: star;
+    justify-self: center;
+}
+
+.star:hover {
+    fill: #F9DE59;
+}
+
+.star + span {
+    grid-area: count;
+    font-size: 1.1vw;
+}
+
+.commonInfo span{
+    color: #f4f4f4;
+}
+
