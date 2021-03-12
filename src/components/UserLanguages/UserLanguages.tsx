@@ -34,25 +34,28 @@ const options = (lables: string[]) => ({
   }]
 })
 
-function GetLablesAndValues(data: {[key: string] : number}){
+function GetLablesAndValues(data: { [key: string]: number }) {
   let lables: string[] = []
   let values: number[] = []
-  for (let key in data){
+  for (let key in data) {
     lables.push(key);
     values.push(data[key])
   }
-  return {lables, values};
+  return { lables, values };
 }
 
+type PropType = { 
+  data: { [key: string]: number } 
+};
 
-function UserLanguages(data: {[key: string] : number}) {
-  let parsedData = GetLablesAndValues(data)
+function UserLanguages(props: PropType) {
+  let parsedData = GetLablesAndValues(props.data)
 
   return (
-      <div className="userLanguages">
-        <Chart options={options(parsedData.lables)} series={parsedData.values} type="pie" width={380} />
-      </div>
-    );
-  }
-  
-  export default UserLanguages;
+    <div className="userLanguages">
+      <Chart options={options(parsedData.lables)} series={parsedData.values} type="pie" width={380} />
+    </div>
+  );
+}
+
+export default UserLanguages;

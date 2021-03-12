@@ -130,8 +130,8 @@ function GetLablesAndValues(activityStatistic: {[key: string] : number}){
   return {xaxisData, values};
 }
 
-function UserActivity(data: {[key: string] : any}) {
-  let parsedData = GetLablesAndValues(data);
+function UserActivity(props: {data: {[key: string] : number}}) {
+  let parsedData = GetLablesAndValues(props.data);
     return (
       <div className="userActivity">
         <Chart type="bar" height={350} options={options(parsedData.xaxisData)} series={getSeries("Contributions" , parsedData.values)}/>

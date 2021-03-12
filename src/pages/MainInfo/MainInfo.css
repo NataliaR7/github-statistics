@@ -18,7 +18,6 @@
 
 .userActivity {
     grid-area: activity;
-    background-color: blue;
 }
 
 .userRecentActivity {
