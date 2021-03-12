@@ -17,7 +17,7 @@ function UserPanel() {
 
   useEffect(() => {
     const userDataReq = octokit.request('GET /users/{username}', {
-      username: 'Aminopyridin'
+      username: 'Nataliar7'
     })
       .then((res) => {
         const data = res.data;
@@ -39,7 +39,7 @@ function UserPanel() {
       });
 
     const userStarsReq = octokit.request('GET /users/{username}/starred?per_page=1', {
-      username: 'Aminopyridin'
+      username: 'Nataliar7'
     })
       .then((res) => {
         console.log(res)
