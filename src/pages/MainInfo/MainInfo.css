@@ -2,22 +2,22 @@
     display: grid;
     height: 100%;
     width: 100%;
-    background-color: rgb(189, 187, 187);
     grid-template-columns: 1fr 1.2fr;
     grid-template-rows: 3fr 2fr 3fr;
     grid-template-areas: 
     "languages activity"
     "languages recentActivity"
     "repositories repositories";
+    background-color: #F4F4F4;
 }
 
 .userLanguages {
     grid-area: languages;
-    background-color: red;
 }
 
 .userActivity {
     grid-area: activity;
+
 }
 
 .userRecentActivity {
