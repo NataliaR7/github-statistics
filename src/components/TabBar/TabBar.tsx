@@ -1,4 +1,4 @@
-import Tab from './Tab';
+import Tab from '../../containers/TabBar/Tab';
 import './TabBar.css';
 
 

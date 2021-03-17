@@ -1,0 +1,55 @@
+
+.userAdditional {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #f4f4f4;
+    font-size: 1vw;
+    max-height: 40vh;
+    overflow: hidden;
+}
+
+
+.label {
+    color: #989898;
+    font-size: 1.35vw;
+    margin-top: 0.2vw;
+    font-variant: small-caps;
+}
+
+.organizations {
+    color: #f4f4f4;
+    font-size: 1.5vw;
+    margin-top: 1vw;
+    font-variant: small-caps;
+}
+
+a {
+    color: #f4f4f4;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+.pictures img {
+    width: 2vw;
+    border-radius: 30%;
+    margin: 0.2vw 0.2vw;
+    border: 0.1vw solid rgb(95, 95, 95) ;
+}
+
+.small,
+.small + a,
+.small span {
+    font-size: 1.1vw;
+}
+
+.small + span, 
+.small + a {
+    font-size: 0.9vw;
+}
+
+.small .pictures img{
+    width: 1.4vw;
+}

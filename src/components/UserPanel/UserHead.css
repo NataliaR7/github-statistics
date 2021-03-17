@@ -3,21 +3,23 @@
     flex-direction: column;
     align-items: center;
     max-width: 15vw;
+    color: #f4f4f4;
+    font-size: 1vw;
 }
 .userHead img {
-    width: 80%;
+    width: 12vw;
     border-radius: 50%;
-    margin-top: 10%;
+    margin-top: 1vw;
+    border: 0.2vw solid rgb(95, 95, 95);
 }
 .username {
-    width: 80%;
+    
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #f4f4f4;
     text-align: center;
     font-size: 1.7vw;
-    margin: 5% 0;
+    margin-bottom: 0.5vw;
 }
 
 .separatorLine {
@@ -37,11 +39,9 @@
 }
 .follower {
     grid-area: follower;
-    font-size: 1.2vw;
 }
 .following {
     grid-area: following;
-    font-size: 1.2vw;
 }
 
 .star {
@@ -59,7 +59,10 @@
     font-size: 1.1vw;
 }
 
-.commonInfo span{
-    color: #f4f4f4;
+.repoInfo {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    margin-left: 1vw;
 }
 

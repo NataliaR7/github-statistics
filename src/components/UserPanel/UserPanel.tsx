@@ -1,62 +1,99 @@
 import UserHead from './UserHead';
+import UserAdditional from './UserAdditional';
 import { Octokit } from "@octokit/rest"
 import { useState, useEffect } from 'react';
+import './UserPanel.css';
 
-const octokit = new Octokit();
-type StateType = {
+export const octokit = new Octokit();
+type UserDataType = {
   avatar?: string;
   username?: string;
   followerCount?: number;
   followingCount?: number;
   starCount?: string;
+  createdDate?: Date;
+  location?: string | null;
+  email?: string | null;
+  site?: string | null;
+  name?: string | null;
+  orgs?: ({
+    avatar: string;
+    login: string;
+    url: string;
+  })[]
 };
 
+type RepoDataType = {
+  repositories?: [];
+  repoCount?: number;
+};
+
+const user = 'Aminopyridin';
+
 function UserPanel() {
-  const [userData, setUserData] = useState<StateType>({});
+  const [userData, setUserData] = useState<UserDataType>({});
+  //const [repoData, setRepoData] = useState<RepoDataType>({});
   const [isLoadedData, setIsLoadedData] = useState(false);
 
+  async function getUserData() {
+    const userDataReq = await octokit.request('GET /users/{username}', {
+      username: user
+    });
+
+    const userStarsReq = await octokit.request('GET /users/{username}/starred?per_page=1', {
+      username: user
+    });
+
+    const userOrgsReq = await octokit.request('GET /users/{username}/orgs', {
+      username: user
+    });
+
+    console.log(userDataReq, "user");
+    console.log(userStarsReq, "stars");
+    console.log(userOrgsReq, "orgs");
+    const data = userDataReq.data;
+    const count = `${userStarsReq.headers.link}`.match(/=(\d+)>; rel=\"last\"/);
+    const orgs = userOrgsReq.data.map((org) => {
+      return {
+        avatar: org.avatar_url,
+        login: org.login,
+        url: org.url
+      }
+    });
+    //console.log(orgs);
+
+    setUserData(userData => userData = {
+      ...userData,
+      avatar: data.avatar_url,
+      username: data.login,
+      followerCount: data.followers,
+      followingCount: data.following,
+      starCount: count ? count[1] : '0',
+      location: data.location,
+      email: data.email,
+      site: data.blog,
+      name: data.name,
+      orgs: orgs,
+      createdDate: new Date(data.created_at),
+    });
+
+  }
+
+  async function getUserAdditional() {
+
+  }
+
+  // async function getRepoData() {
+  //   const repoDataReq = await octokit.request('GET /users/{username}/repos?per_page=1', {
+  //     username: user
+  //   });
+  //   console.log(repoDataReq, "repo");
+  // }
+
   useEffect(() => {
-    const userDataReq = octokit.request('GET /users/{username}', {
-      username: 'Nataliar7'
-    })
-      .then((res) => {
-        const data = res.data;
-        console.log(res)
-        setUserData(userData => userData = {
-          ...userData,
-          avatar: data.avatar_url,
-          username: data.login,
-          followerCount: data.followers,
-          followingCount: data.following
-        });
-        console.log("1")
-        //setIsLoadedData(true);
-        // console.log(res.data)
-        // octokit.request(data.starred_url)
-        //   .then((res) => {
-        //     console.log(res, " 666666")
-        //   });
-      });
-
-    const userStarsReq = octokit.request('GET /users/{username}/starred?per_page=1', {
-      username: 'Nataliar7'
-    })
-      .then((res) => {
-        console.log(res)
-        const count = `${res.headers.link}`.match(/=(\d+)>; rel=\"last\"/)
-        setUserData(userData => userData = {
-          ...userData,
-          starCount: count ? count[1] : '0'
-        });
-        console.log(userData);
-
-        console.log("2")
-        // console.log(res.data)
-      });
-
-    Promise.all([userDataReq, userStarsReq]).then(() => {
-      setIsLoadedData(true);
-    })
+    getUserData();
+    //getRepoData();
+    setIsLoadedData(true);
   }, [isLoadedData]);
 
 
@@ -70,7 +107,16 @@ function UserPanel() {
           followerCount={userData.followerCount}
           followingCount={userData.followingCount}
           starCount={userData.starCount} />
-
+        <UserAdditional
+          location={userData.location}
+          email={userData.email}
+          site={userData.site}
+          name={userData.name}
+          orgs={userData.orgs} />
+        <div className="created">
+          <span>created at</span>
+          <span>{`${userData.createdDate?.getDate()}.${userData.createdDate?.getMonth()}.${userData.createdDate?.getFullYear()}`}</span>
+        </div>
       </>
     )
   }

@@ -1,0 +1,16 @@
+.userPanel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 15vw;
+}
+
+.created {
+    margin: auto 1vw 1vw 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #f4f4f4;
+    font-size: 1.3vw;
+    font-variant: small-caps;
+}

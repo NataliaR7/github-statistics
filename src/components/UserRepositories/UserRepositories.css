@@ -1,0 +1,10 @@
+.head {
+    display: flex;
+    background-color: #EEEEEE;
+    font-variant: small-caps;
+    font-size: 1.6vw;
+    height: 4vh;
+    color: #454545;
+    align-items: center;
+    padding: 0 0 0.5vh 1vw;
+}
