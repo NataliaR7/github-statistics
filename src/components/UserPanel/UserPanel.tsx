@@ -36,9 +36,9 @@ function UserPanel() {
   const [isLoadedData, setIsLoadedData] = useState(false);
 
   async function getUserData() {
-    const userDataReq = await octokit.request('GET /users/{username}', {
-      username: user
-    });
+    // const userDataReq = await octokit.request('GET /users/{username}', {
+    //   username: user
+    // });
 
     const userStarsReq = await octokit.request('GET /users/{username}/starred?per_page=1', {
       username: user
@@ -48,10 +48,13 @@ function UserPanel() {
       username: user
     });
 
-    console.log(userDataReq, "user");
+    //console.log(userDataReq, "user");
     console.log(userStarsReq, "stars");
     console.log(userOrgsReq, "orgs");
-    const data = userDataReq.data;
+    //const data = userDataReq.data;
+    const response = await fetch('/user');
+    const data = await response.json();
+    console.log(data, "userData");
     const count = `${userStarsReq.headers.link}`.match(/=(\d+)>; rel=\"last\"/);
     const orgs = userOrgsReq.data.map((org) => {
       return {

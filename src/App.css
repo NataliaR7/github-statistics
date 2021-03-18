@@ -1,16 +1,10 @@
 .App {
-    display: grid;
     height: 100vh;
     width: 100vw;
-    grid-template-columns: 1fr 6fr;
-    grid-template-rows: 1fr 15fr;
-    grid-template-areas: 
-    "tabBar tabBar"
-    "userPanel mainInfo"
-    "userPanel mainInfo";
+     
 }
 
-.tabBar {
+/*.tabBar {
   grid-area: tabBar;
   background-color: #454545;
 }
@@ -26,4 +20,4 @@
 
 .App-link {
     color: #61dafb;
-}
+} */

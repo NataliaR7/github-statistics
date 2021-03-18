@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import TabBar from './components/TabBar/TabBar';
-import UserPanel from './components/UserPanel/UserPanel';
-import MainInfo from './pages/MainInfo/MainInfo';
-import Repositories from './pages/Repositories/Repositories';
+import General from './pages/General/General';
+import Login from './containers/Login';
 import { rootReducer } from './reducers';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -13,30 +11,30 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import store from './store'
 
-type StateType = {
-  activePage: string,
-};
+// type StateType = {
+//   activePage: string,
+//   isLoggedIn: boolean
+// };
 
-const preloadedState: StateType = {
-  activePage: "/main",
-};
+// const preloadedState: StateType = {
+//   activePage: "/login",
+//   isLoggedIn: false
+// };
 
-const store = createStore(rootReducer, preloadedState);
+// const store = createStore(rootReducer, preloadedState);
 
 function App() {
+
   return (
     <div className="App">
       <Provider store={store}>
         <Router>
-          <TabBar />
-          <UserPanel />
-
           <Switch>
-            <Redirect exact from="/" to="/main" />
-            <Route path="/main" component={MainInfo} />
-            <Route path="/about" />
-            <Route path="/repo" component={Repositories} />
+            {!(store.getState().isLoggedIn) && <Redirect exact from="/" to="/main" />}
+            <Route path="/login" component={Login} />
+            <Route path="/main" component={General} />
           </Switch>
         </Router>
       </Provider>

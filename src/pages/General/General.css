@@ -1,0 +1,25 @@
+.General {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 1fr 15fr;
+    grid-template-areas:
+        'tabBar tabBar'
+        'userPanel mainInfo'
+        'userPanel mainInfo';
+}
+
+.tabBar {
+    grid-area: tabBar;
+    background-color: #454545;
+}
+
+.userPanel {
+    grid-area: userPanel;
+    background-color: #575656;
+}
+
+.mainInfo {
+    grid-area: mainInfo;
+}
