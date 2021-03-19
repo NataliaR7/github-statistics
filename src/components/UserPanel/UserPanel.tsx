@@ -40,23 +40,29 @@ function UserPanel() {
     //   username: user
     // });
 
-    const userStarsReq = await octokit.request('GET /users/{username}/starred?per_page=1', {
-      username: user
-    });
+    // const userStarsReq = await octokit.request('GET /users/{username}/starred?per_page=1', {
+    //   username: user
+    // });
 
-    const userOrgsReq = await octokit.request('GET /users/{username}/orgs', {
-      username: user
-    });
+    // const userOrgsReq = await octokit.request('GET /users/{username}/orgs', {
+    //   username: user
+    // });
 
     //console.log(userDataReq, "user");
-    console.log(userStarsReq, "stars");
-    console.log(userOrgsReq, "orgs");
+    // console.log(userStarsReq, "stars");
+    // console.log(userOrgsReq, "orgs");
     //const data = userDataReq.data;
-    const response = await fetch('/user');
-    const data = await response.json();
-    console.log(data, "userData");
-    const count = `${userStarsReq.headers.link}`.match(/=(\d+)>; rel=\"last\"/);
-    const orgs = userOrgsReq.data.map((org) => {
+    const responseUser = await fetch('/user');
+    const data = await responseUser.json();
+    
+    const responseStars = await fetch('/starred');
+    const userStars = await responseStars.json();
+    const count = `${userStars.headers.link}`.match(/=(\d+)>; rel=\"last\"/);
+
+    const responseOrgs = await fetch('/orgs');
+    const userOrgs = await responseOrgs.json();
+
+    const orgs = userOrgs.map((org: any) => {
       return {
         avatar: org.avatar_url,
         login: org.login,

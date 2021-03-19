@@ -42,14 +42,15 @@ async function setHref(target: EventTarget & HTMLAnchorElement, orgLogin: string
         org: orgLogin
     });
     target.href = orgReq.data.html_url;
+    window.open(orgReq.data.html_url);
 }
 
 function getOrgs(orgs: PropType["orgs"], isSmall: boolean) {
     const organizationsClass = isSmall ? " small" : "";
     return (
-        <div className={"organizations" + organizationsClass}>
+        <div className={"organizations" }>
             <span>organizations</span>
-            <div className="pictures">
+            <div className={"pictures" + organizationsClass}>
                 {orgs && orgs.map((org) =>
                     <a href="#" onClick={(e) => { setHref(e.currentTarget, org.login) }}>
                         <img src={org.avatar} alt={org.login} title={org.login} /* onClick={() => setHref(org.login) }*/ />

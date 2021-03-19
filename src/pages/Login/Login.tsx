@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import store from '../../store'
+import Cookies from 'js-cookie';
 
 
 export default function Login(props: { isLoggedIn: boolean, toLoggedIn: (x: boolean) => void }) {
@@ -24,21 +25,26 @@ export default function Login(props: { isLoggedIn: boolean, toLoggedIn: (x: bool
             });
             response.then(res => {
                 if (res.ok && !props.isLoggedIn) {
-                    props.toLoggedIn(true); //dispatch
+                    console.log("login post");
+                    //props.toLoggedIn(true); //dispatch
+                    Cookies.set('isLoggedIn', 'true');
                     setIsLoading(true);
                 }
             });
         }
     }, [isLoading]);
 
-    if (props.isLoggedIn) {
-        return <Redirect to="/" />;
+    if (/* props.isLoggedIn */!!Cookies.get('isLoggedIn')) {
+        console.log(!!Cookies.get('isLoggedIn'), "SATATE");
+        return <Redirect to="/main" />;
     }
 
     return (
         <div className="container">
             <h1>Welcome</h1>
             <span>Super amazing app</span>
+            {/* {store.getState().isLoggedIn && console.log("FFFFFFF")}
+            {console.log(store.getState().isLoggedIn, "FFFFFFF1")} */}
             {!isLoading && <div className="login-container">
                 <a
                     className="login-link"

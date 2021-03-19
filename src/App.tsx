@@ -32,9 +32,11 @@ function App() {
       <Provider store={store}>
         <Router>
           <Switch>
-            {!(store.getState().isLoggedIn) && <Redirect exact from="/" to="/main" />}
+            {!(store.getState().isLoggedIn) ?
+              <Redirect exact from="/" to="/login" /> :
+              <Redirect exact from="/" to="/main" />}
             <Route path="/login" component={Login} />
-            <Route path="/main" component={General} />
+            <Route path="/" component={General} />
           </Switch>
         </Router>
       </Provider>

@@ -19,7 +19,7 @@
 
 .organizations {
     color: #f4f4f4;
-    font-size: 1.5vw;
+    font-size: 1.4vw;
     margin-top: 1vw;
     font-variant: small-caps;
 }
@@ -42,7 +42,7 @@ a:hover {
 .small,
 .small + a,
 .small span {
-    font-size: 1.1vw;
+    font-size: 1.2vw;
 }
 
 .small + span, 
@@ -50,6 +50,6 @@ a:hover {
     font-size: 0.9vw;
 }
 
-.small .pictures img{
+.small img{
     width: 1.4vw;
 }

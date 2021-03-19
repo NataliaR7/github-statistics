@@ -17,7 +17,7 @@ const app = express();
 const port = 3001;
 //let octokit;
 let octokit = new Octokit();
-const user = 'Aminopyridin';
+const user = 'nulladdict';
 
 app.use(bodyParser.json());
 
@@ -55,6 +55,26 @@ app.get('/user', (req, res) => {
         .then((result) => {
             // console.log(result, 'login');
             // console.log(result.headers, 'login');
+            res.json(result.data);
+        });
+});
+
+app.get('/starred', (req, res) => {
+    octokit
+        .request('GET /users/{username}/starred?per_page=1', {
+            username: user,
+        })
+        .then((result) => {
+            res.json(result);
+        });
+});
+
+app.get('/orgs', (req, res) => {
+    octokit
+        .request('GET /users/{username}/orgs', {
+            username: user,
+        })
+        .then((result) => {
             res.json(result.data);
         });
 });
