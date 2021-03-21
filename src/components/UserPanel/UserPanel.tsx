@@ -14,6 +14,8 @@ type UserDataType = {
   createdDate?: Date;
   location?: string | null;
   email?: string | null;
+  reposCount?: number;
+  forkCount?: number;
   site?: string | null;
   name?: string | null;
   orgs?: ({
@@ -35,6 +37,8 @@ function UserPanel() {
   //const [repoData, setRepoData] = useState<RepoDataType>({});
   const [isLoadedData, setIsLoadedData] = useState(false);
 
+  
+
   async function getUserData() {
     // const userDataReq = await octokit.request('GET /users/{username}', {
     //   username: user
@@ -54,7 +58,7 @@ function UserPanel() {
     //const data = userDataReq.data;
     const responseUser = await fetch('/user');
     const data = await responseUser.json();
-    
+    const activ = await fetch('/activity')
     const responseStars = await fetch('/starred');
     const userStars = await responseStars.json();
     const count = `${userStars.headers.link}`.match(/=(\d+)>; rel=\"last\"/);
@@ -78,6 +82,8 @@ function UserPanel() {
       followerCount: data.followers,
       followingCount: data.following,
       starCount: count ? count[1] : '0',
+      reposCount: data.public_repos,
+      forkCount: 0,
       location: data.location,
       email: data.email,
       site: data.blog,
@@ -108,6 +114,7 @@ function UserPanel() {
 
 
   const renderData = () => {
+    console.log(userData)
     return (
       <>
         <UserHead
@@ -115,7 +122,9 @@ function UserPanel() {
           username={userData.username}
           followerCount={userData.followerCount}
           followingCount={userData.followingCount}
-          starCount={userData.starCount} />
+          starCount={userData.starCount}
+          repoCount={userData.reposCount}
+          forkCount={userData.forkCount} />
         <UserAdditional
           location={userData.location}
           email={userData.email}

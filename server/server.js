@@ -8,8 +8,8 @@ const { Octokit } = require('@octokit/rest');
 const bodyParser = require('body-parser');
 
 const auth = createOAuthAppAuth({
-    clientId: '9607ea01165c834b3511',
-    clientSecret: 'd1a3275c68271ec88d7920673a3fbf89da40bd5d',
+    clientId: 'a53c785b082e97521c98',
+    clientSecret: '66956b1c638c8b4372e90b76a2ff7dd0506c9db1',
     redirectUrl: 'http://localhost:3000/main/login',
 });
 
@@ -17,8 +17,8 @@ const app = express();
 const port = 3001;
 //let octokit;
 let octokit = new Octokit();
-const user = 'nulladdict';
-
+const user = 'Aminopyridin';
+// Aminopyridin
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -47,14 +47,13 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/user', (req, res) => {
-    //console.log(octokit, 'octokit');
     octokit
         .request('GET /users/{username}', {
             username: user,
         })
         .then((result) => {
-            // console.log(result, 'login');
-            // console.log(result.headers, 'login');
+            console.log(result.headers['x-ratelimit-used'], "user");
+            console.log(result.data, 'login');
             res.json(result.data);
         });
 });
@@ -65,6 +64,7 @@ app.get('/starred', (req, res) => {
             username: user,
         })
         .then((result) => {
+            console.log(result.headers['x-ratelimit-used'], "starred");
             res.json(result);
         });
 });
@@ -75,6 +75,7 @@ app.get('/orgs', (req, res) => {
             username: user,
         })
         .then((result) => {
+            console.log(result.headers['x-ratelimit-used'], "orgs");
             res.json(result.data);
         });
 });
@@ -82,6 +83,42 @@ app.get('/orgs', (req, res) => {
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
+
+app.get('/repos', (req, res) => {
+    octokit
+        .request('GET /users/{username}/repos', {
+            username: user,
+        })
+        .then((result) => {
+            console.log(result.headers['x-ratelimit-used'], "repos");
+            console.log(result.headers);
+            res.json(result.data);
+        });
+});
+// https://github-contributions.now.sh/api/v1/vabyars
+app.get('/activity', (req, res) => {
+    octokit
+        .request('https://api.github.com/users/vabyars/events', {
+            username: user,
+        })
+        .then((result) => {
+            console.log(result.headers['x-ratelimit-used'], "activity");
+            console.log(result.data)
+            // res.json(result.data);
+        });
+});
+
+app.post("/reposlang", (req, res) => {
+    octokit
+        .request('GET /repos/{username}/{name}/languages', {
+            username: user,
+            name: req.body.reposName
+        })
+        .then((result) => {
+            console.log(result.headers['x-ratelimit-used'], "reposlang", req.body.reposName);
+            res.json(result.data);
+        });
+})
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);

@@ -23,8 +23,8 @@ function UserHead(props: PropType) {
                 {starSvg()}<span> {props.starCount}</span>
             </div>
             <div className="repoInfo">
-                <span>{props.repoCount}1 public repositories</span>
-                <span>{props.forkCount}1 forks</span>
+                <span>{props.repoCount} public repositories</span>
+                <span>{props.forkCount} forks</span>
             </div>
         </div>
     );

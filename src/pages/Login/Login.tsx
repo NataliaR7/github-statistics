@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 export default function Login(props: { isLoggedIn: boolean, toLoggedIn: (x: boolean) => void }) {
     const [isLoading, setIsLoading] = useState(false);
 
-    const clientId = "9607ea01165c834b3511";
+    const clientId = "a53c785b082e97521c98";
     const redirectUri = "http://localhost:3000/login";
 
     useEffect(() => {
@@ -26,6 +26,7 @@ export default function Login(props: { isLoggedIn: boolean, toLoggedIn: (x: bool
             response.then(res => {
                 if (res.ok && !props.isLoggedIn) {
                     console.log("login post");
+                    console.log(res);
                     //props.toLoggedIn(true); //dispatch
                     Cookies.set('isLoggedIn', 'true');
                     setIsLoading(true);
