@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts'
 
 const options = (lables: string[]) => ({
@@ -44,13 +45,48 @@ function GetLablesAndValues(data: { [key: string]: number }) {
   return { lables, values };
 }
 
+
+
 type PropType = { 
   data: { [key: string]: number } 
 };
 
 function UserLanguages(props: PropType) {
-  let parsedData = GetLablesAndValues(props.data)
+  let [data, setData] = useState<{ [key: string]: number }>({})
+  let [isDataChange, setIsDataChange] = useState(false) 
+  
+  async function getReposLanguages(reposName: string){  
+    const lang = await fetch("/reposlang", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+    },
+      body: JSON.stringify({reposName: reposName})
+    })    
+    return await lang.json()
+  }  
+  
+  async function getLanguagesStatistic(){
+    const repositories = await fetch('/repos')
+    let result: { [key: string]: number }  = {}
+    const reposdata = await repositories.json()
+    for (let repos of reposdata){
+      let reposLanguages = await getReposLanguages(repos.name)
+      for (let key in reposLanguages){
+        if (!result[key])
+          result[key] = reposLanguages[key]
+        result[key] += reposLanguages[key]
+      }
+    }
+    setData(result)
+    setIsDataChange(true)
+  }
 
+  useEffect(() => {
+    getLanguagesStatistic()
+  }, [])
+  
+  let parsedData = GetLablesAndValues(data)
   return (
     <div className="userLanguages">
       <Chart options={options(parsedData.lables)} series={parsedData.values} type="pie" width={380} />
