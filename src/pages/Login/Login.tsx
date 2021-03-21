@@ -27,7 +27,7 @@ export default function Login(props: { isLoggedIn: boolean, toLoggedIn: (x: bool
                 if (res.ok && !props.isLoggedIn) {
                     console.log("login post");
                     //props.toLoggedIn(true); //dispatch
-                    Cookies.set('isLoggedIn', 'true');
+                    //Cookies.set('isLoggedIn', 'true');
                     setIsLoading(true);
                 }
             });
@@ -36,7 +36,7 @@ export default function Login(props: { isLoggedIn: boolean, toLoggedIn: (x: bool
 
     if (/* props.isLoggedIn */!!Cookies.get('isLoggedIn')) {
         console.log(!!Cookies.get('isLoggedIn'), "SATATE");
-        return <Redirect to="/main" />;
+        return <Redirect to="/nickname" />;
     }
 
     return (

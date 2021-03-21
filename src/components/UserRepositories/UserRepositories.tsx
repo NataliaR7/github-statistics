@@ -2,14 +2,20 @@ import './UserRepositories.css';
 import RepoBall from './RepoBall'
 
 function UserRepositories() {
-    return (
-      <div className="userRepositories">
-        <div className="head">
-          <span>repositories</span>
-        </div>
+  return (
+    <div className="userRepositories">
+      <div className="head">
+        <span>repositories</span>
+      </div>
+      <div className="balls">
+        <RepoBall />
+        <RepoBall />
+        <RepoBall />
+        <RepoBall />
         <RepoBall />
       </div>
-    );
-  }
-  
-  export default UserRepositories;
+    </div>
+  );
+}
+
+export default UserRepositories;

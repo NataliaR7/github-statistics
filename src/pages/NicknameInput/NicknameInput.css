@@ -1,0 +1,34 @@
+.nicknameInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.loginForm {
+    border-top: 0.2vw solid #F9DE59;
+    border-right: 0.2vw solid #E8A628;
+    border-bottom: 0.2vw solid #F98365;
+    border-left: 0.2vw solid #CDDA95;
+    border-radius: 10%;
+    padding: 3vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.loginForm span {
+    color: #454545;
+    font-variant: small-caps;
+    font-size: 1vw;
+    margin: 1vw 0;
+    max-width: 10vw;
+    align-self: center;
+    text-align: center;
+}
+
+.inputForm {
+    border-radius: 2vw;
+    width: 15vw;
+    height: 3vh;
+}

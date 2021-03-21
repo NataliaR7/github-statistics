@@ -22,7 +22,6 @@
 
 .userRecentActivity {
     grid-area: recentActivity;
-    background-color: green;
 }
 
 .userRepositories {

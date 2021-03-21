@@ -44,17 +44,19 @@
     grid-area: following;
 }
 
-.star {
+.userHead .star {
     fill: #989898;
     grid-area: star;
     justify-self: center;
+    width: 2.8vw;
+    height: 2vw;
 }
 
-.star:hover {
+.userHead .star:hover {
     fill: #F9DE59;
 }
 
-.star + span {
+.userHead .star + span {
     grid-area: count;
     font-size: 1.1vw;
 }

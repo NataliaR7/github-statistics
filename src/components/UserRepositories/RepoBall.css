@@ -1,6 +1,95 @@
 .repoBall {
-    width: 12vw;
-    height: 12vw;
+    width: 13.5vw;
+    height: 13.5vw;
     border: 0.3vw solid #F9DE59;
     border-radius: 50%;
+    display: grid;
+    grid-template-rows: 3fr 4fr 3fr;
+    grid-template-areas: 
+    "stars"
+    "nameInfo"
+    "update";
 }
+
+.stars {
+    grid-area: stars;
+    justify-self: end;
+    margin-right: 1.8vw;
+    align-self: flex-end;
+}
+
+.stars span {
+    font-size: 1.2vw;
+    margin-left: 0.2vw;
+    vertical-align: super;
+}
+
+.infoRepo {
+    grid-area: nameInfo;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-left: 1vw;
+    margin-top: 1vw;
+}
+
+.nameRepo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.2vw;
+    
+}
+.nameRepo span{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 9.5vw;
+    max-height: 9.5vw;
+}
+
+.fork {
+    align-self: flex-end;
+    color: #888888;
+    font-size: 0.9vw;
+}
+
+.updateRepo {
+    grid-area: update;
+    align-self: flex-start;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #646464;
+    font-size: 1.1vw;
+}
+
+.updateRepo span:first-child {
+    font-variant: small-caps;
+}
+.updateRepo span:first-child + span {
+    
+    font-size: 0.9vw;
+}
+
+.repoBall .link {
+    width: 1vw;
+    height: 1vw;
+    margin-top: 0.3vw;
+    margin-left: 0.4vw;
+    fill: #646464;
+}
+
+.repoBall .star {
+    width: 1.5vw;
+    height: 1.5vw;
+    margin-bottom: 0.15vw;
+    fill: #646464;
+}
+
+/* .repoBall .star + span {
+    font-size: 1vw;
+} */

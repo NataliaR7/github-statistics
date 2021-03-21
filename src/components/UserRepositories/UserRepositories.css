@@ -1,10 +1,68 @@
-.head {
-    display: flex;
-    background-color: #EEEEEE;
-    font-variant: small-caps;
-    font-size: 1.6vw;
-    height: 4vh;
+.userRepositories {
     color: #454545;
+    display: grid;
+    grid-template-rows: 1fr 7fr;
+    grid-template-areas:
+        'head'
+        'balls';
+}
+
+.head {
+    grid-area: head;
+    display: flex;
+    background-color: #eeeeee;
+    font-variant: small-caps;
+    font-size: 1.3vw;
+    /* height: 4vh; */
     align-items: center;
     padding: 0 0 0.5vh 1vw;
+}
+
+.balls {
+    grid-area: balls;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 2vw;
+}
+
+.balls .repoBall:first-child {
+    border: 0.3vw solid #F9DE59;
+}
+.balls .repoBall:first-child:hover {
+    background-color: #F9DE59;
+    /* border: 0.5vw solid #F9DE59; */
+}
+
+.balls .repoBall:first-child + div {
+    border: 0.3vw solid #E8A628;
+}
+
+.balls .repoBall:first-child + div:hover {
+    background-color: #E8A628;
+}
+
+.balls .repoBall:first-child + div + div {
+    border: 0.3vw solid #F98365;
+}
+
+.balls .repoBall:first-child + div + div:hover {
+    background-color: #F98365;
+}
+
+.balls .repoBall:first-child + div + div + div {
+    border: 0.3vw solid #CDDA95;
+}
+
+.balls .repoBall:first-child + div + div + div:hover {
+    background-color: #CDDA95;
+}
+
+.balls .repoBall:last-child {
+    border: 0.3vw solid #A1DFFB;
+}
+
+.balls .repoBall:last-child:hover {
+    background-color: #A1DFFB;
 }

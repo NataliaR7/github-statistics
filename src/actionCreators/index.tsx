@@ -9,3 +9,8 @@ export const signIn  = (isLoggedIn: boolean) => ({
   type: actionTypes.LOGIN,
   isLoggedIn
 });
+
+export const changeNickname = (currentNickname: string) => ({
+  type: actionTypes.CHANGE_CURR_NICKNAME,
+  currentNickname
+});

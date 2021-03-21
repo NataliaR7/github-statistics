@@ -1,7 +1,7 @@
 function getStarLogo() {
 	return (
 		<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="2.8vw" height="2vw" className="star" lightingColor="#f4f4f4" viewBox="0 0 611.996 611.996" style={{background: "new 0 0 611.996 611.996"}}
+	  className="star" lightingColor="#f4f4f4" viewBox="0 0 611.996 611.996" style={{background: "new 0 0 611.996 611.996"}}
 	 xmlSpace="preserve">
 <g>
 	<path  d="M610.036,233.895c-4.704-14.45-17.468-25.211-32.524-27.424l-162.664-23.626L342.109,35.469

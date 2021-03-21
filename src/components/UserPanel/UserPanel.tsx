@@ -32,26 +32,10 @@ const user = 'Aminopyridin';
 
 function UserPanel() {
   const [userData, setUserData] = useState<UserDataType>({});
-  //const [repoData, setRepoData] = useState<RepoDataType>({});
   const [isLoadedData, setIsLoadedData] = useState(false);
 
   async function getUserData() {
-    // const userDataReq = await octokit.request('GET /users/{username}', {
-    //   username: user
-    // });
-
-    // const userStarsReq = await octokit.request('GET /users/{username}/starred?per_page=1', {
-    //   username: user
-    // });
-
-    // const userOrgsReq = await octokit.request('GET /users/{username}/orgs', {
-    //   username: user
-    // });
-
-    //console.log(userDataReq, "user");
-    // console.log(userStarsReq, "stars");
-    // console.log(userOrgsReq, "orgs");
-    //const data = userDataReq.data;
+  
     const responseUser = await fetch('/user');
     const data = await responseUser.json();
     
@@ -69,7 +53,6 @@ function UserPanel() {
         url: org.url
       }
     });
-    //console.log(orgs);
 
     setUserData(userData => userData = {
       ...userData,
@@ -88,22 +71,11 @@ function UserPanel() {
 
   }
 
-  async function getUserAdditional() {
-
-  }
-
-  // async function getRepoData() {
-  //   const repoDataReq = await octokit.request('GET /users/{username}/repos?per_page=1', {
-  //     username: user
-  //   });
-  //   console.log(repoDataReq, "repo");
-  // }
-
+  
   useEffect(() => {
     getUserData();
-    //getRepoData();
     setIsLoadedData(true);
-  }, [isLoadedData]);
+  }, []);
 
 
 

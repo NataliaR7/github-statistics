@@ -3,12 +3,14 @@ import { rootReducer } from './reducers';
 
 type StateType = {
     activePage: string,
-    isLoggedIn: boolean
+    isLoggedIn: boolean,
+    currentNickname: string,
 };
 
 const preloadedState: StateType = {
     activePage: "/login",
-    isLoggedIn: false
+    isLoggedIn: false,
+    currentNickname: ""
 };
 
 const store = createStore(rootReducer, preloadedState);

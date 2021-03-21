@@ -1,5 +1,5 @@
 import './UserHead.css';
-import starSvg from './starSvg';
+import starSvg from '../../svg/starSvg';
 
 type PropType = {
     avatar?: string;

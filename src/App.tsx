@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import General from './pages/General/General';
+import NicknameInput from './containers/NicknameInput';
 import Login from './containers/Login';
 import { rootReducer } from './reducers';
 import { createStore } from 'redux';
@@ -11,7 +12,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import store from './store'
+import store from './store';
+import Cookies from 'js-cookie';
 
 // type StateType = {
 //   activePage: string,
@@ -32,10 +34,12 @@ function App() {
       <Provider store={store}>
         <Router>
           <Switch>
-            {!(store.getState().isLoggedIn) ?
-              <Redirect exact from="/" to="/login" /> :
-              <Redirect exact from="/" to="/main" />}
+            {/* {!!Cookies.get('isLoggedIn') ?
+              <Redirect exact from="/" to="/main" /> :
+              <Redirect exact from="/" to="/login" />} */}
+              <Redirect exact from="/" to="/login" />
             <Route path="/login" component={Login} />
+            <Route path="/nickname" component={NicknameInput} />
             <Route path="/" component={General} />
           </Switch>
         </Router>
