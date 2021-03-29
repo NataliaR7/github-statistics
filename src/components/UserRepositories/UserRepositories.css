@@ -31,16 +31,16 @@
     border: 0.3vw solid #F9DE59;
 }
 .balls .repoBall:first-child:hover {
-    background-color: #F9DE59;
+    background-color: rgba(249, 222, 89, 0.5);
     /* border: 0.5vw solid #F9DE59; */
 }
 
 .balls .repoBall:first-child + div {
-    border: 0.3vw solid #E8A628;
+    border: 0.3vw solid #e8a628;
 }
 
 .balls .repoBall:first-child + div:hover {
-    background-color: #E8A628;
+    background-color: rgba(232, 166, 40, 0.5);;
 }
 
 .balls .repoBall:first-child + div + div {
@@ -48,7 +48,7 @@
 }
 
 .balls .repoBall:first-child + div + div:hover {
-    background-color: #F98365;
+    background-color: rgba(249, 131, 101, 0.5);
 }
 
 .balls .repoBall:first-child + div + div + div {
@@ -56,7 +56,7 @@
 }
 
 .balls .repoBall:first-child + div + div + div:hover {
-    background-color: #CDDA95;
+    background-color: rgba(205, 218, 149, 0.5);
 }
 
 .balls .repoBall:last-child {
@@ -64,5 +64,5 @@
 }
 
 .balls .repoBall:last-child:hover {
-    background-color: #A1DFFB;
+    background-color: rgba(161, 223, 251, 0.5);
 }

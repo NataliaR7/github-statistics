@@ -1,28 +1,40 @@
 .nicknameInput {
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     width: 100vw;
     height: 100vh;
+    background-color: #f4f4f4;
+    display: grid;
+    grid-template-rows: 0.5fr 1.2fr 15fr;
+}
+
+.nicknameInput .headLogo {
+    grid-row: 2;
 }
 
 .loginForm {
-    border-top: 0.2vw solid #F9DE59;
+    grid-row: 3;
+    align-self: center;
+    justify-self: center;
+    /* border-top: 0.2vw solid #F9DE59;
     border-right: 0.2vw solid #E8A628;
     border-bottom: 0.2vw solid #F98365;
     border-left: 0.2vw solid #CDDA95;
-    border-radius: 10%;
+    border-radius: 10%; */
+    border: #979797 solid 0.1vw;
+    border-radius: 4vh;
     padding: 3vw;
     display: flex;
     flex-direction: column;
 }
 
 .loginForm span {
-    color: #454545;
+    color: #5c5c5c;
     font-variant: small-caps;
-    font-size: 1vw;
-    margin: 1vw 0;
-    max-width: 10vw;
+    font-size: 1.5vw;
+    margin-bottom: 1vw;
+    max-width: 15vw;
     align-self: center;
     text-align: center;
 }
@@ -31,4 +43,27 @@
     border-radius: 2vw;
     width: 15vw;
     height: 3vh;
+    color: #5c5c5c;
+    text-align: center;
+    font-size: 0.8vw;
+    border: #c9c9c9 solid 0.1vw;
+}
+
+.submitButton {
+    height: 3.5vh;
+    border-radius: 2vw;
+    border: none;
+    margin-top: 2vh;
+    font-size: 0.8vw;
+    font-variant: small-caps;
+    /* color: #454545;
+    background-color: #dfdfdf; */
+    color: #F4F4F4;
+    background-color: #454545;
+}
+.submitButton:hover {
+   
+    /* background-color: #e2e2e2; */
+    background-color: #535353;
+    /* border: #e2e2e2 solid 0.1vw; */
 }

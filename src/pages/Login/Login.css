@@ -1,0 +1,52 @@
+.login {
+    background-color: #f4f4f4;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 0.5fr 1.2fr 15fr;
+}
+.login .headLogo {
+    grid-row: 2;
+}
+
+.welcomeForm {
+    grid-row: 3;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3vw;
+    border: #505050 solid 0.1vw;
+    border-radius: 4vh;
+    color: #454545
+}
+.welcomeForm a{
+    text-decoration: none;
+}
+
+.titleForm {
+    font-size: 2.5vw;
+    font-weight: 600;
+}
+
+.authButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #454545;
+    border-radius: 2vh;
+    padding: 0.5vw 1vw;
+    width: 15vw;
+    gap: 1vh;
+    margin-top: 3vw;
+    
+}
+.authButton span {
+    font-variant: small-caps;
+    font-size: 1.5vw;
+}
+
+.authButton:hover {
+    background-color: #535353;
+}

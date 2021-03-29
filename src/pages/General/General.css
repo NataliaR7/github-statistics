@@ -23,3 +23,9 @@
 .mainInfo {
     grid-area: mainInfo;
 }
+.repositoriesPage {
+    grid-area: mainInfo;
+}
+.comparation {
+    grid-area: mainInfo;
+}

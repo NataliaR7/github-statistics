@@ -29,14 +29,14 @@ function getLinkInfo(label: string, content: string, isSmall: boolean) {
     </>)
 }
 
-async function setHref1(orgLogin: string) {
+async function setHref(orgLogin: string) {
 
     const orgReq = await octokit.request('GET /orgs/{org}', {
         org: orgLogin
     });
     window.open(orgReq.data.html_url);
 }
-async function setHref(target: EventTarget & HTMLAnchorElement, orgLogin: string) {
+async function setHref1(target: EventTarget & HTMLAnchorElement, orgLogin: string) {
 
     const orgReq = await octokit.request('GET /orgs/{org}', {
         org: orgLogin
@@ -52,9 +52,10 @@ function getOrgs(orgs: PropType["orgs"], isSmall: boolean) {
             <span>organizations</span>
             <div className={"pictures" + organizationsClass}>
                 {orgs && orgs.map((org) =>
-                    <a href="#" onClick={(e) => { setHref(e.currentTarget, org.login) }}>
-                        <img src={org.avatar} alt={org.login} title={org.login} /* onClick={() => setHref(org.login) }*/ />
-                    </a>)}
+                    // <a href="#" target="_blank" onClick={(e) => { setHref(e.currentTarget, org.login) }}>
+                        <img src={org.avatar} alt={org.login} title={org.login}  onClick={() => setHref(org.login) } />
+                    /* </a> */
+                )}
             </div>
         </div>
     )

@@ -1,0 +1,136 @@
+.repositoryItem {
+    border: #454545 solid 0.1vw;
+    border-radius: 1.5vw;
+    display: grid;
+    padding: 0.6vw;
+    grid-template-rows: 1fr 2fr 9fr 2fr 1.5fr 1fr;
+    max-height: 40.5vh;
+    align-content: center;
+    row-gap: 0.5vw;
+}
+.repositoryItem:hover {
+    /* background-color: #f0efef;
+    box-shadow: 0 0 1.5vw white; */
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 1vw #dfdfdf;
+}
+
+.repoName{
+    grid-row: 1;
+    color: #454545;
+    font-size: 1.2vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 90%;
+    align-self: center;
+    justify-self: center;
+}
+
+
+.repoFork {
+    grid-row: 2;
+    color: #888888;
+    font-size: 0.9vw;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.repoFork span{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 13vw;
+}
+
+.repoDescription {
+    grid-row: 3;
+    color: #454545;
+    font-size: 0.8vw;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    width: 100%;
+    max-height: 95%;
+}
+
+.repoMainInfo{
+    grid-row: 4;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.repoLanguage {
+    background-color: lightsalmon;
+    border-radius: 1vw;
+    padding: 0 1.2vw;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.repoContributors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9vw;
+}
+.repoContributors span:first-child {
+    color: #757575;
+}
+
+.repoAdditional{
+    grid-row: 5;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.repoAdditional div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #757575;
+    gap: 0.1vw;
+    font-size: 1vw;
+}
+
+/* .repoAdditional div span{
+    vertical-align: baseline;
+} */
+
+.repoDate{
+    grid-row: 6;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    color: #757575;
+    font-size: 0.8vw;
+}
+
+.repositoryItem .forksIcon {
+    fill: #888888;
+    height: 1.5vw;
+    margin-top: 0.1vh;
+}
+
+.repositoryItem .watchIcon {
+    fill: #888888;
+    height: 1.5vw;
+    margin-right: 0.1vw;
+    margin-top: 0.1vh;
+}
+.repositoryItem .star {
+    fill: #454545;
+    height: 1.3vw;
+    margin-right: 0.1vw;
+    margin-top: 0.1vh;
+}

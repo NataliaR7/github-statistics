@@ -1,7 +1,7 @@
 function getLinkLogo() {
     return (
         <svg version="1.1" id="Capa_1"  className="link" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            width="612px" height="612px" viewBox="0 0 612 612" style={{background: "new 0 0 612 612;"}} xmlSpace="preserve">
+            width="612px" height="612px" viewBox="0 0 612 612"  xmlSpace="preserve">
             <g>
                 <g id="Link">
                     <g>

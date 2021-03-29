@@ -1,0 +1,23 @@
+.comparation {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 9.5fr 2fr;
+    grid-template-areas: 
+    "info user";
+    
+}
+
+.comparation .userPanel {
+    grid-area: user;
+    
+}
+
+.comparation .dataCompare {
+    grid-area: info;
+    display: flex;
+    flex-direction: column;
+}
+
+
+

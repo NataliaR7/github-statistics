@@ -42,7 +42,9 @@ function UserPanel() {
   
     const responseUser = await fetch('/user');
     const data = await responseUser.json();
+
     const activ = await fetch('/activity')
+
     const responseStars = await fetch('/starred');
     const userStars = await responseStars.json();
     const count = `${userStars.headers.link}`.match(/=(\d+)>; rel=\"last\"/);
@@ -57,6 +59,7 @@ function UserPanel() {
         url: org.url
       }
     });
+
 
     setUserData(userData => userData = {
       ...userData,
@@ -105,7 +108,7 @@ function UserPanel() {
           orgs={userData.orgs} />
         <div className="created">
           <span>created at</span>
-          <span>{`${userData.createdDate?.getDate()}.${userData.createdDate?.getMonth()}.${userData.createdDate?.getFullYear()}`}</span>
+          <span>{`${userData.createdDate?.getDate() || ""}.${userData.createdDate?.getMonth() || ""}.${userData.createdDate?.getFullYear() || ""}`}</span>
         </div>
       </>
     )

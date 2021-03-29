@@ -1,0 +1,35 @@
+.repositoriesPage {
+    background-color: #F4F4F4;
+    display: flex;
+    flex-direction: column;
+}
+.repositories {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 1vw;
+    column-gap: 2vw;
+    padding: 0.7vw 1.4vw;
+}
+
+.pageButtons {
+    align-self: center;
+}
+
+.pageButtons button{
+    border: none;
+    font-size: 0.9vw;
+    color: #454545;
+}
+.pageButtons button:hover{
+    background-color: #E3E3E3;
+    border-radius: 1vw;
+}
+
+.pageButtons button:first-child,
+.pageButtons button:last-child
+{
+    color: #888888;
+    margin: 0 1vw;
+}
+

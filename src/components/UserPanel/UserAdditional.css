@@ -36,7 +36,8 @@ a:hover {
     width: 2vw;
     border-radius: 30%;
     margin: 0.2vw 0.2vw;
-    border: 0.1vw solid rgb(95, 95, 95) ;
+    border: 0.1vw solid rgb(95, 95, 95);
+    cursor: pointer
 }
 
 .small,

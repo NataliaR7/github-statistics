@@ -8,7 +8,7 @@ type StateType = {
 };
 
 const preloadedState: StateType = {
-    activePage: "/login",
+    activePage: "/main",
     isLoggedIn: false,
     currentNickname: ""
 };

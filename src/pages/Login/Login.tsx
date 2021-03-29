@@ -2,12 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import store from '../../store'
 import Cookies from 'js-cookie';
+import HeadLogo from '../../components/HeadLogo/HeadLogo';
+import getGitHubLogo from "../../svg/githubSvg"
+import './Login.css'
 
 
 export default function Login(props: { isLoggedIn: boolean, toLoggedIn: (x: boolean) => void }) {
     const [isLoading, setIsLoading] = useState(false);
 
-    const clientId = "a53c785b082e97521c98";
+    const clientId = "9607ea01165c834b3511";
     const redirectUri = "http://localhost:3000/login";
 
     useEffect(() => {
@@ -41,19 +44,16 @@ export default function Login(props: { isLoggedIn: boolean, toLoggedIn: (x: bool
     }
 
     return (
-        <div className="container">
-            <h1>Welcome</h1>
-            <span>Super amazing app</span>
-            {/* {store.getState().isLoggedIn && console.log("FFFFFFF")}
-            {console.log(store.getState().isLoggedIn, "FFFFFFF1")} */}
-            {!isLoading && <div className="login-container">
-                <a
-                    className="login-link"
-                    href={`https://github.com/login/oauth/authorize?scope=user%20repo%20read:org&client_id=${clientId}&redirect_uri=${redirectUri}`}
-                >
-                    <span>Login with GitHub</span>
+        <div className="login">
+            <HeadLogo />
+            <div className="welcomeForm" >
+                <span className="titleForm">Welcome</span>
+                <span>Login with github please</span>
+                <a className="authButton" href={`https://github.com/login/oauth/authorize?scope=user%20repo%20read:org&client_id=${clientId}&redirect_uri=${redirectUri}`}>
+                    {getGitHubLogo()}
+                    <span>login with github</span>
                 </a>
-            </div>}
+            </div>
         </div>
     );
 }

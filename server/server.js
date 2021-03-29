@@ -9,9 +9,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const auth = createOAuthAppAuth({
-    clientId: 'a53c785b082e97521c98',
-    clientSecret: '66956b1c638c8b4372e90b76a2ff7dd0506c9db1',
-    redirectUrl: 'http://localhost:3000/main/login',
+    clientId: '9607ea01165c834b3511',
+    clientSecret: '51a30d03adf6e116993b0a9ced74a44602b66710',
+    redirectUrl: 'http://localhost:3000/login',
 });
 
 const app = express();
@@ -54,11 +54,13 @@ app.post('/login', (req, res) => {
             res.send(err);
         });
 });
+
 app.post('/nickname', (req, res) => {
     console.log('post /nickname');
-    console.log(req, 'post /nickname');
+    //console.log(req, 'post /nickname');
     res.cookie('currentNickname', req.body.nickname);
     user = req.body.nickname;
+    //console.log(res.code);
     res.code(200);
 });
 
@@ -69,13 +71,14 @@ app.get('/user', (req, res) => {
     console.log('get /user');
     octokit
         .request('GET /users/{username}', {
-            username: user,
+            username: req.cookies.currentNickname,
             headers: {
                 'If-None-Match': etag,
             },
         })
         .then((result) => {
             console.log(result.headers);
+            console.log(result.data, "11111111111111");
             etag = result.headers.etag;
             cache = result.data;
             res.json(result.data);
@@ -115,31 +118,25 @@ app.get('/orgs', (req, res) => {
         });
 });
 
-// app.get('/', (req, res) => {
-//     res.send('Hello World!');
-// });
-
 app.get('/repos', (req, res) => {
     octokit
         .request('GET /users/{username}/repos', {
             username: user,
         })
         .then((result) => {
-            console.log(result.headers['x-ratelimit-used'], "repos");
-            console.log(result.headers);
             res.json(result.data);
         });
 });
-// https://github-contributions.now.sh/api/v1/vabyars
+
 app.get('/activity', (req, res) => {
     octokit
-        .request('https://api.github.com/users/vabyars/events', {
+        .request('GET /users/{username}/events', {
             username: user,
         })
         .then((result) => {
-            console.log(result.headers['x-ratelimit-used'], "activity");
-            console.log(result.data)
-            // res.json(result.data);
+            // console.log(result.headers['x-ratelimit-used'], "activity");
+            console.log(result.data, "activ")
+            res.json(result.data);
         });
 });
 
@@ -150,7 +147,7 @@ app.post("/reposlang", (req, res) => {
             name: req.body.reposName
         })
         .then((result) => {
-            console.log(result.headers['x-ratelimit-used'], "reposlang", req.body.reposName);
+            //console.log(result.headers['x-ratelimit-used'], "reposlang", req.body.reposName);
             res.json(result.data);
         });
 })
