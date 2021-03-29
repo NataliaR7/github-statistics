@@ -20,9 +20,19 @@ class DatabaseLogic{
     })  
   }
 
+  insertUserData(username, data){
+    this.db.run("INSERT INTO gitstat(username, user_data, repos_last_update) values(?, ?, ?)",
+     [username, JSON.stringify(data), Date.now().toString()]);
+  }
+
   insertUserRepositories(username, repositories){
     this.db.run("INSERT INTO gitstat(username, repositories, repos_last_update) values(?, ?, ?)",
      [username, JSON.stringify(repositories), Date.now().toString()]);
+  }
+
+  updateUserData(username, data){
+    this.db.run("UPDATE gitstat SET user_data=?, repos_last_update=? where username=?",
+    [JSON.stringify(data), Date.now().toString() , username ]);
   }
 
   updateUserLanguages(username, languages){

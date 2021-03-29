@@ -42,6 +42,7 @@ function UserPanel() {
   
     const responseUser = await fetch('/user');
     const data = await responseUser.json();
+    console.log(data, "DATA");
     // const activ = await fetch('/activity')
     const repositories = await (await fetch("/repos")).json()
     const responseStars = await fetch('/starred');

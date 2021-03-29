@@ -5,6 +5,15 @@ function addRepositoriesToDatabase(database, username, repositories, isUserExist
         database.updateUserRepositories(username, repositories)
     } else {
         database.insertUserRepositories(username, repositories)
+        console.log("НЕ ХОДИ СЮДА")
+    }
+}
+
+function addUserDataToDatabase(database, username, data, isUserExist){
+    if (isUserExist){
+        database.updateUserData(username, data)
+    } else {
+        database.insertUserData(username, data)
     }
 }
 
@@ -45,6 +54,7 @@ module.exports = {
     addRepositoriesToDatabase: addRepositoriesToDatabase,
     isDataActual: isDataActual,
     getLanguageStatistic: getLanguageStatistic,
-    getLanguagesDataPromises: getLanguagesDataPromises
+    getLanguagesDataPromises: getLanguagesDataPromises,
+    addUserDataToDatabase
 }
 

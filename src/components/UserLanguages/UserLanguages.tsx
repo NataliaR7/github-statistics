@@ -58,6 +58,7 @@ function UserLanguages(props: PropType) {
   async function getLanguagesStatistic(){
     const repositories = await fetch("/lang")
     let result: { [key: string]: number }  = await repositories.json()
+    console.log(result, "LANG");
     setData(result)
     setIsDataChange(true)
   }
