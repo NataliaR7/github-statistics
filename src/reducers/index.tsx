@@ -5,7 +5,7 @@ export const rootReducer = combineReducers({
     //userHead: userHeadReducer,
     activePage: tabsReducer,
     isLoggedIn: loginReducer,
-    currentNickname: nicknameReducer
+    currentNickname: nicknameReducer,
 });
 
 type actionType = {
@@ -38,5 +38,8 @@ function nicknameReducer(state = "", action: actionType) {
     }
     return state;
 }
+
+
+
 
 export type RootState = ReturnType<typeof rootReducer>
