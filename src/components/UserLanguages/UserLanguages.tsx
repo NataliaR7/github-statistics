@@ -55,29 +55,9 @@ function UserLanguages(props: PropType) {
   let [data, setData] = useState<{ [key: string]: number }>({})
   let [isDataChange, setIsDataChange] = useState(false) 
   
-  async function getReposLanguages(reposName: string){  
-    const lang = await fetch("/reposlang", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-    },
-      body: JSON.stringify({reposName: reposName})
-    })    
-    return await lang.json()
-  }  
-  
   async function getLanguagesStatistic(){
-    const repositories = await fetch('/repos')
-    let result: { [key: string]: number }  = {}
-    const reposdata = await repositories.json()
-    for (let repos of reposdata){
-      let reposLanguages = await getReposLanguages(repos.name)
-      for (let key in reposLanguages){
-        if (!result[key])
-          result[key] = reposLanguages[key]
-        result[key] += reposLanguages[key]
-      }
-    }
+    const repositories = await fetch("/lang")
+    let result: { [key: string]: number }  = await repositories.json()
     setData(result)
     setIsDataChange(true)
   }

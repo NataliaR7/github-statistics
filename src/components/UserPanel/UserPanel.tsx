@@ -42,7 +42,8 @@ function UserPanel() {
   
     const responseUser = await fetch('/user');
     const data = await responseUser.json();
-    const activ = await fetch('/activity')
+    // const activ = await fetch('/activity')
+    const repositories = await (await fetch("/repos")).json()
     const responseStars = await fetch('/starred');
     const userStars = await responseStars.json();
     const count = `${userStars.headers.link}`.match(/=(\d+)>; rel=\"last\"/);

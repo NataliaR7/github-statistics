@@ -4,7 +4,10 @@ import UserActivity from '../../components/UserActivity/UserActivity';
 import UserRecentActivity from '../../components/UserRecentActivity/UserRecentActivity';
 import UserRepositories from '../../components/UserRepositories/UserRepositories';
 
+
 function MainInfo() {
+
+
     const activityData = {
         a: 0,
         b: 1,

@@ -1,12 +1,11 @@
-// import express from 'express';
-// import { createOAuthAppAuth } from "@octokit/auth-oauth-app"
-// import { Octokit } from "@octokit/rest"
-
 const express = require('express');
 const { createOAuthAppAuth } = require('@octokit/auth-oauth-app');
 const { Octokit } = require('@octokit/rest');
+const DatabaseLogic = require("./databaseLogic")
+const extensions = require("./extensions")
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const { json } = require('express');
 
 const auth = createOAuthAppAuth({
     clientId: 'a53c785b082e97521c98',
@@ -17,6 +16,8 @@ const auth = createOAuthAppAuth({
 const app = express();
 const port = 3001;
 let octokit = new Octokit();
+const database = new DatabaseLogic("./db.sqlite3")
+
 let user = 'nulladdict';
 
 app.use(bodyParser.json());
@@ -54,9 +55,11 @@ app.post('/login', (req, res) => {
             res.send(err);
         });
 });
+
+
 app.post('/nickname', (req, res) => {
-    console.log('post /nickname');
-    console.log(req, 'post /nickname');
+    // console.log('post /nickname');
+    // console.log(req, 'post /nickname');
     res.cookie('currentNickname', req.body.nickname);
     user = req.body.nickname;
     res.code(200);
@@ -78,6 +81,7 @@ app.get('/user', (req, res) => {
             console.log(result.headers);
             etag = result.headers.etag;
             cache = result.data;
+            console.log(result.data)
             res.json(result.data);
         })
         .catch((err) => {
@@ -115,44 +119,53 @@ app.get('/orgs', (req, res) => {
         });
 });
 
-// app.get('/', (req, res) => {
-//     res.send('Hello World!');
-// });
-
 app.get('/repos', (req, res) => {
-    octokit
-        .request('GET /users/{username}/repos', {
-            username: user,
-        })
-        .then((result) => {
-            console.log(result.headers['x-ratelimit-used'], "repos");
-            console.log(result.headers);
-            res.json(result.data);
-        });
+    database.getUser(user)
+    .then(response => {
+        if (response && extensions.isDataActual(Number(response["repos_last_update"]))){
+            res.json(response.repositories)
+        } else {
+            octokit.request('GET /users/{username}/repos', {
+                username: user,
+                per_page: 100
+            })
+            .then((result) => {
+                console.log(result.headers['x-ratelimit-used'], "repos");
+                console.log(result.data.length, "REPOS LENGTH");
+                extensions.addRepositoriesToDatabase(database, user, result.data, response)
+                Promise.all(extensions.getLanguagesDataPromises(result.data, user, octokit))
+                .then((languagesData) => database.updateUserLanguages(user, extensions.getLanguageStatistic(languagesData)))
+                res.json(result.data);
+            });
+        }
+    }).catch(err => console.log(err, "repos"))
+
+    
 });
+
 // https://github-contributions.now.sh/api/v1/vabyars
 app.get('/activity', (req, res) => {
     octokit
         .request('https://api.github.com/users/vabyars/events', {
             username: user,
+            per_page: 100
         })
         .then((result) => {
-            console.log(result.headers['x-ratelimit-used'], "activity");
-            console.log(result.data)
+            // console.log(result.headers['x-ratelimit-used'], "activity");
+            // console.log(result.data.length, "Activity length")
             // res.json(result.data);
         });
 });
 
-app.post("/reposlang", (req, res) => {
-    octokit
-        .request('GET /repos/{username}/{name}/languages', {
-            username: user,
-            name: req.body.reposName
-        })
-        .then((result) => {
-            console.log(result.headers['x-ratelimit-used'], "reposlang", req.body.reposName);
-            res.json(result.data);
-        });
+
+app.get("/lang", (req, res) => {
+    database.getUser(user)
+    .then(result => {
+        if (!result)
+            res.json({})
+        else
+            res.json(JSON.parse(result.languages))
+    })
 })
 
 app.listen(port, () => {
