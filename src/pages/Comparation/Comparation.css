@@ -1,14 +1,15 @@
 .comparation {
     height: 100%;
     width: 100%;
-    display: grid;
+    background-color: #f4f4f4;
+    /* display: grid;
     grid-template-columns: 9.5fr 2fr;
     grid-template-areas: 
-    "info user";
+    "info user"; */
     
 }
 
-.comparation .userPanel {
+/* .comparation .userPanel {
     grid-area: user;
     
 }
@@ -17,7 +18,28 @@
     grid-area: info;
     display: flex;
     flex-direction: column;
+} */
+
+.comparationForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
 }
 
+.comparationContent {
+    display: grid;
+    grid-template-columns: 9.5fr 2fr;
+    grid-template-areas: 
+    "compareContent compareUser"; 
+    height: 100%;
+}
+.comparationContent .userPanel{
+    grid-area: compareUser;
+    height: 100%;
+}
 
+.comparationContent .dataCompare {
+    grid-area: compareContent;
+}
 

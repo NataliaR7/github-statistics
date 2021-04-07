@@ -1,35 +1,32 @@
 import './Comparation.css';
 import UserLanguages from "../../components/UserLanguages/UserLanguages"
 import UserPanel from "../../components/UserPanel/UserPanel"
+import NicknameForm from "../../components/NicknameForm/NicknameForm"
 import UserRepositories from "../../components/UserRepositories/UserRepositories"
+import { useState } from 'react';
 
 function Comparation() {
-    const activityData = {
-        a: 0,
-        b: 1,
-        c: 2,
-        d: 3,
-        e: 4,
-        f: 5,
-        g: 9,
-        h: 7,
-        i: 8,
-        k: 10,
-        l: 11,
-        m: 12,
-    };
-    const languagesData = { "c#": 5, "ht": 3, "gh": 7, "js": 2 }
+    const [compareUserName, setCompareUserName] = useState("");
     return (
         <div className="comparation">
-            <UserPanel />
-            <div className={"dataCompare"}>
-                <div className="upPanel">
-                    <UserLanguages data={languagesData} />
+            {compareUserName.length !== 0 ?
+                <div className="comparationForm">
+                    <form action="" method="post" className="loginForm" onSubmit={(e) => { }}>
+
+                        <NicknameForm title="enter github nickname" setNickname={() => { }} />
+                        {/* {setCompareUserName(compareUserName => compareUserName = "NataliaR7")} */}
+
+                    </form>
                 </div>
-                <div className="downPanel">
-                    <UserRepositories />
+                : <div className="comparationContent">
+                    <UserPanel username="NataliaR7" />
+                    <div className={"dataCompare"}>
+                        
+
+                    </div>
                 </div>
-            </div>
+            }
+
         </div>
     );
 }

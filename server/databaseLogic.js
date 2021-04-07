@@ -40,6 +40,11 @@ class DatabaseLogic{
      [JSON.stringify(languages), username]);
   }
 
+  updateReposAdditionalInfo(username, info){
+    this.db.run(`UPDATE gitstat SET repos_additional_info=? where username=?`,
+     [JSON.stringify(info), username]);
+  }
+
   updateUserRepositories(username, repositories){
     this.db.run(`UPDATE gitstat SET repositories=?, repos_last_update=? where username=?`,
      [JSON.stringify(repositories), Date.now().toString() , username ]);

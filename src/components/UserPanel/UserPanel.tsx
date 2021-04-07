@@ -6,6 +6,7 @@ import './UserPanel.css';
 
 export const octokit = new Octokit();
 type UserDataType = {
+  userUrl?: string;
   avatar?: string;
   username?: string;
   followerCount?: number;
@@ -32,24 +33,23 @@ type RepoDataType = {
 
 const user = 'Aminopyridin';
 
-function UserPanel() {
+function UserPanel(props: { username?: string }) {
   const [userData, setUserData] = useState<UserDataType>({});
   const [isLoadedData, setIsLoadedData] = useState(false);
 
-  
+
 
   async function getUserData() {
-  
-    const responseUser = await fetch('/user');
+    const queryUsername = props.username ? "?username=" + props.username : "";
+    const responseUser = await fetch(`/user${queryUsername}`);
     const data = await responseUser.json();
-    console.log(data, "DATA");
     // const activ = await fetch('/activity')
-    const repositories = await (await fetch("/repos")).json()
-    const responseStars = await fetch('/starred');
+    //const repositories = await (await fetch(`/repos${queryUsername}`)).json()
+    const responseStars = await fetch(`/starred${queryUsername}`);
     const userStars = await responseStars.json();
     const count = `${userStars.headers.link}`.match(/=(\d+)>; rel=\"last\"/);
 
-    const responseOrgs = await fetch('/orgs');
+    const responseOrgs = await fetch(`/orgs${queryUsername}`);
     const userOrgs = await responseOrgs.json();
 
     const orgs = userOrgs.map((org: any) => {
@@ -63,6 +63,7 @@ function UserPanel() {
 
     setUserData(userData => userData = {
       ...userData,
+      userUrl: data.html_url,
       avatar: data.avatar_url,
       username: data.login,
       followerCount: data.followers,
@@ -80,19 +81,20 @@ function UserPanel() {
 
   }
 
-  
+
   useEffect(() => {
-    getUserData();
-    setIsLoadedData(true);
+    getUserData().then(() =>
+      setIsLoadedData(true)
+    )
   }, []);
 
 
 
   const renderData = () => {
-    console.log(userData)
     return (
       <>
         <UserHead
+          userUrl={userData.userUrl}
           avatar={userData.avatar}
           username={userData.username}
           followerCount={userData.followerCount}

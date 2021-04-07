@@ -23,7 +23,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     padding: 0 2vw;
 }
 
@@ -65,4 +65,11 @@
 
 .balls .repoBall:last-child:hover {
     background-color: rgba(161, 223, 251, 0.5);
+}
+
+.userRepositories .warning {
+    font-size: 1vw;
+    color: #888888;
+    align-self: center;
+    margin: auto auto;
 }

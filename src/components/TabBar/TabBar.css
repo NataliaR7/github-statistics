@@ -17,3 +17,35 @@
     flex-grow: 2;
     height: 1.4vh;
 }
+
+.tabBar button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 12vw;
+    margin: 0.8vh 1vw;
+    padding: 0.5vh 0;
+    background: none;
+    color: #f4f4f4;
+    border-radius: 20vh;
+    font-size: 0.85vw;
+    border: 0.1vh solid rgb(133, 133, 133);
+}
+/* .tabBar button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 12vw;
+    margin: 0.8vh 1vw;
+    padding: 0.5vh 0;
+    background: #cacaca;
+    color: #454545;
+    border-radius: 20vh;
+    font-size: 0.85vw;
+    border: none;
+} */
+.tabBar button:hover {
+    /* background-color: rgba(245, 245, 245, 5%); */
+    background-color: #5f5f5f;
+
+}

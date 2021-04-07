@@ -1,0 +1,32 @@
+.activityItem {
+    /* background-color: hsl(0, 100%, 78%); */
+    display: flex;
+    flex-direction: row;
+    height: 1.5vw;
+    align-items: center;
+    color: #454545;
+    font-size: 0.9vw;
+}
+
+.activityItem .circle{
+    background-color: #C4C4C4;
+    width: 0.6vw;
+    height: 0.6vw;
+    border-radius: 50%;
+    border: 0.3vw solid #F4F4F4;
+    z-index: 1;
+    
+}
+
+.activityItem .activityInfo{
+    margin-left: 0.5vh;
+}
+
+.activityItem .date{
+    margin-left: auto;
+    color: #888888;
+}
+.activityItem .repo{
+    color: #888888;
+    font-style: italic;
+}

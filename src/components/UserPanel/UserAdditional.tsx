@@ -69,7 +69,7 @@ function UserAdditional(props: PropType) {
             { props.location && getLabelInfo("location", props.location, isSmall)}
             { props.email && getLabelInfo("e-mail", props.email, isSmall)}
             { props.site && getLinkInfo("site", props.site, isSmall)}
-            { console.log(isSmall)}
+            
             { props.orgs?.length !== 0 && getOrgs(props.orgs, isSmall)}
         </div>
     );

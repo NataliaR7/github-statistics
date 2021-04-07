@@ -16,7 +16,6 @@ function Tab(props: TabType) {
     const currentTab = useRef<HTMLDivElement>(null);
     useEffect(()=> {
         setActiveStatus();
-        console.log(props.activePage, "TABS11");
     }, [props.activePage]);
     const setActiveStatus = () => {
         if(props.path === props.activePage && currentTab && currentTab.current) {

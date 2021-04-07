@@ -14,3 +14,13 @@ export const changeNickname = (currentNickname: string) => ({
   type: actionTypes.CHANGE_CURR_NICKNAME,
   currentNickname
 });
+
+export const setRepoActive = (activeRepoId: number) => ({
+  type: actionTypes.SET_REPO_ACTIVE,
+  activeRepoId
+});
+
+export const changeReposPage = (currentReposPage: number) => ({
+  type: actionTypes.CHANGE_CURR_REPOS_PAGE,
+  currentReposPage
+});

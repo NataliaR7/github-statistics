@@ -18,7 +18,7 @@ function addUserDataToDatabase(database, username, data, isUserExist){
 }
 
 function isDataActual(lastDateInMilliseconds){
-    const delay = 30 * 1000
+    const delay =  5 * 60 * 1000
     return Date.now() - lastDateInMilliseconds < delay
 }
 
@@ -50,11 +50,41 @@ function getLanguagesDataPromises(repos, user, octokit){
     return res;
 }
 
+function getContributorsPromises(repos, user, octokit){
+    let res = [];
+    
+    for (let rep of repos){
+        res.push(
+            octokit
+            .request('GET /repos/{username}/{reposName}/contributors', {
+                username: user,
+                reposName: rep.name
+            }))
+    } 
+    return res;
+}
+
+function getDetailedRepositoryPromises(repos, user, octokit) {
+    let res = [];
+    
+    for (let rep of repos){
+        res.push(
+            octokit
+            .request('GET /repos/{username}/{reposName}', {
+                username: user,
+                reposName: rep.name
+            }));
+    } 
+    return res;
+}
+
 module.exports = {
     addRepositoriesToDatabase: addRepositoriesToDatabase,
     isDataActual: isDataActual,
     getLanguageStatistic: getLanguageStatistic,
     getLanguagesDataPromises: getLanguagesDataPromises,
-    addUserDataToDatabase
+    addUserDataToDatabase,
+    getDetailedRepositoryPromises,
+    getContributorsPromises
 }
 

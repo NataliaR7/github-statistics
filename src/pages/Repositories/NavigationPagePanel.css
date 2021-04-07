@@ -1,0 +1,32 @@
+.navigationPagePanel {
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.navigationPagePanel button{
+    border: none;
+    font-size: 0.9vw;
+    color: #454545;
+}
+.navigationPagePanel button:hover{
+    background-color: #E3E3E3;
+    border-radius: 1vw;
+}
+.navigationPagePanel .activePage{
+    background-color: #E3E3E3;
+    border-radius: 1vw;
+}
+
+
+.navigationPagePanel .prevButton,
+.navigationPagePanel .nextButton
+{
+    color: #888888;
+    margin: 0 1vw;
+}
+
+.navigationPagePanel .prevButton + button {
+    background-color: #E3E3E3;
+    border-radius: 1vw;
+}

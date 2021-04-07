@@ -56,11 +56,10 @@ function UserLanguages(props: PropType) {
   let [isDataChange, setIsDataChange] = useState(false) 
   
   async function getLanguagesStatistic(){
-    const repositories = await fetch("/lang")
-    let result: { [key: string]: number }  = await repositories.json()
-    console.log(result, "LANG");
-    setData(result)
-    setIsDataChange(true)
+    const repositories = await fetch("/lang");
+    let result: { [key: string]: number }  = await repositories.json();
+    setData(result);
+    setIsDataChange(true);
   }
 
   useEffect(() => {

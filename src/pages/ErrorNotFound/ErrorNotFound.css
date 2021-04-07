@@ -1,0 +1,45 @@
+.errorNotFound {
+    background-color: #F4F4F4;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.errorContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #454545;
+}
+
+.errorContent h1{
+    font-size: 4vw;
+    margin: 2vw 0 0 0;
+}
+.errorContent h1 + span{
+    font-size: 2vw;
+    margin: 0 0 1.5vw 0;
+    color: #ffd000;
+}
+.errorContent span{
+    font-size: 1vw;
+}
+
+.errorContent button{
+    font-size: 1.1vw;
+    margin-top: 1vw;
+    border-radius: 2vw;
+    padding: 0.4vw 2.1vw;
+    background-color: #dddddd;
+    /* color: #F4F4F4; */
+    color: #454545;
+    
+    font-variant: small-caps;
+    border: none;
+}
+.errorContent button:hover{
+    background-color: #e4e4e4;
+}

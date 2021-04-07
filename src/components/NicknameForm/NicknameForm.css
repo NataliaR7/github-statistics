@@ -1,0 +1,40 @@
+.loginForm span {
+    color: #5c5c5c;
+    font-variant: small-caps;
+    font-size: 1.5vw;
+    margin-bottom: 1vw;
+    max-width: 15vw;
+    align-self: center;
+    text-align: center;
+}
+
+.inputForm {
+    border-radius: 2vw;
+    width: 15vw;
+    height: 3vh;
+    color: #5c5c5c;
+    text-align: center;
+    font-size: 0.8vw;
+    border: #c9c9c9 solid 0.1vw;
+    outline: 0;
+    outline-offset: 0;
+}
+
+.submitButton {
+    height: 3.5vh;
+    border-radius: 2vw;
+    border: none;
+    margin-top: 2vh;
+    font-size: 0.8vw;
+    font-variant: small-caps;
+    /* color: #454545;
+    background-color: #dfdfdf; */
+    color: #F4F4F4;
+    background-color: #454545;
+}
+.submitButton:hover {
+   
+    /* background-color: #e2e2e2; */
+    background-color: #535353;
+    /* border: #e2e2e2 solid 0.1vw; */
+}

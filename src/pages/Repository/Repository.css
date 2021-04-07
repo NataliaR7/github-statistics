@@ -1,0 +1,123 @@
+.repository {
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    color: #454545;
+    padding: 1vw 0;
+    height: 95%;
+}
+
+.repositoryHead {
+    display: flex;
+    flex-direction: column;
+}
+
+.repositoryName {
+    font-size: 2.7vw;
+    background-color: #eeeeee;
+    padding: 0 1.5vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 0.5vw;
+    line-height: 2.5vw;
+    gap: 0.5vw;
+}
+
+.repositoryName > span {
+    font-size: 2vw;
+    padding-top: 0.5vw;
+    cursor: default;
+}
+.repositoryName > span:hover {
+    color: #686868;
+}
+
+
+.repositoryFork {
+    color: #888888;
+    font-size: 1.1vw;
+    padding: 0 1.5vw;
+}
+
+.repository .repoInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'info about';
+    margin: 1.5vw;
+    gap: 8vw;
+}
+
+.repoAbout {
+    grid-area: about;
+    display: flex;
+    flex-direction: column;
+}
+
+.repoAbout .title{
+    color: #9B9B9B;
+}
+
+.repoAdditionalPanel {
+    grid-area: info;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.repoInfoComponent {
+    display: flex;
+    flex-direction: row;
+}
+
+.ownerPanel, .infoPanel, .contributorsPanel {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1vw;
+    align-items: center;
+    gap: 0.3vw;
+    font-size: 0.9vw;
+}
+
+.contributors {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1vw;
+    margin-top: 0.3vw;
+}
+
+.ownerPanel img {
+    width: 5vw;
+    border-radius: 50%;
+}
+
+.contributorsPanel img {
+    width: 4vw;
+    border-radius: 50%;
+}
+
+.repoInfoComponent .header ~ span {
+    color: #888888;
+    align-self: flex-start;
+}
+
+.repoInfoComponent span {
+    color: #454545;
+}
+
+.repoInfo .separator {
+    background-color: #9B9B9B;
+    width: 0.1vh;
+    height: 7.5vw;
+    margin: 0 1.5vw;
+    align-self: center;
+}
+
+.repoInfoComponent .header, 
+.repoInfo .title {
+    font-variant: small-caps;
+    font-size: 1.1vw;
+    margin-bottom: 0.5vw;
+}

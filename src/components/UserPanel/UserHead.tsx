@@ -1,7 +1,8 @@
 import './UserHead.css';
-import starSvg from '../../svg/starSvg';
+import starSvg from '../../resources/starSvg';
 
 type PropType = {
+    userUrl?: string;
     avatar?: string;
     username?: string;
     followerCount?: number;
@@ -14,7 +15,7 @@ type PropType = {
 function UserHead(props: PropType) {
     return (
         <div className="userHead">
-            <img src={props.avatar} alt="avatar" />
+            <a href={props.userUrl} target="_blank"><img src={props.avatar} alt="avatar" /></a>
             <span className="username">{props.username}</span>
             <div className="separatorLine"></div>
             <div className="commonInfo">

@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import store from '../../store'
 import Cookies from 'js-cookie';
 import HeadLogo from '../../components/HeadLogo/HeadLogo';
-import getGitHubLogo from "../../svg/githubSvg"
+import getGitHubLogo from "../../resources/githubSvg"
 import './Login.css'
 
 

@@ -2,6 +2,7 @@
     background-color: #F4F4F4;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 .repositories {
     display: grid;
@@ -12,8 +13,17 @@
     padding: 0.7vw 1.4vw;
 }
 
-.pageButtons {
+.repositoriesPage .warning{
+    font-size: 1vw;
+    color: #888888;
     align-self: center;
+    margin: auto auto;
+}
+
+/* .pageButtons {
+    align-self: center;
+    display: flex;
+    flex-direction: row;
 }
 
 .pageButtons button{
@@ -25,11 +35,21 @@
     background-color: #E3E3E3;
     border-radius: 1vw;
 }
+.pageButtons .activePage{
+    background-color: #E3E3E3;
+    border-radius: 1vw;
+}
 
-.pageButtons button:first-child,
-.pageButtons button:last-child
+
+.pageButtons .prevButton,
+.pageButtons .nextButton
 {
     color: #888888;
     margin: 0 1vw;
 }
+
+.pageButtons .prevButton + button {
+    background-color: #E3E3E3;
+    border-radius: 1vw;
+} */
 
