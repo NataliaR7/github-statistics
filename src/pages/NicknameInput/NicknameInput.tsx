@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import "./NicknameInput.css"
 import HeadLogo from '../../components/HeadLogo/HeadLogo';
 import HashLoader from "react-spinners/HashLoader";
+import { on } from "node:cluster";
 
 function NicknameInput(props: { currentNickname: string, setNickname: (x: string) => void }) {
   const [isSubmit, setIsSubmit] = useState(false);
@@ -35,6 +36,9 @@ function NicknameInput(props: { currentNickname: string, setNickname: (x: string
     const responseUser = await fetch('/user');
     const data = await responseUser.json();
     const repositories = await (await fetch("/repos")).json();
+    const activ = await (await fetch('/activity')).json()
+    // let ac =  filterActualActivity(activ)
+    // console.log(getActivityStatistics(ac))
     const lang = await fetch("/lang");
     let a = await lang.json();
     console.log(a, "LGLoad");

@@ -2,10 +2,11 @@ const express = require('express');
 const { createOAuthAppAuth } = require('@octokit/auth-oauth-app');
 const { Octokit } = require('@octokit/rest');
 const DatabaseLogic = require('./databaseLogic');
-const extensions = require('./extensions');
+const extensions = require('./databaseExtensions');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { json } = require('express');
+const activityParser = require("./activityparser");
 
 const auth = createOAuthAppAuth({
     clientId: '9607ea01165c834b3511',
@@ -62,7 +63,7 @@ app.post('/nickname', (req, res) => {
     res.cookie('currentNickname', req.body.nickname);
     user = req.body.nickname;
     //console.log(res.code);
-    res.send(200);
+    res.sendStatus(200);
 });
 
 app.get('/user', (req, res) => {
@@ -130,8 +131,8 @@ app.get('/repos', (req, res) => {
                         per_page: 100,
                     })
                     .then((result) => {
-                        console.log(result.headers['x-ratelimit-used'], 'repos');
-                        console.log(result.data.length, 'REPOS LENGTH');
+                        // console.log(result.headers['x-ratelimit-used'], 'repos');
+                        // console.log(result.data.length, 'REPOS LENGTH');
                         extensions.addRepositoriesToDatabase(database, currentUser, result.data, response);
                         Promise.all(extensions.getLanguagesDataPromises(result.data, currentUser, octokit)).then(
                             (languagesData) => {
@@ -151,23 +152,34 @@ app.get('/repos', (req, res) => {
 
 // https://github-contributions.now.sh/api/v1/vabyars
 app.get('/activity', (req, res) => {
-    console.log('get /activity');
-    octokit
-        .request('GET /users/{username}/events', {
-            username: req.cookies.currentNickname,
-            per_page: 100,
-        })
-        .then((result) => {
+    const currentUser = req.cookies.currentNickname;
+    // console.log('get /activity');
+    database
+        .getUser(currentUser)
+        .then((response) => {
+            if (response.activity && extensions.isDataActual(Number(response['repos_last_update']))){
+                res.send(response.activity);
+            } else {
+                octokit
+                    .request('GET https://github-contributions.now.sh/api/v1/{username}', {
+                        username: currentUser,
+                    })
+                    .then((result) => {
+                        let activityData = activityParser.getActivityStatistics(result.data)
+                        database.updateUserActivity(currentUser, activityData)
             // console.log(result.headers['x-ratelimit-used'], "activity");
             // console.log(result.data.length, "Activity length")
-            res.json(result.data);
-        });
+                    res.json(activityData);
+                    });
+            }
+        })
+        .catch((err) => console.log(err, 'activity'));
 });
 
 app.get('/lang', (req, res) => {
     console.log('get /lang');
     database.getUser(req.cookies.currentNickname).then((result) => {
-        console.log(result);
+        // console.log(result);
         if (!result) res.json({});
         else res.send(result.languages);
     });
