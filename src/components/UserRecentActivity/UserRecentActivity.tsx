@@ -28,28 +28,24 @@ function UserRecentActivity() {
         continue;
       }
       const actDate = new Date(activityData[i].created_at);
+
       if (!result.has(actDate.getFullYear())) {
         currentYear = actDate.getFullYear();
         result.set(currentYear, []);
       }
 
-      const resIndex = result.get(currentYear)?.findIndex(e => e.date.toLocaleDateString() === actDate.toLocaleDateString()
-        && e.type === activityData[i].type
-        && e.data[0].repo.name === activityData[i].repo.name);
-      if (resIndex && resIndex !== -1) {
-        result.get(currentYear)?.[resIndex].data.push(activityData[i])
-      } else {
-        result.get(currentYear)?.push({ date: actDate, type: activityData[i].type, data: [activityData[i]] })
-      }
-      //console.log(result, "push");
+      const resIndex = result.get(currentYear)?.findIndex(e => isSimilar(e, activityData[i]));
+      resIndex && resIndex !== -1
+        ? result.get(currentYear)?.[resIndex].data.push(activityData[i])
+        : result.get(currentYear)?.push({ date: actDate, type: activityData[i].type, data: [activityData[i]] });
     }
     return result;
   }
 
   const fillActivityItems = (source: Map<number, Array<{ date: Date, type: string, data: any[] }>>) => {
     const result: JSX.Element[] = [];
-    if(source.size === 1 && source.get(currentYear)?.length === 0) {
-      result.push(<span className="warning">{"There are no activities for this user"}</span>);
+    if (source.size === 1 && source.get(currentYear)?.length === 0) {
+      result.push(<span className="warning">{"This user has no activity in the past three months"}</span>);
       return result;
     }
     for (let year of source.keys()) {
@@ -75,9 +71,15 @@ function UserRecentActivity() {
 
 function isNotValidType(data: any) {
   return !Object.values(ActivityType).includes(data.type)
-  || (data.type === ActivityType.CreateEvent && data.payload.ref_type !== "repository")
-  || (data.type === ActivityType.PullRequestEvent && data.payload.action !== "opened")
-  || (data.type === ActivityType.IssuesEvent && !(data.payload.action === "opened" || data.payload.action === "reopened"))
+    || (data.type === ActivityType.CreateEvent && data.payload.ref_type !== "repository")
+    || (data.type === ActivityType.PullRequestEvent && data.payload.action !== "opened")
+    || (data.type === ActivityType.IssuesEvent && !(data.payload.action === "opened" || data.payload.action === "reopened"));
+}
+
+function isSimilar(activity: any, data: any) {
+  return activity.date.toLocaleDateString() === new Date(data.created_at).toLocaleDateString()
+    && activity.type === data.type
+    && activity.data[0].repo.name === data.repo.name;
 }
 
 export default UserRecentActivity;
