@@ -5,12 +5,14 @@ const options = (lables: string[]) => ({
   plotOptions: {
     pie: {
       startAngle: -90,
-      endAngle: 270
+      endAngle: 270,
+      
     }
   },
+  colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800', '#ffd230'],
   labels: lables,
   dataLabels: {
-    enabled: true
+    enabled: true,
   },
   fill: {
     type: 'solid',
@@ -20,8 +22,11 @@ const options = (lables: string[]) => ({
     // },
   },
   title: {
-    text: 'Gradient Donut with custom Start-angle'
+    text: 'Popular user languages:'
   },
+
+
+
   responsive: [{
     breakpoint: 480,
     options: {
@@ -35,16 +40,20 @@ const options = (lables: string[]) => ({
   }]
 })
 
-function GetLablesAndValues(data: { [key: string]: number }) {
+type LanguageData = {
+  language: string;
+  bytes: number;
+}
+
+function GetLablesAndValues(data: LanguageData[]) {
   let lables: string[] = []
   let values: number[] = []
-  for (let key in data) {
-    lables.push(key);
-    values.push(data[key])
+  for (let languageData of data) {
+    lables.push(languageData.language);
+    values.push(languageData.bytes)
   }
   return { lables, values };
 }
-
 
 
 type PropType = { 
@@ -52,14 +61,13 @@ type PropType = {
 };
 
 function UserLanguages(props: PropType) {
-  let [data, setData] = useState<{ [key: string]: number }>({})
-  let [isDataChange, setIsDataChange] = useState(false) 
+  let [data, setData] = useState<LanguageData[]>([])
   
   async function getLanguagesStatistic(){
-    const repositories = await fetch("/lang");
-    let result: { [key: string]: number }  = await repositories.json();
-    setData(result);
-    setIsDataChange(true);
+    const repositories = await fetch("/lang")
+    let result: LanguageData[]  = await repositories.json()
+    console.log(result, "LANG");
+    setData(result)
   }
 
   useEffect(() => {

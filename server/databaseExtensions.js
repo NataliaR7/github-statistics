@@ -33,7 +33,21 @@ function getLanguageStatistic(responses){
                 languageStatistic[key] += reposLanguages[key]
           }
     }
-    return languageStatistic
+    
+    return sortLanguageByFrequency(languageStatistic)
+}
+
+function sortLanguageByFrequency(languageStatistic){
+    let statisticArray = []
+    for (let key in languageStatistic){
+        statisticArray.push({language: key, bytes: languageStatistic[key]})
+    }
+    statisticArray.sort((prev, next) => next.bytes - prev.bytes)
+    let res = statisticArray.splice(0, 5);
+    let otherLanguagesBytes = statisticArray.reduce((acc, item) => acc += item.bytes, 0)
+    if (otherLanguagesBytes != 0)
+        res.push({language: "Другое", bytes: otherLanguagesBytes})
+    return res
 }
 
 function getLanguagesDataPromises(repos, user, octokit){

@@ -36,6 +36,7 @@ class DatabaseLogic{
   }
 
   updateUserLanguages(username, languages){
+    console.log(languages, "database")
     this.db.run(`UPDATE gitstat SET languages=? where username=?`,
      [JSON.stringify(languages), username]);
   }
@@ -48,6 +49,11 @@ class DatabaseLogic{
   updateUserRepositories(username, repositories){
     this.db.run(`UPDATE gitstat SET repositories=?, repos_last_update=? where username=?`,
      [JSON.stringify(repositories), Date.now().toString() , username ]);
+  }
+
+  updateUserActivity(username, activity){
+    this.db.run(`UPDATE gitstat SET activity=?, repos_last_update=? where username=?`,
+     [JSON.stringify(activity), Date.now().toString() , username ]);
   }
 }
 

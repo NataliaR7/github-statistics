@@ -2,11 +2,12 @@ const express = require('express');
 const { createOAuthAppAuth } = require('@octokit/auth-oauth-app');
 const { Octokit } = require('@octokit/rest');
 const DatabaseLogic = require('./databaseLogic');
-const extensions = require('./extensions');
+const extensions = require('./databaseExtensions');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { json } = require('express');
 const { idText } = require('typescript');
+const activityParser = require("./activityparser");
 
 const auth = createOAuthAppAuth({
     clientId: '9607ea01165c834b3511',
@@ -228,16 +229,34 @@ app.get('/repos', (req, res) => {
 app.get('/activity', (req, res) => {
     console.log('get /activity ', req.query.username);
     const currentUser = req.query.username || req.cookies.currentNickname;
-    octokit
-        .request('GET /users/{username}/events', {
-            username: currentUser,
-            per_page: 100,
-        })
-        .then((result) => {
+    // octokit
+    //     .request('GET /users/{username}/events', {
+    //         username: currentUser,
+    //         per_page: 100,
+    //     })
+    //     .then((result) => {
+    // const currentUser = req.cookies.currentNickname;
+    // console.log('get /activity');
+    database
+        .getUser(currentUser)
+        .then((response) => {
+            if (response.activity && extensions.isDataActual(Number(response['repos_last_update']))){
+                res.send(response.activity);
+            } else {
+                octokit
+                    .request('GET https://github-contributions.now.sh/api/v1/{username}', {
+                        username: currentUser,
+                    })
+                    .then((result) => {
+                        let activityData = activityParser.getActivityStatistics(result.data)
+                        database.updateUserActivity(currentUser, activityData)
             // console.log(result.headers['x-ratelimit-used'], "activity");
             // console.log(result.data.length, "Activity length")
-            res.json(result.data);
-        });
+                    res.json(activityData);
+                    });
+            }
+        })
+        .catch((err) => console.log(err, 'activity'));
 });
 
 app.get('/lang', (req, res) => {

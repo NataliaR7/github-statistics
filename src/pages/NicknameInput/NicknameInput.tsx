@@ -11,6 +11,7 @@ import NicknameForm from '../../components/NicknameForm/NicknameForm';
 import HashLoader from "react-spinners/HashLoader";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import { getRandomGeneralColor } from "../../resources/colors"
+import { on } from "node:cluster";
 
 function NicknameInput(props: { currentNickname: string, setNickname: (x: string) => void }) {
   const [isSubmit, setIsSubmit] = useState(false);
@@ -43,6 +44,9 @@ function NicknameInput(props: { currentNickname: string, setNickname: (x: string
     const responseUser = await fetch('/user');
     const data = await responseUser.json();
     const repositories = await (await fetch("/repos")).json();
+    const activ = await (await fetch('/activity')).json()
+    // let ac =  filterActualActivity(activ)
+    // console.log(getActivityStatistics(ac))
     const lang = await fetch("/lang");
     let a = await lang.json();
     // const activity = await fetch("/activity");
