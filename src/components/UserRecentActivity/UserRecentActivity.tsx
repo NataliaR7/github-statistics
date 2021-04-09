@@ -50,7 +50,7 @@ function UserRecentActivity() {
     }
     for (let year of source.keys()) {
       result.push(<span className="year">{year}</span>);
-      const data = source.get(year)?.sort((a, b) => +b.date - +a.date).slice(0, 5);
+      const data = source.get(year)?.sort((a, b) => +b.date - +a.date).slice(0, 6);
       console.log(data, "ACT_DATA");
       data?.forEach(e => result.push(<ActivityItem groupData={e} />))
     }
@@ -61,9 +61,14 @@ function UserRecentActivity() {
 
   return (
     <div className="userRecentActivity">
-      <div className="line"></div>
-      <div className="content">
-        {isLoadedData && fillActivityItems(activityDataProcessing())}
+      <div className="head">
+        <span>recent activity</span>
+      </div>
+      <div className="recentActivity">
+        <div className="line"></div>
+        <div className="content">
+          {isLoadedData && fillActivityItems(activityDataProcessing())}
+        </div>
       </div>
     </div>
   );

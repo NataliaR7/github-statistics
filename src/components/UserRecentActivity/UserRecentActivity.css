@@ -1,13 +1,26 @@
 .userRecentActivity {
+    color: #454545;
+    display: grid;
+    grid-template-rows: 0.5fr 6fr;
+    grid-template-areas:
+        'head'
+        'recentActiv';
+}
+
+.userRecentActivity .recentActivity {
+    grid-area: recentActiv;
     border: 0.1vh solid #C4C4C4;
     border-radius: 5vh;
-    margin: 1vw 0vw;
+    margin: 0.3vw 1vw;
     max-width: 45vw;
-    height: 19vh;
+    max-height: 23vh;
     display: flex;
     flex-direction: row;
     align-items: center;
     color: #454545;
+}
+.userRecentActivity .head {
+    background-color: rgb(255, 255, 255, 0%);
 }
 
 .userRecentActivity .line{
@@ -29,11 +42,12 @@
 .userRecentActivity .year{
     font-size: 0.9vw;
     margin-left: 1vw;
+    margin: 0.4vh 1.2vw;
     color: #888888;
 }
-.userRecentActivity .warning{
+/* .userRecentActivity .warning{
     font-size: 1vw;
     color: #888888;
     align-self: center;
     margin: auto 0;
-}
+} */

@@ -1,3 +1,6 @@
+// import { Mouth } from '../src/resources/constants.tsx'
+// const { Mouth } = require('../src/resources/constants.tsx');
+
 function filterActualActivity(activData){
     let currentDate = new Date()
     let yearAgoDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 11, 1, 5)
@@ -58,19 +61,33 @@ function filterActualActivity(activData){
   }
 
   const DAYSINWEEK = 7
-  const MONTHNAMES = [
-    'Январь',
-    'Февраль',
-    'Март',
-    'Апрель',
-    'Май',
-    'Июнь',
-    'Июль',
-    'Август',
-    'Сентябрь',
-    'Октябрь',
-    'Ноябрь',
-    'Декабрь'
+//   const MONTHNAMES = [
+//     'Январь',
+//     'Февраль',
+//     'Март',
+//     'Апрель',
+//     'Май',
+//     'Июнь',
+//     'Июль',
+//     'Август',
+//     'Сентябрь',
+//     'Октябрь',
+//     'Ноябрь',
+//     'Декабрь'
+//  ];
+ const MONTHNAMES = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
  ];
 
   function isDateSuitable(now, yearAgo, comparableDate){

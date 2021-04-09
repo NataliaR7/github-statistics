@@ -3,6 +3,7 @@ import UserLanguages from '../../components/UserLanguages/UserLanguages';
 import UserActivity from '../../components/UserActivity/UserActivity';
 import UserRecentActivity from '../../components/UserRecentActivity/UserRecentActivity';
 import UserRepositories from '../../components/UserRepositories/UserRepositories';
+import Partners from '../../components/Partners/Partners';
 
 
 function MainInfo() {
@@ -25,6 +26,7 @@ function MainInfo() {
     const languagesData = { "c#": 5, "ht": 3, "gh": 7, "js": 2 }
     return (
         <div className="mainInfo">
+            <Partners />
             <UserLanguages data={languagesData} />
             <UserActivity data={activityData} />
             <UserRecentActivity />

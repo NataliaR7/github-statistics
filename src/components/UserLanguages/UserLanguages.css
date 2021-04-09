@@ -1,7 +1,28 @@
 .userLanguages {
+    color: #454545;
+    display: grid;
+    grid-template-rows: 0.5fr 8fr;
+    grid-template-areas:
+        'head'
+        'lang';
+}
+
+/* .userLanguages .head {
+    grid-area: head;
     display: flex;
+    background-color: #eeeeee;
+    font-variant: small-caps;
+    font-size: 1.3vw;
     align-items: center;
-    justify-content: center;
-    /* align-self: center;
-    justify-self: center; */
+    padding: 0 0 0.5vh 1vw;
+} */
+
+.userLanguages .langStatistics {
+    grid-area: lang;
+    align-self: center;
+    justify-self: center;
+}
+
+.userLanguages .head {
+    margin-top: 1vh;
 }

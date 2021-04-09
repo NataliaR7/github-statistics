@@ -1,22 +1,22 @@
 .userRepositories {
     color: #454545;
     display: grid;
-    grid-template-rows: 1fr 7fr;
+    grid-template-rows: 0.5fr 8fr;
     grid-template-areas:
         'head'
         'balls';
 }
 
-.head {
+/* .userRepositories .head {
     grid-area: head;
     display: flex;
     background-color: #eeeeee;
     font-variant: small-caps;
     font-size: 1.3vw;
-    /* height: 4vh; */
+    
     align-items: center;
     padding: 0 0 0.5vh 1vw;
-}
+} */
 
 .balls {
     grid-area: balls;
@@ -67,9 +67,9 @@
     background-color: rgba(161, 223, 251, 0.5);
 }
 
-.userRepositories .warning {
+/* .userRepositories .warning {
     font-size: 1vw;
     color: #888888;
     align-self: center;
     margin: auto auto;
-}
+} */

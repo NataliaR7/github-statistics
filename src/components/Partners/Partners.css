@@ -1,0 +1,25 @@
+.partners {
+    color: #454545;
+    display: grid;
+    grid-template-rows: 0.5fr 2fr;
+    grid-template-areas:
+        'head'
+        'people';
+}
+
+.partners .people {
+    grid-area: people;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+}
+
+.partners .people img {
+    width: 5.3vw;
+    border-radius: 1vw;
+}
+
+/* .partners .head {
+    margin-top: 1vh;
+} */

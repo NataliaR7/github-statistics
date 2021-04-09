@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import './UserLanguages.css';
-import {color, generalColor, graphColors} from '../../resources/colors'
+import { color, generalColor, graphColors } from '../../resources/colors'
 
 const options = (lables: string[]) => {
   return {
@@ -11,6 +11,19 @@ const options = (lables: string[]) => {
         endAngle: 270,
       }
     },
+    animations: {
+      enabled: true,
+      // easing: 'line',
+      // speed: 800,
+      // animateGradually: {
+      //   enabled: true,
+      //   delay: 150
+      // },
+      // dynamicAnimation: {
+      //   enabled: true,
+      //   speed: 350
+      // }
+    },
     //colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800', '#ffd230'],
     colors: graphColors,
     labels: lables,
@@ -18,7 +31,7 @@ const options = (lables: string[]) => {
       position: 'right',
       //horizontalAlign: 'center',
       //verticalAlign: 'center',
-      //fontSize: '14px',
+      fontSize: '17em',
       itemMargin: {
         vertical: 5
       },
@@ -94,9 +107,12 @@ function UserLanguages(props: PropType) {
   let parsedData = GetLablesAndValues(data)
   return (
     <div className="userLanguages">
-      
-        <Chart options={options(parsedData.lables)} series={parsedData.values} type="pie" width={"500"} />
-      
+      <div className="head">
+        <span>languages</span>
+      </div>
+      <div className="langStatistics">
+        <Chart options={options(parsedData.lables)} series={parsedData.values} type="pie" width={"550"} />
+      </div>
     </div>
   );
 }
