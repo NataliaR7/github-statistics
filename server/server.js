@@ -259,6 +259,21 @@ app.get('/activity', (req, res) => {
         .catch((err) => console.log(err, 'activity'));
 });
 
+app.get('/recentActivity', (req, res) => {
+    console.log('get /recentActivity ', req.query.username);
+    const currentUser = req.query.username || req.cookies.currentNickname;
+    octokit
+        .request('GET /users/{username}/events', {
+            username: currentUser,
+            per_page: 100,
+        })
+        .then((result) => {
+            // console.log(result.headers['x-ratelimit-used'], "activity");
+            // console.log(result.data.length, "Activity length")
+            res.json(result.data);
+        });
+});
+
 app.get('/lang', (req, res) => {
     console.log('get /lang ', req.query.username);
     const currentUser = req.query.username || req.cookies.currentNickname;

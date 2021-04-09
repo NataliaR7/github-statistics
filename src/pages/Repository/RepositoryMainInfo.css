@@ -1,0 +1,91 @@
+.repository .repositoryMainInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'info about';
+    margin: 1.5vw;
+    gap: 8vw;
+}
+
+.repoAbout {
+    grid-area: about;
+    display: flex;
+    flex-direction: column;
+}
+
+.repoAbout .title{
+    color: #9B9B9B;
+}
+
+/* .repoAdditionalPanel {
+    grid-area: info;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+} */
+
+.repoInfoComponent {
+    grid-area: info;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #eeeeee;
+    border-radius: 2vw;
+    padding: 0.7vw 0;
+    margin: 0 1vw;
+}
+
+.ownerPanel, .infoPanel, .contributorsPanel {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0.8vw;
+    align-items: center;
+    gap: 0.3vw;
+    font-size: 0.8vw;
+}
+
+.contributors {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1vw;
+    margin-top: 0.4vw;
+}
+
+.ownerPanel img {
+    width: 4vw;
+    border-radius: 1vw;
+}
+
+.contributorsPanel img {
+    width: 3vw;
+    border-radius: 1vw;
+}
+
+.repoInfoComponent .header ~ span {
+    color: #888888;
+    align-self: flex-start;
+}
+
+.repoInfoComponent span {
+    color: #454545;
+}
+
+.repositoryMainInfo .separator {
+    background-color: #9B9B9B;
+    width: 0.1vh;
+    height: 7.2vw;
+    margin: 0 1.5vw;
+    align-self: center;
+}
+
+.repoInfoComponent .header, 
+.repositoryMainInfo .title {
+    font-variant: small-caps;
+    font-size: 1.1vw;
+    margin-bottom: 0.4vw;
+}
+
+.repositoryDescription {
+    font-size: 1vw;
+}

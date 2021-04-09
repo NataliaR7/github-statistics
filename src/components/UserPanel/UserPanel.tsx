@@ -118,7 +118,7 @@ function UserPanel(props: { username?: string }) {
 
   return (
     <div className="userPanel">
-      {isLoadedData ? renderData() : null}
+      {isLoadedData && renderData()}
 
     </div>
   );

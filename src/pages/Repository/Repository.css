@@ -3,8 +3,9 @@
     display: flex;
     flex-direction: column;
     color: #454545;
-    padding: 1vw 0;
-    height: 95%;
+    /* padding: 1vw 0; */
+    height: 100%;
+    width: 100%;
 }
 
 .repositoryHead {
@@ -13,14 +14,14 @@
 }
 
 .repositoryName {
-    font-size: 2.7vw;
+    font-size: 2.6vw;
     background-color: #eeeeee;
     padding: 0 1.5vw;
     display: flex;
     flex-direction: row;
     align-items: center;
     padding-bottom: 0.5vw;
-    line-height: 2.5vw;
+    line-height: 2vw;
     gap: 0.5vw;
 }
 
@@ -40,84 +41,32 @@
     padding: 0 1.5vw;
 }
 
-.repository .repoInfo {
+.repository .statistics{
+    background-color: #ff9393;
+    width: 100%;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: 'info about';
-    margin: 1.5vw;
-    gap: 8vw;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    'languageRepo issueAvgRepo'
+    'activityRepo issueCountRepo';
 }
 
-.repoAbout {
-    grid-area: about;
-    display: flex;
-    flex-direction: column;
+.repository .languageRepo {
+    grid-area: languageRepo;
+    background-color: burlywood;
+}
+.repository .issueAvgRepo {
+    grid-area: issueAvgRepo;
+    background-color: rgb(135, 222, 203);
+}
+.repository .activityRepo {
+    grid-area: activityRepo;
+    background-color: rgb(55, 160, 69);
+}
+.repository .issueCountRepo {
+    grid-area: issueCountRepo;
+    background-color: rgb(207, 123, 255);
 }
 
-.repoAbout .title{
-    color: #9B9B9B;
-}
-
-.repoAdditionalPanel {
-    grid-area: info;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.repoInfoComponent {
-    display: flex;
-    flex-direction: row;
-}
-
-.ownerPanel, .infoPanel, .contributorsPanel {
-    display: flex;
-    flex-direction: column;
-    margin: 0 1vw;
-    align-items: center;
-    gap: 0.3vw;
-    font-size: 0.9vw;
-}
-
-.contributors {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 1vw;
-    margin-top: 0.3vw;
-}
-
-.ownerPanel img {
-    width: 5vw;
-    border-radius: 50%;
-}
-
-.contributorsPanel img {
-    width: 4vw;
-    border-radius: 50%;
-}
-
-.repoInfoComponent .header ~ span {
-    color: #888888;
-    align-self: flex-start;
-}
-
-.repoInfoComponent span {
-    color: #454545;
-}
-
-.repoInfo .separator {
-    background-color: #9B9B9B;
-    width: 0.1vh;
-    height: 7.5vw;
-    margin: 0 1.5vw;
-    align-self: center;
-}
-
-.repoInfoComponent .header, 
-.repoInfo .title {
-    font-variant: small-caps;
-    font-size: 1.1vw;
-    margin-bottom: 0.5vw;
-}

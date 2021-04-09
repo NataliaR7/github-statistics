@@ -2,6 +2,7 @@ import { type } from 'node:os';
 import { useEffect, useState } from 'react'
 import ReactApexChart from 'react-apexcharts';
 import Chart from 'react-apexcharts'
+import {color, generalColor, graphColors, getRandomColor} from '../../resources/colors'
 
 
 
@@ -128,13 +129,13 @@ function getTempSeries(data: {[key: string] : number}){
 function getСolumnColor(value: number){
   switch(true){
     case value > 100:
-      return '#fa5b16'
+      return graphColors[0]//'#fa5b16'
     case value > 30:
-      return '#f0a91d'
+      return graphColors[1]//'#f0a91d'
     case value > 6:
-      return '#eafa41'
+      return graphColors[2]//'#eafa41'
     default:
-      return '#72f276'
+      return graphColors[3]//'#72f276'
   }
 }
 
@@ -159,7 +160,7 @@ function UserActivity(props: {data: {[key: string] : number}}) {
     return {
       chart: {
         type: 'bar',
-        height: 350,
+        // height: 350,
         // stacked: true,
         toolbar: {
           show: true
@@ -191,7 +192,7 @@ function UserActivity(props: {data: {[key: string] : number}}) {
       },    
       colors:[function(data: {value: number, seriesIndex: number, w: any}) {
         console.log(data.value)
-        return getСolumnColor(data.value)
+        return getСolumnColor(data.value);
       }],//цвет столбиков(если несколько - то для каждого отдельно)    
       dataLabels: dataLabels,    
       xaxis: xaxis(xaxisData),
@@ -209,10 +210,11 @@ function UserActivity(props: {data: {[key: string] : number}}) {
     console.log(result, "LANG");
     setData(result)
     setMainData(GetLablesAndSeries(result))
+
   }
 
   useEffect(() => {
-    getActivityStatistic()
+    getActivityStatistic();
   }, [])
 
   function backToMainChart(){
@@ -222,7 +224,7 @@ function UserActivity(props: {data: {[key: string] : number}}) {
       // console.log("back only if need")
     }
   }
-  const chartHeight = 300
+  const chartHeight = "90%"
   // let parsedData = GetLablesAndSeries(data);
   return (
     <div className="userActivity">

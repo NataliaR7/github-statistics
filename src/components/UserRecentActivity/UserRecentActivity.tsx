@@ -11,7 +11,7 @@ function UserRecentActivity() {
   let currentYear = new Date().getFullYear();
 
   useEffect(() => {
-    const activity = fetch("/activity")
+    const activity = fetch("/recentActivity")
       .then(res => res.json())
       .then(result => {
         console.log(result, "ACTIV")
