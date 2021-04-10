@@ -98,6 +98,7 @@ app.get('/user', (req, res) => {
                     .then((result) => {
                         extensions.addUserDataToDatabase(database, currentUser, result.data, response);
                         console.log("User Octikit");
+                        console.log('user head', result.headers);
                         res.json(result.data);
                     })
                     .catch((err) => {

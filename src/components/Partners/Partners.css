@@ -12,13 +12,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2vw;
+    gap: 1.5vw;
 }
 
-.partners .people img {
-    width: 5.3vw;
-    border-radius: 1vw;
-}
+
 
 /* .partners .head {
     margin-top: 1vh;

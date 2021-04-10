@@ -1,0 +1,19 @@
+.partners .partner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.partners .partner span {
+    font-size: 1.1em;
+    color: #646464;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 7.5vw;
+}
+.partners .partner img {
+    width: 5.3vw;
+    border-radius: 1vw;
+}
