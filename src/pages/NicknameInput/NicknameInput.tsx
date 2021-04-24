@@ -47,10 +47,11 @@ function NicknameInput(props: { currentNickname: string, setNickname: (x: string
     const data = await responseUser.json();
     const repositories = await (await fetch("/repos")).json();
     const activ = await (await fetch('/activity')).json()
+    
     // let ac =  filterActualActivity(activ)
     // console.log(getActivityStatistics(ac))
-    const lang = await fetch("/lang");
-    let a = await lang.json();
+    // const lang = await fetch("/lang");
+    // let a = await lang.json();
     // const activity = await fetch("/activity");
     // let a1 = await activity.json();
     // console.log(a1, "ACTIVITY");

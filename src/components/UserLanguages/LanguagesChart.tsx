@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import './UserLanguages.css';
 import { color, generalColor, graphColors } from '../../resources/colors'
+import {GetLablesAndValues} from "../../extentions/extentions"
 
 const options = (lables: string[], legendOffset: number, legendPosition?: string) => {
     return {
@@ -72,38 +73,66 @@ const options = (lables: string[], legendOffset: number, legendPosition?: string
 };
 
 type LanguageData = {
-    language: string;
-    bytes: number;
+    // language: string;
+    // bytes: number;
+    [key: string]: number;
 }
 
-function GetLablesAndValues(data: LanguageData[]) {
-    let lables: string[] = []
-    let values: number[] = []
-    for (let languageData of data) {
-        lables.push(languageData.language);
-        values.push(languageData.bytes)
-    }
-    return { lables, values };
-}
+// function GetLablesAndValues(data: LanguageData[]) {
+//     let lables: string[] = []
+//     let values: number[] = []
+//     for (let languageData of data) {
+//         lables.push(languageData.language);
+//         values.push(languageData.bytes)
+//     }
+//     return { lables, values };
+// }
 
 
 type PropType = {
-    data?: { [key: string]: number },
+    // data?: { [key: string]: number },
     width?: string,
     height?: string,
     legendPosition?: string,
     username?: string,
+    url?: string,
+    reposName?: string,
 };
 
+// interface PropType {
+//   url: string,
+//   reposName?: string
+// };
+
+function getLanguagesPromise(data: PropType) {
+    if (data.reposName) {
+        return fetch(`/reposlangs`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify({ reposName: data.reposName })
+        })
+    }
+    return fetch(`/userlangs`);
+}
+
 function LanguagesChart(props: PropType) {
-    let [data, setData] = useState<LanguageData[]>([])
+    let [data, setData] = useState<LanguageData>({});
+
+
 
     async function getLanguagesStatistic() {
-        const queryUsername = props.username ? "?username=" + props.username : "";
-        const repositories = await fetch(`/lang${queryUsername}`);
-        let result: LanguageData[] = await repositories.json();
-        console.log(result, "LANG");
-        setData(result);
+        // const queryUsername = props.username ? "?username=" + props.username : "";
+        // const repositories = await fetch(`/lang${queryUsername}`);
+        // let result: LanguageData[] = await repositories.json();
+        // console.log(result, "LANG");
+        // setData(result);
+        const languages = await (await getLanguagesPromise(props)).json()
+
+
+        console.log(languages, "LANG");
+        setData(languages)
     }
 
     useEffect(() => {

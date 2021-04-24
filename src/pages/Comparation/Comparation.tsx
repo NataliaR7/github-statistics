@@ -25,8 +25,8 @@ function Comparation(props: PropsType) {
         const queryUsername = props.compareNickname ? "?username=" + props.compareNickname : "";
         const userResult = await (await fetch(`/user${queryUsername}`)).json()
         const repositories = await (await fetch(`/repos${queryUsername}`)).json();
-        const activ = await (await fetch(`/activity${queryUsername}`)).json()
-        const lang = await (await fetch(`/lang${queryUsername}`)).json()
+        const activ = await (await fetch(`/activity${queryUsername}`)).json();
+        const lang = await (await fetch(`/userlangs${queryUsername}`)).json();
      
         await setIsLoadedData(true);
       }

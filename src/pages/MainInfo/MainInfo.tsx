@@ -27,7 +27,7 @@ function MainInfo() {
     return (
         <div className="mainInfo">
             <Partners />
-            <UserLanguages data={languagesData} />
+            <UserLanguages /* url="userlangs" */ />
             <UserActivity data={activityData} />
             <UserRecentActivity type="user"/>
             <UserRepositories />

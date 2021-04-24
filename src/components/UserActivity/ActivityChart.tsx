@@ -5,12 +5,11 @@ import Chart from 'react-apexcharts'
 import { color, generalColor, graphColors, getRandomColor } from '../../resources/colors'
 import './UserActivity.css'
 
-
 const dataLabels = {
     enabled: true, ///данные внизу столба
-    // formatter: function (val: string) {
-    //   return val + "%";
-    // },
+    formatter: function (val: number) {
+        return val === 0 ? "" : val
+    },
     textAnchor: 'middle',
     style: {
         fontSize: '0.8em',
@@ -19,8 +18,6 @@ const dataLabels = {
     offsetY: -10,
 
 }
-
-
 
 const responsive = [{
     breakpoint: 480,
@@ -176,7 +173,7 @@ function ActivityChart(props: { data?: { [key: string]: number }, username?: str
                         zoomout: true,
                         pan: false,
                         reset: true,
-                        
+
                     }
                 },
                 zoom: {

@@ -4,6 +4,8 @@ import { Redirect } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import RepositoryMainInfo from './RepositoryMainInfo'
 import UserRecentActivity from '../../components/UserRecentActivity/UserRecentActivity'
+import LanguagesChart from "../../components/UserLanguages/LanguagesChart";
+import Issues from "../../components/ReposIssues/IssuesItem"
 
 interface RepoType {
     activeRepoId: number;
@@ -11,6 +13,7 @@ interface RepoType {
     deactiveteRepo: () => void;
 }
 
+// const reposName = "west"
 function Repository(props: RepoType) {
     const [isBack, setIsBack] = useState(false);
     const [repoData, setRepoData] = useState<any>({});
@@ -60,13 +63,14 @@ function Repository(props: RepoType) {
                 <RepositoryMainInfo data={getRepoMainInfo()} />
                 <div className="statistics">
                     <div className="languageRepo">
-
+                        <LanguagesChart /* url="reposlangs" */ reposName={repoData.name} />
                     </div>
                     <div className="issueAvgRepo">
-
+                        <Issues url="repoIssues" reposName={repoData.name} type="issues" />
+                        <Issues url="repoPulls" reposName={repoData.name} type="pull requests" />
                     </div>
                     <div className="activityRepo">
-                        <UserRecentActivity type="repo" repoName={repoData.name}/>
+                        <UserRecentActivity type="repo" repoName={repoData.name} />
                     </div>
                     <div className="issueCountRepo">
 

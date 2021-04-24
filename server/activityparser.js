@@ -17,8 +17,8 @@ function filterActualActivity(activData){
   function getActivityStatistics(activityData){
     let actualActivityData = filterActualActivity(activityData)
     let result= {}
-    let tempMonthStat = defaultMonthStatistics()
-    let parts = Object.keys(tempMonthStat)
+    let tempMonthStat = {}
+    // let parts = Object.keys(tempMonthStat)
     let tempMonthName = ""
     let isFirst = true
     for (let data of actualActivityData.reverse()){
@@ -30,34 +30,19 @@ function filterActualActivity(activData){
         tempMonthName = MONTHNAMES[month]
         isFirst = false
       }
-      let partOfMonth = parts[getPartNumber(day)] 
-      tempMonthStat[partOfMonth] += data.count
+      // let partOfMonth = parts[getPartNumber(day)] 
+      tempMonthStat[day] = data.count
 
       if (MONTHNAMES[month] != tempMonthName){
         result[tempMonthName] = tempMonthStat 
-        
         tempMonthName = MONTHNAMES[month]         
-        tempMonthStat = defaultMonthStatistics()
+        tempMonthStat = {}
       }
     }
 
-    if (tempMonthStat != defaultMonthStatistics())
+    if (tempMonthStat != {})
       result[tempMonthName] = tempMonthStat 
     return result
-  }
-
-  function getPartNumber(day){
-    let weekIndex = Math.floor(day / DAYSINWEEK)
-    return Math.min(weekIndex, 3)
-  }
-
-  function defaultMonthStatistics(){
-    return {
-      "0-7": 0,
-      "8-13": 0,
-      "14-20": 0,
-      "21-конец": 0
-     }
   }
 
   const DAYSINWEEK = 7
