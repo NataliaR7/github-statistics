@@ -81,6 +81,16 @@
     background-color: rgba(161, 223, 251, 0.5);
 }
 
+
+
+.repoSquare:first-child,
+.repoSquare:first-child + div,
+.repoSquare:first-child + div + div,
+.repoSquare:first-child + div + div + div,
+.repoSquare:last-child {
+    border-width: 0.2vw;
+}
+
 /* .userRepositories .warning {
     font-size: 1vw;
     color: #888888;

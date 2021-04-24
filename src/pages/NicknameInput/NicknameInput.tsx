@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import "./NicknameInput.css"
 import HeadLogo from '../../components/HeadLogo/HeadLogo';
 import NicknameForm from '../../components/NicknameForm/NicknameForm';
+import Loader from '../../components/Loader/Loader'
 import HashLoader from "react-spinners/HashLoader";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import { getRandomGeneralColor } from "../../resources/colors"
@@ -72,11 +73,8 @@ function NicknameInput(props: { currentNickname: string, setNickname: (x: string
   return (
     <div className="nicknameInput">
       {isError && <Redirect to="/notFound" />}
-      { (!isLoadingData && isSubmit)  ? <div className="hashLoader">
-        <HashLoader size={150} color={getRandomGeneralColor()} />
-        <span>Collecting information...</span>
-      </div>:
-      !isSubmit
+      { (/* true || */ !isLoadingData && isSubmit)  ? <Loader />
+      : !isSubmit
         ? <>
           <HeadLogo />
           <form action="" method="post" className="loginForm" onSubmit={(e) => submitHandler(e)}>

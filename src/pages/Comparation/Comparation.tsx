@@ -1,12 +1,13 @@
 import './Comparation.css';
 import UserLanguages from "../../components/UserLanguages/UserLanguages"
-import UserPanel from "../../components/UserPanel/UserPanel"
+import UserPanel from "../../containers/UserPanel"
 import NicknameForm from "../../components/NicknameForm/NicknameForm"
 import UserRepositories from "../../components/UserRepositories/UserRepositories"
 import { useEffect, useState } from 'react';
 import { Redirect } from "react-router-dom";
 import ErrorNotFound from '../ErrorNotFound/ErrorNotFound';
 import ComparePanel from './ComparePanel'
+import Loader from '../../components/Loader/Loader'
 
 interface PropsType {
     compareNickname: string;
@@ -27,7 +28,7 @@ function Comparation(props: PropsType) {
         const activ = await (await fetch(`/activity${queryUsername}`)).json()
         const lang = await (await fetch(`/lang${queryUsername}`)).json()
      
-        setIsLoadedData(true);
+        await setIsLoadedData(true);
       }
 
 
@@ -67,7 +68,7 @@ function Comparation(props: PropsType) {
 
                     </form>
                 </div>
-                : isLoadedData && <div className="comparationContent">
+                : isLoadedData ? <div className="comparationContent">
                     <UserPanel username={props.compareNickname} />
                     <div className="dataCompare">
                         {/* <div className="upPanel"> 
@@ -80,6 +81,7 @@ function Comparation(props: PropsType) {
                         <ComparePanel compareName={props.compareNickname} minState={2} maxState={4} />
                     </div>
                 </div>
+                :  <Loader />
             }
 
         </div>

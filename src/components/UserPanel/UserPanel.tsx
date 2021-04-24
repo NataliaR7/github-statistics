@@ -1,5 +1,6 @@
 import UserHead from './UserHead';
 import UserAdditional from './UserAdditional';
+import changeUserSvg from '../../resources/changeUserSvg'
 import { Octokit } from "@octokit/rest"
 import { useState, useEffect } from 'react';
 import './UserPanel.css';
@@ -31,9 +32,14 @@ type RepoDataType = {
   repoCount?: number;
 };
 
+interface PropsType {
+  setCompareNickname?: (value: string) => void;
+  username?: string;
+}
+
 const user = 'Aminopyridin';
 
-function UserPanel(props: { username?: string }) {
+function UserPanel(props: PropsType) {
   const [userData, setUserData] = useState<UserDataType>({});
   const [isLoadedData, setIsLoadedData] = useState(false);
 
@@ -41,13 +47,12 @@ function UserPanel(props: { username?: string }) {
 
   async function getUserData() {
     const queryUsername = props.username ? "?username=" + props.username : "";
-    const responseUser = await fetch(`/user${queryUsername}`);
-    const data = await responseUser.json();
-    // console.log(data, 'DATA');
-    // const activ = await fetch('/activity')
-    //const repositories = await (await fetch(`/repos${queryUsername}`)).json()
-    const responseStars = await fetch(`/starred${queryUsername}`);
-    const userStars = await responseStars.json();
+    
+    const userInfo = await (await fetch(`/user${queryUsername}`)).json();
+    const repositories = await (await fetch(`/repos${queryUsername}`)).json();
+    const forks = repositories.filter((repo: any) => repo.fork);
+
+    const userStars = await (await fetch(`/starred${queryUsername}`)).json();
     const count = `${userStars.headers.link}`.match(/=(\d+)>; rel=\"last\"/);
 
     const responseOrgs = await fetch(`/orgs${queryUsername}`);
@@ -64,20 +69,20 @@ function UserPanel(props: { username?: string }) {
 
     setUserData(userData => userData = {
       ...userData,
-      userUrl: data.html_url,
-      avatar: data.avatar_url,
-      username: data.login,
-      followerCount: data.followers,
-      followingCount: data.following,
+      userUrl: userInfo.html_url,
+      avatar: userInfo.avatar_url,
+      username: userInfo.login,
+      followerCount: userInfo.followers,
+      followingCount: userInfo.following,
       starCount: count ? count[1] : '0',
-      reposCount: data.public_repos,
-      forkCount: 0,
-      location: data.location,
-      email: data.email,
-      site: data.blog,
-      name: data.name,
+      reposCount: userInfo.public_repos,
+      forkCount:  forks.length,
+      location: userInfo.location,
+      email: userInfo.email,
+      site: userInfo.blog,
+      name: userInfo.name,
       orgs: orgs,
-      createdDate: new Date(data.created_at),
+      createdDate: new Date(userInfo.created_at),
     });
 
   }
@@ -94,6 +99,12 @@ function UserPanel(props: { username?: string }) {
   const renderData = () => {
     return (
       <>
+        <div 
+        title="change user" 
+        className={`changeUserIcon` + ` ${props.username !== undefined && 'show'}`}
+        onClick={ () => props.setCompareNickname && props.setCompareNickname('')}>
+          {changeUserSvg()}
+        </div>
         <UserHead
           userUrl={userData.userUrl}
           avatar={userData.avatar}

@@ -80,3 +80,8 @@
     align-self: center;
 }
 
+.repoSquare .copyMessage {
+    position: relative;
+    margin-left: 1vh;
+}
+

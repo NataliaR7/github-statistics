@@ -185,8 +185,9 @@ app.get('/repos', (req, res) => {
                 });
         })
         .then((resultData) => {
-            const forkRepos = resultData.filter((repo)=>{repo.fork});
-            // console.log(resultData, 'resultData1');
+            // const forkRepos = resultData.filter((repo)=> repo.fork);
+            // console.log(resultData, 'resultData');
+            // console.log(forkRepos.length, 'forkRepos');
             return Promise.all(extensions.getDetailedRepositoryPromises(resultData, currentUser, octokit)).then(
                 (repositoriesData) => {
                     console.log('Repos-octokit');

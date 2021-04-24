@@ -15,3 +15,20 @@
     font-variant: small-caps;
     max-width: 15vw;
 }
+
+.changeUserIcon {
+    width: 2vw;
+    /* fill: rgba(244, 244, 244, 60%); */
+    fill: #989898;
+    position: absolute;
+    right: 12.1vw;
+    top: 7.5vh;
+    cursor: pointer;
+    visibility: collapse;
+}
+.changeUserIcon:hover {
+    fill: #dddddd;
+}
+.changeUserIcon.show{
+   visibility: visible;
+}
