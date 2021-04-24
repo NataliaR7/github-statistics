@@ -1,9 +1,9 @@
 import RepositoryItem from "../../containers/RepositoryItem"
-import Repository from '../Repository/Repository'
+import Repository from '../../containers/Repository'
 import NavigationPagePanel from '../../containers/NavigationPagePanel'
 import { useEffect, useRef, useState } from 'react';
 import { sortReposData } from '../../generalLogic/repositoryLogic';
-import stope from '../../store'
+// import {store} from '../../store'
 import "./Repositories.css"
 
 
@@ -38,8 +38,7 @@ function Repositories(props: ReposType) {
         const response = await repositories.json();
         const repoAdditionalInfo = await fetch('/repoAdditionalInfo');
         const additionalRes = await repoAdditionalInfo.json();
-        console.log(response, "repos");
-        console.log(additionalRes, "additional");
+        
         const sortPeros = await sortReposData(response);
         //console.log(response, "Repo");
 
@@ -87,6 +86,7 @@ function Repositories(props: ReposType) {
 
     return (
         <div className="repositoriesContent">
+            
             {props.isRepoActive ? <Repository /> :
                 <div className="repositoriesPage">
                     {repoData.length === 0

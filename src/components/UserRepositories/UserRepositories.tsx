@@ -1,5 +1,6 @@
 import './UserRepositories.css';
-import RepoBall from './RepoBall'
+import RepoBall from '../../containers/RepoBall'
+import RepoPanel from '../../components/UserRepositories/RepoPanel'
 import { useEffect, useState } from 'react';
 import { sortReposData } from '../../generalLogic/repositoryLogic';
 
@@ -47,20 +48,7 @@ function UserRepositories() {
       <div className="head">
         <span>repositories</span>
       </div>
-      {isLoadedData &&
-        <div className="balls">
-          {repoData.length === 0 
-          ? <span className="warning">This user has no repositories</span> 
-          : <>
-              {repoData[0] && <RepoBall data={repoData[0]} />}
-              {repoData[1] && <RepoBall data={repoData[1]} />}
-              {repoData[2] && <RepoBall data={repoData[2]} />}
-              {repoData[3] && <RepoBall data={repoData[3]} />}
-              {repoData[4] && <RepoBall data={repoData[4]} />}
-            </>
-          }
-        </div>
-      }
+      <RepoPanel type="ball" />
     </div>
   );
 }

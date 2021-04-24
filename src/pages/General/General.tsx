@@ -4,11 +4,11 @@ import {
     Route,
     Redirect,
 } from "react-router-dom";
-import TabBar from '../../components/TabBar/TabBar';
+import TabBar from '../../containers/TabBar';
 import UserPanel from '../../components/UserPanel/UserPanel';
 import MainInfo from '../MainInfo/MainInfo';
 import Repositories from '../../containers/Repositories';
-import Comparation from '../Comparation/Comparation';
+import Comparation from '../../containers/Comparation';
 import './General.css'
 
 function General() {

@@ -1,14 +1,18 @@
 
-export enum ActivityType {
+export enum UserActivityType {
     PushEvent = "PushEvent",
     PullRequestEvent = "PullRequestEvent",
     CreateEvent = "CreateEvent",
     ForkEvent = "ForkEvent",
-    // MemberEvent ="MemberEvent",
-    // DeleteEvent ="DeleteEvent",
     IssuesEvent="IssuesEvent",
-    // IssueCommentEvent="IssueCommentEvent",
     WatchEvent="WatchEvent"
+}
+export enum RepoActivityType {
+    PushEvent = "PushEvent",
+    PullRequestEvent = "PullRequestEvent",
+    PullRequestReviewEvent ="PullRequestReviewEvent",
+    IssuesEvent="IssuesEvent",
+    // IssueCommentEvent="IssueCommentEvent"
 }
 
 export enum Mouth {

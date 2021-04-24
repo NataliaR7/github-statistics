@@ -2,7 +2,8 @@ import './RepoBall.css';
 import starSvg from '../../resources/starSvg';
 import linkSvg from '../../resources/linkSvg';
 import { getStylizedDate } from '../../generalLogic/repositoryLogic';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { Redirect } from 'react-router';
 
 type RepoBallType = {
     data: {
@@ -13,9 +14,12 @@ type RepoBallType = {
         updateDate: Date;
         cloneUrl: string;
     }
+    selectRepo: (value: number) => void;
+    isRepoActive: boolean;
 }
 
 function RepoBall(props: RepoBallType) {
+    const [isSelectedRepo, setIsSelectedRepo] = useState(false);
     const message = useRef<HTMLSpanElement>(null);
     const data = props.data;
 
@@ -25,7 +29,6 @@ function RepoBall(props: RepoBallType) {
             message?.current?.classList.remove("hide");
             setTimeout(() => {
                 target.classList.remove("hidden");
-                //message?.classList.add("hide");
             }, 80);
             setTimeout(() => {
                 message?.current?.classList.add("hide");
@@ -35,12 +38,21 @@ function RepoBall(props: RepoBallType) {
     }
 
     return (
-        <div className="repoBall" key={data.id}>
+        <div className="repoBall" key={data.id} onClick={(e) => {
+            const target:any = e.target;
+            console.log(target.tagName, "TN")
+            console.log(target, "TN")
+            if(target.tagName === 'path' || target.tagName === 'svg') {
+                return;
+            }
+            props.selectRepo(data.id);
+            setIsSelectedRepo(true);
+        }}>
+            {isSelectedRepo && <Redirect to="/repos" />}
             <div className="stars">{starSvg()}<span>{data.starsCount}</span></div>
             <span ref={message} className="copyMessage hide">{"Copied!"}</span>
             <div className="infoRepo">
                 <div className="nameRepo">
-                    {/* <span ref={message} className="copyMessage hide">{"Copied!"}</span> */}
                     <span>{data.repoName}</span>
                     {data.isFork && <span className="fork">{"Forked"}</span>}
                 </div>

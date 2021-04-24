@@ -42,7 +42,6 @@
 }
 
 .repository .statistics{
-    background-color: #ff9393;
     width: 100%;
     height: 100%;
     display: grid;
@@ -63,7 +62,6 @@
 }
 .repository .activityRepo {
     grid-area: activityRepo;
-    background-color: rgb(55, 160, 69);
 }
 .repository .issueCountRepo {
     grid-area: issueCountRepo;

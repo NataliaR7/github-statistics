@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
-import store from '../../store'
+import {store} from '../../store'
 import Cookies from 'js-cookie';
 import HeadLogo from '../../components/HeadLogo/HeadLogo';
 import getGitHubLogo from "../../resources/githubSvg"

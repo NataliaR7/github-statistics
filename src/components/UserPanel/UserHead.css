@@ -14,7 +14,6 @@
     background-color: rgb(95, 95, 95);
 }
 .username {
-    
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

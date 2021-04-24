@@ -2,20 +2,24 @@
     /* background-color: hsl(0, 100%, 78%); */
     display: flex;
     flex-direction: row;
-    height: 1.5vw;
+    /* height: 1.5vw; */
     align-items: center;
     color: #454545;
     font-size: 0.9vw;
+    gap: 1vh;
+    margin-top: 0.3vh;
+    margin-bottom: 0.3vh;
 }
 
 .activityItem .circle{
     background-color: #C4C4C4;
     width: 0.6vw;
     height: 0.6vw;
+    min-width: 0.6vw;
+    min-height: 0.6vw;
     border-radius: 50%;
     border: 0.3vw solid #F4F4F4;
     z-index: 1;
-    
 }
 
 .activityItem .activityInfo{
@@ -25,6 +29,10 @@
 .activityItem .date{
     margin-left: auto;
     color: #888888;
+    min-width: 2.8vw;
+    align-self: flex-start;
+    display: flex;
+    justify-content: flex-end;
 }
 .activityItem .repo{
     color: #888888;

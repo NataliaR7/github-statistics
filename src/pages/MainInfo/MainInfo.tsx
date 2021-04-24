@@ -29,7 +29,7 @@ function MainInfo() {
             <Partners />
             <UserLanguages data={languagesData} />
             <UserActivity data={activityData} />
-            <UserRecentActivity />
+            <UserRecentActivity type="user"/>
             <UserRepositories />
         </div>
     );

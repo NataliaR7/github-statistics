@@ -13,7 +13,7 @@ import PropagateLoader from "react-spinners/PropagateLoader";
 import { getRandomGeneralColor } from "../../resources/colors"
 import { on } from "node:cluster";
 
-function NicknameInput(props: { currentNickname: string, setNickname: (x: string) => void }) {
+function NicknameInput(props: { currentNickname: string, setNickname: (x: string) => void , resetStore: () => void}) {
   const [isSubmit, setIsSubmit] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isLoadingData, setIsLoadingData] = useState(false);
@@ -21,6 +21,7 @@ function NicknameInput(props: { currentNickname: string, setNickname: (x: string
 
   const submitHandler = async function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    props.resetStore();
     console.log(e, "INP");
     console.log(e.target, "INP");
     const responseUser = await fetch('/nickname', {
@@ -79,9 +80,6 @@ function NicknameInput(props: { currentNickname: string, setNickname: (x: string
         ? <>
           <HeadLogo />
           <form action="" method="post" className="loginForm" onSubmit={(e) => submitHandler(e)}>
-            {/* <span>enter your github nickname</span>
-            <input className="inputForm" type="text" value={props.currentNickname} onChange={(e) => props.setNickname(e.target.value)} />
-            <input className="submitButton" type="submit" value="ok" /> */}
             <NicknameForm title="enter your github nickname" setNickname={props.setNickname} />
           </form>
         </>

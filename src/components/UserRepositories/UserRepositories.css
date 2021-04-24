@@ -1,7 +1,7 @@
 .userRepositories {
     color: #454545;
     display: grid;
-    grid-template-rows: 0.5fr 8fr;
+    grid-template-rows: 0.5fr 4.2fr;
     grid-template-areas:
         'head'
         'balls';
@@ -27,43 +27,57 @@
     padding: 0 2vw;
 }
 
-.balls .repoBall:first-child {
+.squares {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8vw;
+    /* justify-content: space-around; */
+    /* padding: 0 2vw; */
+}
+
+.repoBall:first-child,
+.repoSquare:first-child {
     border: 0.3vw solid #F9DE59;
 }
-.balls .repoBall:first-child:hover {
+.repoBall:first-child:hover {
     background-color: rgba(249, 222, 89, 0.5);
     /* border: 0.5vw solid #F9DE59; */
 }
 
-.balls .repoBall:first-child + div {
+.repoBall:first-child + div,
+.repoSquare:first-child + div {
     border: 0.3vw solid #e8a628;
 }
 
-.balls .repoBall:first-child + div:hover {
+.repoBall:first-child + div:hover {
     background-color: rgba(232, 166, 40, 0.5);;
 }
 
-.balls .repoBall:first-child + div + div {
+.repoBall:first-child + div + div,
+.repoSquare:first-child + div + div {
     border: 0.3vw solid #F98365;
 }
 
-.balls .repoBall:first-child + div + div:hover {
+.repoBall:first-child + div + div:hover {
     background-color: rgba(249, 131, 101, 0.5);
 }
 
-.balls .repoBall:first-child + div + div + div {
+.repoBall:first-child + div + div + div,
+.repoSquare:first-child + div + div + div {
     border: 0.3vw solid #CDDA95;
 }
 
-.balls .repoBall:first-child + div + div + div:hover {
+.repoBall:first-child + div + div + div:hover {
     background-color: rgba(205, 218, 149, 0.5);
 }
 
-.balls .repoBall:last-child {
+.repoBall:last-child,
+.repoSquare:last-child {
     border: 0.3vw solid #A1DFFB;
 }
 
-.balls .repoBall:last-child:hover {
+.repoBall:last-child:hover {
     background-color: rgba(161, 223, 251, 0.5);
 }
 

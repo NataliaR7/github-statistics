@@ -1,11 +1,11 @@
-.partners .partner {
+.partnerPanel .partner {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.partners .partner span {
+.partnerPanel .partner span {
     font-size: 1.1em;
     color: #646464;
     overflow: hidden;
@@ -15,5 +15,9 @@
 }
 .partners .partner img {
     width: 5.3vw;
+    border-radius: 1vw;
+}
+.comparePanel .partner img {
+    width: 7.1vw;
     border-radius: 1vw;
 }

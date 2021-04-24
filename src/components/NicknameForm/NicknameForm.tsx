@@ -5,7 +5,7 @@ function NicknameForm(props: { title: string, setNickname: (x: string) => void }
 
     return (
         <>
-            <span>enter your github nickname</span>
+            <span>{/* enter your github nickname */ props.title}</span>
             <input className="inputForm" type="text"  onChange={(e) => props.setNickname(e.target.value) } />
             <input className="submitButton" type="submit" value="ok" />
         </>

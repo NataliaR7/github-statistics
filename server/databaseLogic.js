@@ -21,8 +21,8 @@ class DatabaseLogic{
   }
 
   insertUserData(username, data){
-    this.db.run("INSERT INTO gitstat(username, user_data, repos_last_update) values(?, ?, ?)",
-     [username, JSON.stringify(data), Date.now().toString()]);
+    this.db.run("INSERT INTO gitstat(username, user_data) values(?, ?)",
+     [username, JSON.stringify(data)]);
   }
 
   insertUserRepositories(username, repositories){
@@ -31,8 +31,8 @@ class DatabaseLogic{
   }
 
   updateUserData(username, data){
-    this.db.run("UPDATE gitstat SET user_data=?, repos_last_update=? where username=?",
-    [JSON.stringify(data), Date.now().toString() , username ]);
+    this.db.run("UPDATE gitstat SET user_data=? where username=?",
+    [JSON.stringify(data), username ]);
   }
 
   updateUserLanguages(username, languages){

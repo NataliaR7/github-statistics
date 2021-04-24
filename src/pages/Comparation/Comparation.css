@@ -41,5 +41,11 @@
 
 .comparationContent .dataCompare {
     grid-area: compareContent;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    "upPanel"
+    "downPanel"; 
 }
+
 

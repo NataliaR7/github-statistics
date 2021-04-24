@@ -1,0 +1,60 @@
+.comparePanel {
+    display: grid;
+    grid-template-rows: 1fr 6fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        'header header'
+        'leftData rightData';
+}
+
+/* .comparePanel .leftUserData {
+    grid-area: leftData;
+    background-color: rgb(93, 187, 124);
+    align-self: center; 
+} */
+.comparePanel .leftUserData {
+    grid-area: leftData;
+    display: grid;
+    height: 90%;
+    width: 95%;
+    align-self: center;
+    justify-self: center;
+    /* background-color: rgb(135, 222, 171); */
+}
+
+.comparePanel .rightUserData {
+    grid-area: rightData;
+    display: grid;
+    height: 90%;
+    width: 95%;
+    align-self: center;
+    justify-self: center;
+    /* justify-content: space-around; */
+    /* background-color: burlywood; */
+}
+
+.comparePanel .header {
+    grid-area: header;
+    background-color: #eeeeee;
+    height: 60%;
+    align-self: center;
+}
+
+.comparePanel .header {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 1vw;
+    color: #454545;
+    font-variant: small-caps;
+    font-feature-settings: 'smcp';
+    font-size: 1.3vw;
+}
+.header .navArrow {
+    color: #a1a1a1;
+    font-size: 1vw;
+    cursor: pointer;
+}
+.header .navArrow:hover {
+    color: #7c7c7c;
+}

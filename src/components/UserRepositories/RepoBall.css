@@ -5,7 +5,7 @@
     height: 13.4vw;
     border: 0.3vw solid #F9DE59;
     border-radius: 50%;
-    margin: 0 1.15vw;
+    margin: 0 1.12vw;
     display: grid;
     grid-template-rows: 3fr 0.8fr 2.2fr 0.8fr 3fr;
     grid-template-areas: 
@@ -18,14 +18,14 @@
     transition: all 0.5s ease-in-out;
 }
 
-.stars {
+.repoBall .stars {
     grid-area: stars;
     justify-self: end;
     margin-right: 1.8vw;
     align-self: flex-end;
 }
 
-.stars span {
+.repoBall .stars span {
     font-size: 1.2vw;
     margin-left: 0.2vw;
     vertical-align: super;
@@ -44,14 +44,14 @@
     margin-top: 0.5vw;
 }
 
-.nameRepo {
+.repoBall .nameRepo {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 1.2vw;
     
 }
-.nameRepo span{
+.repoBall .nameRepo span{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -65,7 +65,7 @@
     font-size: 0.9vw;
 }
 
-.updateRepo {
+.repoBall .updateRepo {
     grid-area: update;
     align-self: flex-start;
     justify-self: center;
@@ -80,7 +80,6 @@
     font-variant: small-caps;
 }
 .updateRepo span:first-child + span {
-    
     font-size: 0.9vw;
 }
 

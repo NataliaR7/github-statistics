@@ -20,8 +20,12 @@
     border-radius: 4vh;
     color: #454545
 }
-.welcomeForm a{
+
+.welcomeForm a,
+.welcomeForm a:visited,
+.welcomeForm a:active{
     text-decoration: none;
+    color: #f4f4f4;
 }
 
 .titleForm {

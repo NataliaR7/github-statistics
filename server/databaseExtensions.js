@@ -1,10 +1,11 @@
 
 
 function addRepositoriesToDatabase(database, username, repositories, isUserExist){
+    console.log(isUserExist, "response4")
     if (isUserExist){
         database.updateUserRepositories(username, repositories)
     } else {
-        database.insertUserRepositories(username, repositories)
+        //database.insertUserRepositories(username, repositories)
         console.log("НЕ ХОДИ СЮДА")
     }
 }
@@ -18,7 +19,7 @@ function addUserDataToDatabase(database, username, data, isUserExist){
 }
 
 function isDataActual(lastDateInMilliseconds){
-    const delay =  5 * 60 * 1000
+    const delay = 5 * 60 * 1000
     return Date.now() - lastDateInMilliseconds < delay
 }
 

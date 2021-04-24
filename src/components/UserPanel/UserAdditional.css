@@ -6,6 +6,7 @@
     color: #f4f4f4;
     font-size: 1vw;
     max-height: 40vh;
+    max-width: 14vw;
     overflow: hidden;
 }
 
@@ -22,14 +23,29 @@
     font-size: 1.4vw;
     margin-top: 1vw;
     font-variant: small-caps;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-a {
+.userAdditional a {
     color: #f4f4f4;
     text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 12vw;
 }
 a:hover {
     text-decoration: underline;
+}
+
+.pictures {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .pictures img {

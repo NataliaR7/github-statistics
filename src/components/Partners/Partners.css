@@ -7,12 +7,29 @@
         'people';
 }
 
-.partners .people {
+.partners .partnerPanel {
     grid-area: people;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 1.5vw;
+}
+
+.comparePanel .partnerPanel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5vw;
+    flex-wrap: wrap;
+    padding: 0 0.8vh;
+}
+
+.partnerPanel .warning {
+    font-size: 1vw;
+    color: #888888;
+    max-width: 80%;
 }
 
 

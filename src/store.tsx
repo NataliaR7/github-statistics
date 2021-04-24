@@ -7,19 +7,18 @@ type StateType = {
     currentNickname: string,
     activeRepoId: number,
     isRepoActive: boolean,
+    currentReposPage: number,
     compareNickname: string,
-    currentReposPage: number
 };
 
-const preloadedState: StateType = {
+export const preloadedState: StateType = {
     activePage: "/main",
     isLoggedIn: false,
     currentNickname: "",
     activeRepoId: 0,
     isRepoActive: false,
+    currentReposPage: 1,
     compareNickname: "",
-    currentReposPage: 1
 };
 
-const store = createStore(rootReducer, preloadedState);
-export default store;
+export const store = createStore(rootReducer, preloadedState);

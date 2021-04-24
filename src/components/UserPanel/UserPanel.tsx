@@ -43,6 +43,7 @@ function UserPanel(props: { username?: string }) {
     const queryUsername = props.username ? "?username=" + props.username : "";
     const responseUser = await fetch(`/user${queryUsername}`);
     const data = await responseUser.json();
+    // console.log(data, 'DATA');
     // const activ = await fetch('/activity')
     //const repositories = await (await fetch(`/repos${queryUsername}`)).json()
     const responseStars = await fetch(`/starred${queryUsername}`);
