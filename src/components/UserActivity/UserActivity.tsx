@@ -8,16 +8,15 @@ import './UserActivity.css'
 
 const dataLabels = {
   enabled: true, ///данные внизу столба
-  // formatter: function (val: string) {
-  //   return val + "%";
-  // },
+  formatter: function (val: number) {
+    return val === 0 ? "" : val
+  },
   textAnchor: 'middle',
   style: {
     fontSize: '0.8em',
     colors: ["#888888"]
   },
-  offsetY: -10,
-  
+  offsetY: -10,  
 }
 
 
@@ -110,10 +109,10 @@ function GetLablesAndSeries(activityStatistic: { [key: string]: any }) {
   let xaxisData = Object.keys(activityStatistic)
 
   let values: number[] = []
-  for (let key in activityStatistic) {
+  for (let month in activityStatistic) {
     let allActivityPerMonth = 0
-    for (let partKey in activityStatistic[key]) {
-      allActivityPerMonth += activityStatistic[key][partKey]
+    for (let day in activityStatistic[month]) {
+      allActivityPerMonth += activityStatistic[month][day]
     }
     values.push(allActivityPerMonth)
   }
@@ -121,6 +120,7 @@ function GetLablesAndSeries(activityStatistic: { [key: string]: any }) {
 }
 
 function getTempSeries(data: { [key: string]: number }) {
+ 
   let values = []
   let xaxisData = []
   for (let key in data) {
@@ -179,7 +179,6 @@ function UserActivity(props: { data: { [key: string]: number } }) {
             // console.log(dataPoints)
             for (let point of dataPoints) {
               if (point && point.length !== 0 && isMainChart) {
-                console.log(point)
                 let month = Object.keys(data)[point[0]]
                 let ser = getTempSeries(data[month])
                 setIsMainChart(false)
@@ -195,7 +194,6 @@ function UserActivity(props: { data: { [key: string]: number } }) {
         opacity: 1,     //прозрачность столбов
       },
       colors: [function (data: { value: number, seriesIndex: number, w: any }) {
-        console.log(data.value)
         return getСolumnColor(data.value);
       }],//цвет столбиков(если несколько - то для каждого отдельно)    
       dataLabels: dataLabels,

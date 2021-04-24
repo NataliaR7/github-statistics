@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import './UserLanguages.css';
 import { color, generalColor, graphColors } from '../../resources/colors'
+import { strict } from 'node:assert';
+import {GetLablesAndValues} from "../../extentions/extentions"
 
 const options = (lables: string[]) => {
   return {
@@ -75,29 +77,45 @@ type LanguageData = {
   bytes: number;
 }
 
-function GetLablesAndValues(data: LanguageData[]) {
-  let lables: string[] = []
-  let values: number[] = []
-  for (let languageData of data) {
-    lables.push(languageData.language);
-    values.push(languageData.bytes)
+// function GetLablesAndValues(data: {[key: string]: number}) {
+//   let lables: string[] = []
+//   let values: number[] = []
+//   for (let lanuage in data) {
+//     lables.push(lanuage);
+//     values.push(data[lanuage])
+//   }
+//   return { lables, values };
+// }
+
+
+interface PropType {
+  url: string,
+  reposName?: string
+};
+
+function getLanguagesPromise(data: PropType){
+  if (data.reposName){
+    return fetch(`/${data.url}`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({reposName: data.reposName})
+    })
   }
-  return { lables, values };
+  return fetch(`/${data.url}`);
 }
 
 
-type PropType = {
-  data: { [key: string]: number }
-};
-
 function UserLanguages(props: PropType) {
-  let [data, setData] = useState<LanguageData[]>([])
+  let [data, setData] = useState<{[key: string]: number}>({})
 
   async function getLanguagesStatistic() {
-    const repositories = await fetch("/lang")
-    let result: LanguageData[] = await repositories.json()
-    console.log(result, "LANG");
-    setData(result)
+    const languages = await(await getLanguagesPromise(props)).json()
+
+
+    console.log(languages, "LANG");
+    setData(languages)
   }
 
   useEffect(() => {
@@ -111,7 +129,7 @@ function UserLanguages(props: PropType) {
         <span>languages</span>
       </div>
       <div className="langStatistics">
-        <Chart options={options(parsedData.lables)} series={parsedData.values} type="pie" width={"550"} />
+        <Chart options={options(parsedData.lables)} series={parsedData.values} type="pie" width={"450"} />
       </div>
     </div>
   );

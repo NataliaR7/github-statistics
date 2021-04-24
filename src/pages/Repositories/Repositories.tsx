@@ -37,6 +37,14 @@ function Repositories(props: ReposType) {
         const repositories = await fetch('/repos');
         const response = await repositories.json();
         const repoAdditionalInfo = await fetch('/repoAdditionalInfo');
+        // const asd = await (await fetch("/repoIssues", {
+        //     method: "POST",
+        //     headers: {
+        //       'Content-Type': 'application/json;charset=utf-8',
+        //     },
+        //     body: JSON.stringify({reposName: "mtprotoproxy"})
+        //   })).json()
+        // console.log(asd, "asd")
         const additionalRes = await repoAdditionalInfo.json();
         console.log(response, "repos");
         console.log(additionalRes, "additional");
