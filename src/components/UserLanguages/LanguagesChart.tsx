@@ -7,24 +7,11 @@ import { GetLablesAndValues } from "../../extentions/extentions"
 
 
 type LanguageData = {
-    // language: string;
-    // bytes: number;
     [key: string]: number;
 }
 
-// function GetLablesAndValues(data: LanguageData[]) {
-//     let lables: string[] = []
-//     let values: number[] = []
-//     for (let languageData of data) {
-//         lables.push(languageData.language);
-//         values.push(languageData.bytes)
-//     }
-//     return { lables, values };
-// }
-
 
 type PropType = {
-    // data?: { [key: string]: number },
     width?: string,
     height?: string,
     legendPosition?: string,
@@ -33,10 +20,6 @@ type PropType = {
     reposName?: string,
 };
 
-// interface PropType {
-//   url: string,
-//   reposName?: string
-// };
 
 
 
@@ -132,11 +115,6 @@ function LanguagesChart(props: PropType) {
     }
 
     async function getLanguagesStatistic() {
-        // const queryUsername = props.username ? "?username=" + props.username : "";
-        // const repositories = await fetch(`/lang${queryUsername}`);
-        // let result: LanguageData[] = await repositories.json();
-        // console.log(result, "LANG");
-        // setData(result);
         const languages = await (await getLanguagesPromise(props)).json()
 
 

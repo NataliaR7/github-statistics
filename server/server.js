@@ -398,7 +398,7 @@ app.post('/reposlangs', (req, res) => {
     extensions
         .getReposLanguagesPromise(req.body.reposName, currentUser, octokit)
         .then((result) => {
-            res.json(result.data);
+            res.json(extensions.getLanguageStatistic([result]));
         })
         .catch((err) => console.log(err));
 });
@@ -416,9 +416,15 @@ app.get('/userlangs', (req, res) => {
         .catch((err) => console.log(err));
 });
 
-// 'GET /repos/{username}/{reposName}/issues?state=all&per_page={per_page}'
-app.post('/repoIssues', (req, res) => {
-    console.log('get /repoIssues ', req.query.username);
+app.post('/repoIssuesPullsClose', (req, res) => {
+    const currentUser = req.query.username || req.cookies.currentNickname;
+    let promises = extensions.getIssuesPromises(req.body.reposName, currentUser, octokit);
+    Promise.all(promises).then((responce) => {
+        res.json(extensions.parseIssues(responce));
+    });
+});
+
+app.post('/repoIssuesCount', (req, res) => {
     const currentUser = req.query.username || req.cookies.currentNickname;
     octokit
         .request('GET /repos/{username}/{reposName}/issues', {
@@ -428,19 +434,12 @@ app.post('/repoIssues', (req, res) => {
             per_page: 100,
         })
         .then((response) => {
-            console.log(
-                response.headers['x-ratelimit-limit'] - response.headers['x-ratelimit-remaining'],
-                'LimitIssues'
-            );
-            res.json(response.data);
+            res.json(extensions.getOpenClosed(response));
         })
         .catch((err) => console.log(err));
-
-    // octokit.request('GET /repos/{username}/{reposName}/issues?state=all&per_page=100')
 });
 
-app.post('/repoPulls', (req, res) => {
-    console.log('get /repoPulls ', req.query.username);
+app.post('/repoPullsCount', (req, res) => {
     const currentUser = req.query.username || req.cookies.currentNickname;
     octokit
         .request('GET /repos/{username}/{reposName}/pulls', {
@@ -450,15 +449,9 @@ app.post('/repoPulls', (req, res) => {
             per_page: 100,
         })
         .then((response) => {
-            console.log(
-                response.headers['x-ratelimit-limit'] - response.headers['x-ratelimit-remaining'],
-                'LimitPuuls'
-            );
-            res.json(response.data);
+            res.json(extensions.getOpenClosed(response));
         })
         .catch((err) => console.log(err));
-
-    // octokit.request('GET /repos/{username}/{reposName}/issues?state=all&per_page=100')
 });
 
 app.get('/repoAdditionalInfo', (req, res) => {
@@ -467,10 +460,7 @@ app.get('/repoAdditionalInfo', (req, res) => {
     database
         .getUser(currentUser)
         .then((result) => {
-            // console.log(result);
             res.send(result.repos_additional_info);
-            // if (!result) res.json({});
-            // else res.send(result.languages);
         })
         .catch((err) => console.log(err));
 });
@@ -483,7 +473,6 @@ app.get('/repo', (req, res) => {
     database
         .getUser(currentUser)
         .then((response) => {
-            //console.log(response, '00');
             const repos = JSON.parse(response.repositories);
             const result = repos.find((e) => e.id === +repoId);
             res.json(result);
