@@ -6,6 +6,7 @@ import RepositoryMainInfo from './RepositoryMainInfo'
 import UserRecentActivity from '../../components/UserRecentActivity/UserRecentActivity'
 import LanguagesChart from "../../components/UserLanguages/LanguagesChart";
 import Issues from "../../components/ReposIssues/IssuesItem"
+import IssueBar from "./IssueBar"
 
 interface RepoType {
     activeRepoId: number;
@@ -53,27 +54,28 @@ function Repository(props: RepoType) {
             {isLoadedData && <>
                 {console.log(repoData, "REPO_DATA")}
                 <div className="repositoryHead">
-                    <span className="repositoryName"><span onClick={() => {
+                    <span className="repositoryName canSelect"><span className="noSelect" onClick={() => {
                         // stope.getState().isRepoActive = false;
                         props.deactiveteRepo();
                         setIsBack(true);
                     }}>{"⮜"}</span>{repoData.name}</span>
-                    {repoData.fork && <span className="repositoryFork">Forked from {repoData.parent.full_name}</span>}
+                    {repoData.fork && <span className="repositoryFork">Forked from <span className="canSelect">{repoData.parent.full_name}</span></span>}
                 </div>
                 <RepositoryMainInfo data={getRepoMainInfo()} />
                 <div className="statistics">
                     <div className="languageRepo">
-                        <LanguagesChart /* url="reposlangs" */ reposName={repoData.name} />
+                        <LanguagesChart /* url="reposlangs" */ reposName={repoData.name} width={"450"} height={"250"}/>
                     </div>
                     <div className="issueAvgRepo">
                         <Issues url="repoIssues" reposName={repoData.name} type="issues" />
-                        <Issues url="repoPulls" reposName={repoData.name} type="pull requests" />
+                        {/* <Issues url="repoPulls" reposName={repoData.name} type="pull requests" /> */}
                     </div>
                     <div className="activityRepo">
                         <UserRecentActivity type="repo" repoName={repoData.name} />
                     </div>
                     <div className="issueCountRepo">
-
+                        <IssueBar /*openCount={} closedCount={}*//>
+                        <IssueBar isPullRequest={true} /*openCount={} closedCount={}*//>
                     </div>
 
                 </div>

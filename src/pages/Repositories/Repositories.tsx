@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { sortReposData } from '../../generalLogic/repositoryLogic';
 // import {store} from '../../store'
 import "./Repositories.css"
+import Loader from '../../components/Loader/Loader'
 
 
 type RepoDataType = {
@@ -31,6 +32,7 @@ type ReposType = {
 function Repositories(props: ReposType) {
     const [repoData, setRepoData] = useState<Array<RepoDataType>>([]);
     const [isLoadedData, setIsLoadedData] = useState(false);
+    const [isStartLoader, setIsStartLoader] = useState(false);
 
 
     const loadReposData = async function () {
@@ -46,7 +48,7 @@ function Repositories(props: ReposType) {
         //   })).json()
         // console.log(asd, "asd")
         const additionalRes = await repoAdditionalInfo.json();
-        
+
         const sortPeros = await sortReposData(response);
         //console.log(response, "Repo");
 
@@ -59,12 +61,12 @@ function Repositories(props: ReposType) {
                 isFork: repo.fork,
                 parentFork: repo.parent ? repo.parent.full_name : null,
                 description: repo.description,
-                generalLanguage: Object.keys(additional.languages)[0],
+                generalLanguage: additional && Object.keys(additional.languages)[0],
                 contributorsCount: additional?.contributors?.length || 0,
                 forksCount: repo.parent ? repo.parent.forks_count : repo.forks_count,
                 watchersCount: repo.parent ? repo.parent.watchers_count : repo.watchers_count,
                 starsCount: repo.parent ? repo.parent.stargazers_count : repo.stargazers_count,
-                updateDate: new Date(repo.pushed_at),
+                updateDate: new Date(repo.pushed_at || repo.created_at),
                 cloneUrl: repo.clone_url
             }
         });
@@ -73,9 +75,10 @@ function Repositories(props: ReposType) {
     }
 
     useEffect(() => {
+        delayToLoader();
         loadReposData().then(() => {
             setIsLoadedData(true);
-        })
+        });
     }, []);
 
     const fillRepositoryItems = (currentPage: number) => {
@@ -89,22 +92,26 @@ function Repositories(props: ReposType) {
         return result;
     }
 
-
+    const delayToLoader = () => {
+        setTimeout(() => setIsStartLoader(true), 100);
+    }
 
 
     return (
         <div className="repositoriesContent">
-            
+
             {props.isRepoActive ? <Repository /> :
                 <div className="repositoriesPage">
-                    {repoData.length === 0
-                        ? <span className="warning">This user has no repositories</span>
-                        : <>
-                            <div className="repositories">
-                                {isLoadedData && fillRepositoryItems(props.currentReposPage || 1)}
-                            </div>
-                            {isLoadedData && <NavigationPagePanel pageCount={Math.ceil(repoData.length / 10)} />}
-                        </>
+                    {isLoadedData
+                        ? repoData.length === 0
+                            ? <span className="warning">This user has no repositories</span>
+                            : <>
+                                <div className="repositories">
+                                    {isLoadedData && fillRepositoryItems(props.currentReposPage || 1)}
+                                </div>
+                                {isLoadedData && <NavigationPagePanel pageCount={Math.ceil(repoData.length / 10)} />}
+                            </>
+                        : isStartLoader && <Loader withoutLabel={true}/>
                     }
                 </div>
             }

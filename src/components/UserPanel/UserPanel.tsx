@@ -47,7 +47,7 @@ function UserPanel(props: PropsType) {
 
   async function getUserData() {
     const queryUsername = props.username ? "?username=" + props.username : "";
-    
+
     const userInfo = await (await fetch(`/user${queryUsername}`)).json();
     const repositories = await (await fetch(`/repos${queryUsername}`)).json();
     const forks = repositories.filter((repo: any) => repo.fork);
@@ -67,6 +67,7 @@ function UserPanel(props: PropsType) {
     });
 
 
+
     setUserData(userData => userData = {
       ...userData,
       userUrl: userInfo.html_url,
@@ -76,7 +77,7 @@ function UserPanel(props: PropsType) {
       followingCount: userInfo.following,
       starCount: count ? count[1] : '0',
       reposCount: userInfo.public_repos,
-      forkCount:  forks.length,
+      forkCount: forks.length,
       location: userInfo.location,
       email: userInfo.email,
       site: userInfo.blog,
@@ -99,10 +100,10 @@ function UserPanel(props: PropsType) {
   const renderData = () => {
     return (
       <>
-        <div 
-        title="change user" 
-        className={`changeUserIcon` + ` ${props.username !== undefined && 'show'}`}
-        onClick={ () => props.setCompareNickname && props.setCompareNickname('')}>
+        <div
+          title="change user"
+          className={`changeUserIcon` + ` ${props.username !== undefined && 'show'}`}
+          onClick={() => props.setCompareNickname && props.setCompareNickname('')}>
           {changeUserSvg()}
         </div>
         <UserHead

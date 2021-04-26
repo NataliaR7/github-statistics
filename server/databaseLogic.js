@@ -46,9 +46,9 @@ class DatabaseLogic{
      [JSON.stringify(info), username]);
   }
 
-  updateUserRepositories(username, repositories){
-    this.db.run(`UPDATE gitstat SET repositories=?, repos_last_update=? where username=?`,
-     [JSON.stringify(repositories), Date.now().toString() , username ]);
+  updateUserRepositories(username, repositories, eTags){
+    this.db.run(`UPDATE gitstat SET repositories=?, repos_last_update=?, e_tags=? where username=?`,
+     [JSON.stringify(repositories), Date.now().toString(), eTags, username ]);
   }
 
   updateUserActivity(username, activity){

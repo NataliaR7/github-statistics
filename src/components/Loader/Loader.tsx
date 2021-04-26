@@ -5,7 +5,7 @@ import { getRandomGeneralColor } from "../../resources/colors"
 import "./Loader.css"
 
 interface PropsType {
-
+    withoutLabel?: boolean;
 }
 
 function Loader(props: PropsType) {
@@ -13,7 +13,7 @@ function Loader(props: PropsType) {
     return (
         <div className="hashLoader">
             <HashLoader size={150} color={getRandomGeneralColor()} />
-            <span>Collecting information...</span>
+            {!props.withoutLabel && <span>Collecting information...</span>}
         </div>
     );
 }

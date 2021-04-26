@@ -16,7 +16,7 @@ function UserHead(props: PropType) {
     return (
         <div className="userHead">
             <a href={props.userUrl} target="_blank"><img src={props.avatar} alt="avatar" /></a>
-            <span className="username">{props.username}</span>
+            <span className="username canSelect">{props.username}</span>
             <div className="separatorLine"></div>
             <div className="commonInfo">
                 <span className="follower">{props.followerCount} follower</span>

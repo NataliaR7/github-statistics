@@ -174,7 +174,7 @@ function UserActivityItem(props: { groupData: { date: Date, type: string, data: 
             {isFill && <>
                 <div className="circle"></div>
                 <div className="activityInfo">
-                    {actContent.text} <span className="repo">{actContent.target}</span> {actContent.targetType}
+                    {actContent.text} <span className="repo canSelect">{actContent.target}</span> {actContent.targetType}
                 </div>
                 <div className="date">{getStylizedDate(actContent.date)}</div>
             </>}

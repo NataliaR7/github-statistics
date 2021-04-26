@@ -21,15 +21,19 @@ function Comparation(props: PropsType) {
     const [isLoadedData, setIsLoadedData] = useState(false);
 
     async function loadData() {
-        // console.log("start");
+        console.log("startLoad");
+        await console.log(props.compareNickname, "3");
         const queryUsername = props.compareNickname ? "?username=" + props.compareNickname : "";
-        const userResult = await (await fetch(`/user${queryUsername}`)).json()
-        const repositories = await (await fetch(`/repos${queryUsername}`)).json();
-        const activ = await (await fetch(`/activity${queryUsername}`)).json();
-        const lang = await (await fetch(`/userlangs${queryUsername}`)).json();
-     
-        await setIsLoadedData(true);
-      }
+        const userResult = await fetch(`/user${queryUsername}`);
+        console.log(userResult, "userResult");
+        const repositories = await fetch(`/repos${queryUsername}`);
+        console.log(repositories, "repositories");
+        const activ = await fetch(`/activity${queryUsername}`);
+        console.log(activ, "activ");
+        const lang = await fetch(`/userlangs${queryUsername}`);
+        console.log("endLoad");
+        setIsLoadedData(true);
+    }
 
 
     useEffect(() => {
@@ -38,50 +42,54 @@ function Comparation(props: PropsType) {
 
     const submitHandler = async function (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        setIsLoadedData(false);
         const responseUser = await fetch('/compareNickname', {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-          },
-          body: JSON.stringify({ nickname: compareUserName.toLowerCase() })
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify({ nickname: compareUserName.toLowerCase() })
         })/* .then(res => console.log(res, "ERR")); */
         console.log(responseUser.status)
         if (responseUser.status === 404) {
-          setIsError(true);
+            setIsError(true);
         } else {
-            props.setCompareNickname(compareUserName.toLowerCase())
+            console.log(props.compareNickname, "1");
+            await props.setCompareNickname(compareUserName.toLowerCase());
+            await console.log(props.compareNickname, "2");
+           
+            // await loadData().then(() => {
+            //     setIsLoadedData(true);
+            // });
         }
-        
-        await setIsSubmit(true);
-    
-      }
+
+
+    }
 
     return (
         <div className="comparation">
-            {isError ? <ErrorNotFound backPage={setIsError} />
-            : props.compareNickname.length === 0  ?
-                <div className="comparationForm">
-                    <form action="" method="post" className="loginForm" onSubmit={(e) => {submitHandler(e)}}>
+            {isError
+                ? <ErrorNotFound backPage={setIsError} />
+                : props.compareNickname.length === 0
+                    ? <div className="comparationForm">
+                        {console.log("FORM")}
+                        <form action="" method="post" className="loginForm" onSubmit={(e) => { submitHandler(e) }}>
 
-                        <NicknameForm title="enter github nickname" setNickname={setCompareUserName} />
-                        {/* {setCompareUserName(compareUserName => compareUserName = "NataliaR7")} */}
+                            <NicknameForm title="enter github nickname" setNickname={setCompareUserName} />
+                            {/* {setCompareUserName(compareUserName => compareUserName = "NataliaR7")} */}
 
-                    </form>
-                </div>
-                : isLoadedData ? <div className="comparationContent">
-                    <UserPanel username={props.compareNickname} />
-                    <div className="dataCompare">
-                        {/* <div className="upPanel"> 
-
-                        </div>
-                        <div className="downPanel"> 
-
-                        </div> */}
-                        <ComparePanel compareName={props.compareNickname} minState={0} maxState={1} />
-                        <ComparePanel compareName={props.compareNickname} minState={2} maxState={4} />
+                        </form>
                     </div>
-                </div>
-                :  <Loader />
+                    : isLoadedData
+                        ? <div className="comparationContent">
+                            {console.log("PANEL")}
+                            <UserPanel username={props.compareNickname} />
+                            <div className="dataCompare">
+                                <ComparePanel compareName={props.compareNickname} minState={0} maxState={1} />
+                                <ComparePanel compareName={props.compareNickname} minState={2} maxState={4} />
+                            </div>
+                        </div>
+                        : <Loader />
             }
 
         </div>

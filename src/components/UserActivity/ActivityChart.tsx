@@ -46,7 +46,7 @@ const xaxis = (xaxisData: string[]) => {
             show: true,
             style: {/// параметры верхних лейблов
                 colors: "#646464",
-                fontSize: '1em',
+                fontSize: '0.8em',
                 fontFamily: 'Segoe UI, Roboto',
                 // fontWeight: 400,
                 // cssClass: 'apexcharts-xaxis-label',

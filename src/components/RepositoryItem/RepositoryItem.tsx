@@ -78,7 +78,7 @@ function RepositoryItem(props: RepoItemType) {
                     <span>{data.starsCount}</span>
                 </div>
             </div>
-            <span className="repoDate">{getStylizedDate(data.updateDate)}</span>
+            <span className="repoDate">Updated {getStylizedDate(data.updateDate)}</span>
         </div>
     );
 }

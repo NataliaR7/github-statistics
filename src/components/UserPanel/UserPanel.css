@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     max-width: 15vw;
+    position: relative;
 }
 
 .created {
@@ -17,12 +18,14 @@
 }
 
 .changeUserIcon {
-    width: 2vw;
+    width: 1.9vw;
+    /* height: 1vh; */
     /* fill: rgba(244, 244, 244, 60%); */
     fill: #989898;
     position: absolute;
-    right: 12.1vw;
-    top: 7.5vh;
+    left: 0.95vw;
+    top: 0.65vw;
+    /* right: 10vw; */
     cursor: pointer;
     visibility: collapse;
 }

@@ -32,8 +32,8 @@ function RepositoryMainInfo(props: RepoInfoType) {
 
     const getContributors = (source: any[]) => {
         const currentRepo = source.find(repo => repo.repoName === data.repoName);
-        const contributors = currentRepo.contributors.filter((c: any) => c.type === "User");
-        return contributors.splice(0, contributors.length > 3 ? 3 : contributors.length);
+        const contributors = currentRepo && currentRepo.contributors?.filter((c: any) => c.type === "User");
+        return contributors ? contributors.splice(0, contributors.length > 3 ? 3 : contributors.length) : [];
     }
     const fillContributors = () => {
         return contributors.map(people =>
@@ -76,7 +76,7 @@ function RepositoryMainInfo(props: RepoInfoType) {
 
             <div className="repoAbout">
                 <span className="title">about</span>
-                <span className="repositoryDescription">{data.description || "No description"}</span>
+                <span className="repositoryDescription canSelect">{data.description || "No description"}</span>
             </div>
         </div>
     );

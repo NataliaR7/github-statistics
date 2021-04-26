@@ -1,0 +1,68 @@
+.issueBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1vh;
+    position: relative;
+}
+
+.statisticLine {
+    width: 50%;
+    background-color: #cecece;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.statisticLine,
+.closedLine,
+.openLine {
+    height: 1.5vh;
+    border-radius: 2em;
+}
+
+.closedLine{
+    position: absolute;
+    /* background-color: #D83A48; */
+    left: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.openLine {
+    position: absolute;
+    background-color: #23A63C;
+    right: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.statisticData {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color:#888888;
+}
+.statisticData div{
+    display: flex;
+    flex-direction: row;
+    gap: 0.3vw;
+    align-items: center;
+}
+
+.closedIssuesIcon, 
+.openIssuesIcon,
+.mergedPRIcon,
+.openPRIcon{
+    width: 1.2vw;
+    height: 1.2vw;
+}
+
+/* .mergedPRIcon,
+.openPRIcon {
+    width: 1.5vw;
+    height: 1.5vw;
+    fill: darkkhaki;
+} */

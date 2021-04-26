@@ -67,7 +67,10 @@ app.post('/nickname', (req, res) => {
             username: req.body.nickname,
         })
         .then((result) => {
-            res.cookie('currentNickname', `${req.body.nickname}`.toLowerCase());
+            if (result.data.type !== 'User') {
+                return Promise.reject({ status: 404 });
+            }
+            res.cookie('currentNickname', `${req.body.nickname}`.trim().toLowerCase());
             res.send(200);
         })
         .catch((err) => {
@@ -116,6 +119,10 @@ app.get('/user', (req, res) => {
                     .then((result) => {
                         extensions.addUserDataToDatabase(database, currentUser, result.data, response);
                         console.log('User Octikit');
+                        console.log(
+                            result.headers['x-ratelimit-limit'] - result.headers['x-ratelimit-remaining'],
+                            'LimitUser'
+                        );
                         // console.log('user head', result.headers);
                         res.json(result.data);
                     })
@@ -135,8 +142,10 @@ app.get('/starred', (req, res) => {
             username: currentUser,
         })
         .then((result) => {
+            console.log(result.headers['x-ratelimit-limit'] - result.headers['x-ratelimit-remaining'], 'LimitStarred');
             res.json(result);
-        });
+        })
+        .catch((err) => console.log(err, 'starredErr'));
 });
 
 app.get('/orgs', (req, res) => {
@@ -148,8 +157,10 @@ app.get('/orgs', (req, res) => {
         })
         .then((result) => {
             // console.log(result.headers['x-ratelimit-used'], "orgs");
+            console.log(result.headers['x-ratelimit-limit'] - result.headers['x-ratelimit-remaining'], 'LimitOrgs');
             res.json(result.data);
-        });
+        })
+        .catch((err) => console.log(err, 'orgErr'));
 });
 
 app.get('/repos', (req, res) => {
@@ -164,61 +175,129 @@ app.get('/repos', (req, res) => {
                 res.send(response.repositories);
                 return Promise.reject('toDatabase');
             }
-            return Promise.resolve();
+            return Promise.resolve(response);
         })
-        .then(() => {
-            return octokit
-                .request('GET /users/{username}/repos', {
-                    username: currentUser,
-                    per_page: 100,
-                })
-                .then((result) => {
-                    const resultData = [];
-                    if (result.headers.link) {
-                        const nextLink = `${result.headers.link}`.match(/<(.+)>; rel="next"/)[1];
-                        return octokit.request(nextLink).then((res) => {
-                            resultData.push(...result.data);
-                            resultData.push(...res.data);
+        .then((response) => {
+            // console.log(response.e_tags, 'response');
+            const currEtag = response.e_tags;
+            console.log(currEtag, 'currEtag');
+            // if(currEtag === response['e_tags']) {
+
+            // }
+
+            return (
+                octokit
+                    .request('GET /users/{username}/repos', {
+                        username: currentUser,
+                        per_page: 100,
+                        headers: {
+                            'If-None-Match': currEtag,
+                        },
+                    })
+                    // .catch((err)=>{
+                    //     console.log(err, "ошибка!!")
+                    // })
+                    .then((result) => {
+                        const resultData = [];
+                        console.log(
+                            result.headers['x-ratelimit-limit'] - result.headers['x-ratelimit-remaining'],
+                            'RepoOctokitLimit'
+                        );
+                        if (result.headers.link) {
+                            const nextLink = `${result.headers.link}`.match(/<(.+)>; rel="next"/)[1];
+                            return octokit.request(nextLink).then((res) => {
+                                resultData.push(...result.data);
+                                resultData.push(...res.data);
+                                return Promise.resolve({ headers: result.headers, data: resultData });
+                            });
+                        } else {
+                            return Promise.resolve(result);
+                        }
+                    })
+                    .then((result) => {
+                        // const forkRepos = resultData.filter((repo)=> repo.fork);
+                        // console.log(result, 'result');
+                        // console.log(forkRepos.length, 'forkRepos');
+                        const resultData = result.data;
+                        return Promise.all(
+                            extensions.getDetailedRepositoryPromises(resultData, currentUser, octokit)
+                        ).then((repositoriesData) => {
+                            const repos = repositoriesData.map((response) => response.data);
+                            const limit =
+                                resultData.length !== 0 &&
+                                repositoriesData[repositoriesData.length - 1].headers['x-ratelimit-limit'] -
+                                    repositoriesData[repositoriesData.length - 1].headers['x-ratelimit-remaining'];
+                            console.log(limit, 'RepoDetailedOctokitLimit');
+                            // const newEtag = `${result.headers.etag}`.match(/W\/\"(.+)\"/)[1];
+                            const newEtag = result.headers.etag;
+                            console.log(newEtag, 'newEtag');
+                            extensions.addRepositoriesToDatabase(
+                                database,
+                                currentUser,
+                                repos,
+                                newEtag,
+                                true || response
+                            );
+                            res.json(repos);
                             return resultData;
                         });
-                    } else {
-                        return result.data;
-                    }
-                });
-        })
-        .then((resultData) => {
-            // const forkRepos = resultData.filter((repo)=> repo.fork);
-            // console.log(resultData, 'resultData');
-            // console.log(forkRepos.length, 'forkRepos');
-            return Promise.all(extensions.getDetailedRepositoryPromises(resultData, currentUser, octokit)).then(
-                (repositoriesData) => {
-                    console.log('Repos-octokit');
-                    const repos = repositoriesData.map((response) => response.data);
-                    extensions.addRepositoriesToDatabase(database, currentUser, repos, true || response);
-                    res.json(repos);
-                    return resultData;
-                }
+                    })
+                    .catch((err) => {
+                        // console.log(
+                        //     err.headers['x-ratelimit-limit'] - err.headers['x-ratelimit-remaining'],
+                        //     'LimitCacheRepo'
+                        // );
+
+                        if (err.status === 304) {
+                            console.log('CACHE_Repo');
+                            res.send(response.repositories);
+                            return Promise.reject('err');
+                        }
+                        console.log(err, 'reposDet');
+                    })
             );
         })
         .then((resultData) => {
-            // console.log(resultData.length, 'REPOS LENGTH11');
+            // console.log(resultData, "resultData")
             Promise.all(extensions.getLanguagesDataPromises(resultData, currentUser, octokit))
                 .then((languagesData) => {
+                    const limit =
+                        resultData &&
+                        resultData.length !== 0 &&
+                        languagesData[languagesData.length - 1].headers['x-ratelimit-limit'] -
+                            languagesData[languagesData.length - 1].headers['x-ratelimit-remaining'];
+                    console.log(limit, 'LanguagesRepolimit');
                     database.updateUserLanguages(currentUser, extensions.getLanguageStatistic(languagesData));
                     return languagesData;
                 })
                 .then((languages) => {
-                    Promise.all(extensions.getContributorsPromises(resultData, currentUser, octokit)).then(
+                    Promise.allSettled(extensions.getContributorsPromises(resultData, currentUser, octokit)).then(
                         (contributorsData) => {
                             for (let i = 0; i < contributorsData.length; i++) {
-                                const repositoryName = `${contributorsData[i].url}`.match(/\/([^/]+)\/contributors/)[1];
+                                if (contributorsData[i].status === 'rejected') {
+                                    console.log(contributorsData[i].reason);
+                                    continue;
+                                }
+                                // console.log(contributorsData[i], "contributorsData[i]", i);
+                                const dataValue = contributorsData[i].value;
+                                const repositoryName = `${dataValue.url}`.match(/\/([^/]+)\/contributors/)[1];
                                 if (!additionalReposInfo.has(repositoryName)) {
                                     additionalReposInfo.set(repositoryName, {
                                         languages: languages[i].data,
-                                        contributors: contributorsData[i].data,
+                                        contributors: dataValue.data,
                                     });
                                 }
                             }
+
+                            const dataValue1 =
+                                contributorsData &&
+                                contributorsData[contributorsData.length - 1] &&
+                                contributorsData[contributorsData.length - 1].values &&
+                                contributorsData[contributorsData.length - 1].value;
+                            const limit =
+                                dataValue1 &&
+                                dataValue1.headers['x-ratelimit-limit'] - dataValue1.headers['x-ratelimit-remaining'];
+                            console.log(limit, 'ContributorsRepolimit');
 
                             const resultInfo = [];
                             additionalReposInfo.forEach((value, key) => {
@@ -228,9 +307,16 @@ app.get('/repos', (req, res) => {
                             database.updateReposAdditionalInfo(currentUser, resultInfo);
                         }
                     );
-                });
+                })
+                .catch((err) => console.log(err, 'additReposErr'));
         })
-        .catch((err) => console.log(err, 'repos'));
+        .catch((err) => {
+            console.log(err, 'repos');
+            console.log(
+                err.headers && err.headers['x-ratelimit-limit'] - err.headers['x-ratelimit-remaining'],
+                'LimitRepo'
+            );
+        });
 });
 
 // https://github-contributions.now.sh/api/v1/vabyars
@@ -248,6 +334,10 @@ app.get('/activity', (req, res) => {
                         username: currentUser,
                     })
                     .then((result) => {
+                        console.log(
+                            result.headers['x-ratelimit-limit'] - result.headers['x-ratelimit-remaining'],
+                            'LimitActivity'
+                        );
                         let activityData = activityParser.getActivityStatistics(result.data);
                         database.updateUserActivity(currentUser, activityData);
                         res.json(activityData);
@@ -268,8 +358,13 @@ app.get('/userRecentActivity', (req, res) => {
         .then((result) => {
             // console.log(result.headers['x-ratelimit-used'], "activity");
             // console.log(result.data.length, "Activity length")
+            console.log(
+                result.headers['x-ratelimit-limit'] - result.headers['x-ratelimit-remaining'],
+                'LimitRecentActivityUSER'
+            );
             res.json(result.data);
-        });
+        })
+        .catch((err) => console.log(err));
 });
 
 app.get('/repoRecentActivity', (req, res) => {
@@ -285,84 +380,106 @@ app.get('/repoRecentActivity', (req, res) => {
         .then((result) => {
             // console.log(result.headers['x-ratelimit-used'], "activity");
             // console.log(result.data.length, "Activity length")
+            console.log(
+                result.headers['x-ratelimit-limit'] - result.headers['x-ratelimit-remaining'],
+                'LimitRecentActivityREPO'
+            );
             res.json(result.data);
-        });
+        })
+        .catch((err) => console.log(err));
 });
 
 // app.get('/lang', (req, res) => {
 //     console.log('get /lang ', req.query.username);
-app.post("/reposlangs", (req, res) => {
+app.post('/reposlangs', (req, res) => {
+    console.log('get /reposlangs ', req.query.username);
     const currentUser = req.query.username || req.cookies.currentNickname;
-    console.log(req.body.reposName)
-    extensions.getReposLanguagesPromise(req.body.reposName, currentUser, octokit)
+    // console.log(req.body.reposName)
+    extensions
+        .getReposLanguagesPromise(req.body.reposName, currentUser, octokit)
         .then((result) => {
             res.json(result.data);
-        });
-})
+        })
+        .catch((err) => console.log(err));
+});
 
 app.get('/userlangs', (req, res) => {
     console.log('get /userlangs ', req.query.username);
     const currentUser = req.query.username || req.cookies.currentNickname;
-    database.getUser(currentUser).then((result) => {
-        // console.log(result);
-        if (!result) res.json({});
-        else res.send(result.languages);
-    });
+    database
+        .getUser(currentUser)
+        .then((result) => {
+            // console.log(result);
+            if (!result) res.json({});
+            else res.send(result.languages);
+        })
+        .catch((err) => console.log(err));
 });
 
 // 'GET /repos/{username}/{reposName}/issues?state=all&per_page={per_page}'
 app.post('/repoIssues', (req, res) => {
+    console.log('get /repoIssues ', req.query.username);
     const currentUser = req.query.username || req.cookies.currentNickname;
-    octokit.request('GET /repos/{username}/{reposName}/issues', {
-        username: currentUser,
-        reposName: req.body.reposName,
-        state: "all",
-        per_page: 100,
-    })
-        .then((response) => {
-            res.json(response.data)
+    octokit
+        .request('GET /repos/{username}/{reposName}/issues', {
+            username: currentUser,
+            reposName: req.body.reposName,
+            state: 'all',
+            per_page: 100,
         })
-        .catch((err) => console.log(err))
-    
+        .then((response) => {
+            console.log(
+                response.headers['x-ratelimit-limit'] - response.headers['x-ratelimit-remaining'],
+                'LimitIssues'
+            );
+            res.json(response.data);
+        })
+        .catch((err) => console.log(err));
 
     // octokit.request('GET /repos/{username}/{reposName}/issues?state=all&per_page=100')
-})
+});
 
 app.post('/repoPulls', (req, res) => {
+    console.log('get /repoPulls ', req.query.username);
     const currentUser = req.query.username || req.cookies.currentNickname;
-    octokit.request('GET /repos/{username}/{reposName}/pulls', {
-        username: currentUser,
-        reposName: req.body.reposName,
-        state: "all",
-        per_page: 100,
-    })
-    .then((response) => {
-        
-            res.json(response.data)
+    octokit
+        .request('GET /repos/{username}/{reposName}/pulls', {
+            username: currentUser,
+            reposName: req.body.reposName,
+            state: 'all',
+            per_page: 100,
         })
-        .catch((err) => console.log(err))
-    
+        .then((response) => {
+            console.log(
+                response.headers['x-ratelimit-limit'] - response.headers['x-ratelimit-remaining'],
+                'LimitPuuls'
+            );
+            res.json(response.data);
+        })
+        .catch((err) => console.log(err));
 
     // octokit.request('GET /repos/{username}/{reposName}/issues?state=all&per_page=100')
-})
-
+});
 
 app.get('/repoAdditionalInfo', (req, res) => {
     console.log('get /repoAdditionalInfo ', req.query.username);
     const currentUser = req.query.username || req.cookies.currentNickname;
-    database.getUser(currentUser).then((result) => {
-        // console.log(result);
-        res.send(result.repos_additional_info);
-        // if (!result) res.json({});
-        // else res.send(result.languages);
-    });
+    database
+        .getUser(currentUser)
+        .then((result) => {
+            // console.log(result);
+            res.send(result.repos_additional_info);
+            // if (!result) res.json({});
+            // else res.send(result.languages);
+        })
+        .catch((err) => console.log(err));
 });
 
 app.get('/repo', (req, res) => {
     console.log('get /repo ', req.query.username);
     const currentUser = req.query.username || req.cookies.currentNickname;
     const repoId = req.query.repoId;
-    console.log(repoId, 'repoId');
+    // console.log(repoId, 'repoId');
     database
         .getUser(currentUser)
         .then((response) => {

@@ -17,7 +17,7 @@ function getLabelInfo(label: string, content: string, isSmall: boolean) {
     const labelClass = isSmall ? " small" : "";
     return (<>
         <span className={"label" + labelClass}>{label}</span>
-        <span>{content}</span>
+        <span className="canSelect">{content}</span>
     </>)
 }
 

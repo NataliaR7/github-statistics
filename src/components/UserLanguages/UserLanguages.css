@@ -27,10 +27,10 @@
     align-self: center;
     justify-self: center;
     /* align-items: center; 
-    /*overflow: hidden;
-    /* display: flex;
-    align-self: center;
-    justify-self: center; */
+    /*overflow: hidden;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .comparePanel .langStatistics {
     grid-area: lang;

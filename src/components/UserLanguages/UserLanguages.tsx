@@ -43,7 +43,7 @@ function UserLanguages(props: PropType) {
       <div className="head">
         <span>languages</span>
       </div>
-      <LanguagesChart />
+      <LanguagesChart width="500" height="300"/>
     </div>
   );
 }

@@ -18,7 +18,7 @@ function Contributor(props: ContributorType) {
             <a href={data.url} target="_blank">
                 <img src={data.avatar} alt="partnerAvatar"></img>
             </a>
-            <span>{data.name}</span>
+            <span className="canSelect">{data.name}</span>
         </div>
     );
 }

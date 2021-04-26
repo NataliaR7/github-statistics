@@ -105,7 +105,7 @@ function Issues(props: PropType){
       </div>
       <div className="issuesStatistics">
         {issuesStatistics && <>
-          <Chart options={options(parsedData.lables)} series={parsedData.values} type="donut" width={"400"} />          
+          <Chart options={options(parsedData.lables)} series={parsedData.values} type="donut" width={"300"} />          
         </>}
       </div>
     </div>

@@ -112,7 +112,7 @@
     grid-area: copyMess;
     align-self: center;
     color: #888888;
-    font-size: 0.8vw;
+    font-size: 0.75vw;
     opacity: 1;
     filter: alpha(opacity=100);
     -webkit-transition: all 0.5s ease-in-out;
