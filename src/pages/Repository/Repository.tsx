@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import RepositoryMainInfo from './RepositoryMainInfo'
 import UserRecentActivity from '../../components/UserRecentActivity/UserRecentActivity'
 import LanguagesChart from "../../components/UserLanguages/LanguagesChart";
-import Issues from "../../components/ReposIssues/IssuesItem"
+import IssuesPullsStat from "../../components/ReposIssues/IssuesItem"
 
 interface RepoType {
     activeRepoId: number;
@@ -63,11 +63,10 @@ function Repository(props: RepoType) {
                 <RepositoryMainInfo data={getRepoMainInfo()} />
                 <div className="statistics">
                     <div className="languageRepo">
-                        <LanguagesChart /* url="reposlangs" */ reposName={repoData.name} />
+                        <LanguagesChart reposName={repoData.name} />
                     </div>
                     <div className="issueAvgRepo">
-                        <Issues url="repoIssues" reposName={repoData.name} type="issues" />
-                        <Issues url="repoPulls" reposName={repoData.name} type="pull requests" />
+                        <IssuesPullsStat reposName={repoData.name} />
                     </div>
                     <div className="activityRepo">
                         <UserRecentActivity type="repo" repoName={repoData.name} />

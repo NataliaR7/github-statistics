@@ -266,8 +266,6 @@ app.get('/userRecentActivity', (req, res) => {
             per_page: 100,
         })
         .then((result) => {
-            // console.log(result.headers['x-ratelimit-used'], "activity");
-            // console.log(result.data.length, "Activity length")
             res.json(result.data);
         });
 });
@@ -283,20 +281,16 @@ app.get('/repoRecentActivity', (req, res) => {
             per_page: 100,
         })
         .then((result) => {
-            // console.log(result.headers['x-ratelimit-used'], "activity");
-            // console.log(result.data.length, "Activity length")
             res.json(result.data);
         });
 });
 
-// app.get('/lang', (req, res) => {
-//     console.log('get /lang ', req.query.username);
 app.post("/reposlangs", (req, res) => {
     const currentUser = req.query.username || req.cookies.currentNickname;
     console.log(req.body.reposName)
     extensions.getReposLanguagesPromise(req.body.reposName, currentUser, octokit)
         .then((result) => {
-            res.json(result.data);
+            res.json(extensions.getLanguageStatistic([result]));
         });
 })
 
@@ -304,14 +298,20 @@ app.get('/userlangs', (req, res) => {
     console.log('get /userlangs ', req.query.username);
     const currentUser = req.query.username || req.cookies.currentNickname;
     database.getUser(currentUser).then((result) => {
-        // console.log(result);
         if (!result) res.json({});
         else res.send(result.languages);
     });
 });
 
-// 'GET /repos/{username}/{reposName}/issues?state=all&per_page={per_page}'
-app.post('/repoIssues', (req, res) => {
+app.post('/repoIssuesPullsClose', (req, res) => {
+    const currentUser = req.query.username || req.cookies.currentNickname;
+    let promises = extensions.getIssuesPromises(req.body.reposName, currentUser, octokit)
+    Promise.all(promises).then((responce) => {
+        res.json(extensions.parseIssues(responce))        
+    })
+})
+
+app.post('/repoIssuesCount', (req, res) => {
     const currentUser = req.query.username || req.cookies.currentNickname;
     octokit.request('GET /repos/{username}/{reposName}/issues', {
         username: currentUser,
@@ -319,16 +319,13 @@ app.post('/repoIssues', (req, res) => {
         state: "all",
         per_page: 100,
     })
-        .then((response) => {
-            res.json(response.data)
+    .then((response) => {
+            res.json(extensions.getOpenClosed(response))
         })
         .catch((err) => console.log(err))
-    
-
-    // octokit.request('GET /repos/{username}/{reposName}/issues?state=all&per_page=100')
 })
 
-app.post('/repoPulls', (req, res) => {
+app.post('/repoPullsCount', (req, res) => {
     const currentUser = req.query.username || req.cookies.currentNickname;
     octokit.request('GET /repos/{username}/{reposName}/pulls', {
         username: currentUser,
@@ -337,13 +334,9 @@ app.post('/repoPulls', (req, res) => {
         per_page: 100,
     })
     .then((response) => {
-        
-            res.json(response.data)
+            res.json(extensions.getOpenClosed(response))
         })
         .catch((err) => console.log(err))
-    
-
-    // octokit.request('GET /repos/{username}/{reposName}/issues?state=all&per_page=100')
 })
 
 
@@ -351,10 +344,7 @@ app.get('/repoAdditionalInfo', (req, res) => {
     console.log('get /repoAdditionalInfo ', req.query.username);
     const currentUser = req.query.username || req.cookies.currentNickname;
     database.getUser(currentUser).then((result) => {
-        // console.log(result);
         res.send(result.repos_additional_info);
-        // if (!result) res.json({});
-        // else res.send(result.languages);
     });
 });
 
@@ -366,7 +356,6 @@ app.get('/repo', (req, res) => {
     database
         .getUser(currentUser)
         .then((response) => {
-            //console.log(response, '00');
             const repos = JSON.parse(response.repositories);
             const result = repos.find((e) => e.id === +repoId);
             res.json(result);

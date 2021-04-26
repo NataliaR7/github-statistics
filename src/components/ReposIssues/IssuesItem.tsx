@@ -8,14 +8,19 @@ import "./IssuesItem.css"
 let options =(labels: string[]) => {
   return {
     chart: {
-      type: 'donut',
+      type: 'pie',
     },
     plotOptions: {
       pie: {
         startAngle: -90,
-        endAngle: 90,
+        endAngle: 270,
         offsetY: 10,        
       }
+    },
+    noData: {
+      text: "No issues and pull requests",
+      align: 'center',
+      verticalAlign: 'top',
     },
     color: graphColors,
     labels: labels,
@@ -38,60 +43,24 @@ interface IssuesStatistics {
   [key: string]: number
 }
 
-const day = 1000 * 60 * 60 * 24 
-const daysInWeek = 7
-const daysInMonth = 30
-
-function parseIssuesData(data: {[key: string]: string}[]): IssuesStatistics{
-  let issuesStat = {
-    "week": 0,
-    "month": 0,
-    "later": 0,
-    "open": 0
-  }
-  for (let issue of data){
-    if (issue["state"] === "open")
-      issuesStat["open"] += 1 
-    else if (issue["state"] === "closed"){
-      let dateOpen = new Date(issue["created_at"])
-      let dateClose = new Date(issue["closed_at"])
-      let closingTimeInDays = getDatesDifferenceInDays(dateOpen, dateClose)     
-      if (closingTimeInDays <= daysInWeek)
-        issuesStat["week"] += 1
-      else if (closingTimeInDays <= daysInMonth)
-        issuesStat["month"] += 1
-      else 
-        issuesStat["later"] += 1
-    }
-  }
-  return issuesStat
-}
-
-function getDatesDifferenceInDays(dateOpen: Date, dateClose: Date){
-  return Math.floor((dateClose.getTime() - dateOpen.getTime()) / day)
-}
-
 type PropType = {
-  url: string,
-  type: string,
   reposName: string
 };
 
-function Issues(props: PropType){
+function IssuesPullsStat(props: PropType){
   const [issuesStatistics, setIssuesStat] = useState<IssuesStatistics>({})
-  const [labelData, setLabel] = useState("")
 
   async function getIssuesData() {
-    const repositoryIssues = await (await fetch(`/${props.url}`, {
+    const repositoryIssues = await (await fetch(`/repoIssuesPullsClose`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({reposName: `${props.reposName}`})
     })).json()
-    setLabel(`Statistics for the last ${repositoryIssues.length} ${props.type}`)
-    setIssuesStat(parseIssuesData(repositoryIssues))
+    setIssuesStat(repositoryIssues)
   }
+  
   useEffect(() => {
     getIssuesData()
   }, [])
@@ -101,15 +70,15 @@ function Issues(props: PropType){
   return (
     <div className="userIssues">
       <div className="head">
-        <span>{labelData}</span>
+        <span>Close issues and pull requests statistics</span>
       </div>
       <div className="issuesStatistics">
         {issuesStatistics && <>
-          <Chart options={options(parsedData.lables)} series={parsedData.values} type="donut" width={"400"} />          
+          <Chart options={options(parsedData.lables)} series={parsedData.values} type="pie" width={"400"} />          
         </>}
       </div>
     </div>
   );
 }
 
-export default Issues
+export default IssuesPullsStat
