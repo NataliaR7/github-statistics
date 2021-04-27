@@ -9,6 +9,5 @@ export default connect(
         isLoggedIn: state.isLoggedIn,
     }),
     (dispatch, props) => ({
-        toLoggedIn: (value: boolean) => dispatch(signIn(value)),
     })
 )(Login);

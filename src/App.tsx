@@ -12,18 +12,6 @@ import {
 } from "react-router-dom";
 import {store} from './store';
 
-// type StateType = {
-//   activePage: string,
-//   isLoggedIn: boolean
-// };
-
-// const preloadedState: StateType = {
-//   activePage: "/login",
-//   isLoggedIn: false
-// };
-
-// const store = createStore(rootReducer, preloadedState);
-
 function App() {
 
   return (
@@ -31,9 +19,6 @@ function App() {
       <Provider store={store}>
         <Router>
           <Switch>
-            {/* {!!Cookies.get('isLoggedIn') ?
-              <Redirect exact from="/" to="/main" /> :
-              <Redirect exact from="/" to="/login" />} */}
             <Redirect exact from="/" to="/login" />
             <Route path="/login" component={Login} />
             <Route path="/nickname" component={NicknameInput} />
