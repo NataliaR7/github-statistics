@@ -17,31 +17,31 @@ function UserRepositories() {
   const [repoData, setRepoData] = useState<Array<RepoDataType>>([]);
   const [isLoadedData, setIsLoadedData] = useState(false);
 
-  const loadReposData = async function () {
-    const repositories = await fetch('/repos');
-    const response = await repositories.json();
-    const sortPeros = sortReposData(response).slice(0, 5);
+  // const loadReposData = async function () {
+  //   const repositories = await fetch('/repos');
+  //   const response = await repositories.json();
+  //   const sortPeros = sortReposData(response).slice(0, 5);
 
-    const stylizedRepo = sortPeros.map(repo => {
-      return {
-        id: repo.id,
-        starsCount: repo.stargazers_count,
-        repoName: repo.name,
-        isFork: repo.fork,
-        updateDate: new Date(repo.pushed_at),
-        cloneUrl: repo.clone_url,
-      }
-    });
+  //   const stylizedRepo = sortPeros.map(repo => {
+  //     return {
+  //       id: repo.id,
+  //       starsCount: repo.stargazers_count,
+  //       repoName: repo.name,
+  //       isFork: repo.fork,
+  //       updateDate: new Date(repo.pushed_at || repo.created_at),
+  //       cloneUrl: repo.clone_url,
+  //     }
+  //   });
 
-    setRepoData(repoData => repoData = stylizedRepo);
-  }
+  //   setRepoData(repoData => repoData = stylizedRepo);
+  // }
 
-  useEffect(() => {
-    loadReposData().then(() => {
-      setIsLoadedData(true);
-    })
+  // useEffect(() => {
+  //   loadReposData().then(() => {
+  //     setIsLoadedData(true);
+  //   })
 
-  }, []);
+  // }, []);
 
   return (
     <div className="userRepositories">

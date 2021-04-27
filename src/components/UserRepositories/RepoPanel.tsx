@@ -41,7 +41,7 @@ function RepoPanel(props: PropsType) {
                 starsCount: repo.stargazers_count,
                 repoName: repo.name,
                 isFork: repo.fork,
-                updateDate: new Date(repo.pushed_at),
+                updateDate: new Date(repo.pushed_at || repo.created_at),
                 cloneUrl: repo.clone_url,
             }
         });

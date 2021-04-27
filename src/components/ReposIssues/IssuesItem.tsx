@@ -1,39 +1,74 @@
 import { useEffect, useState } from 'react';
 import { color, generalColor, graphColors } from '../../resources/colors'
 import Chart from 'react-apexcharts';
-import {GetLablesAndValues} from "../../extentions/extentions"
+import { GetLablesAndValues } from "../../extentions/extentions"
 import "./IssuesItem.css"
 
 
-let options =(labels: string[]) => {
+let options = (labels: string[]) => {
   return {
     chart: {
       type: 'pie',
+      width: 300,
+      height: 150,
     },
     plotOptions: {
       pie: {
         startAngle: -90,
         endAngle: 270,
-        offsetY: 10,        
+        // offsetY: 10,        
       }
     },
+    animations: {
+      enabled: true,
+    },
+    // noData: {
+    //   text: "No issues and pull requests",
+    //   align: 'center',
+    //   verticalAlign: 'top',
+    // },
     noData: {
-      text: "No issues and pull requests",
+      text: 'No issues and pull requests',
       align: 'center',
-      verticalAlign: 'top',
+      verticalAlign: 'middle',
+      style: {
+        color: "#888888",
+        fontSize: '1vw',
+        fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+        'Droid Sans', 'Helvetica Neue', sans-serif`
+      },
     },
     color: graphColors,
     labels: labels,
+    legend: {
+      offsetX: 0,
+      horizontalAlign: 'left',
+      // verticalAlign: 'center',
+      fontSize: '17em',
+      itemMargin: {
+        vertical: 5,
+      },
+      formatter: function (seriesName: any, opts: any) {
+        return [" " + seriesName]
+      },
+    },
     responsive: [{
-      breakpoint: 480,
+      breakpoint: 1500,
       options: {
         chart: {
-          width: 200
+          width: 450,
+          height: 250
         },
-        legend: {
-          position: 'bottom'
-        }
-      }
+      },
+    },
+    {
+      breakpoint: 1000,
+      options: {
+        chart: {
+          width: 300,
+          height: 150
+        },
+      },
     }]
   }
 };
@@ -47,7 +82,7 @@ type PropType = {
   reposName: string
 };
 
-function IssuesPullsStat(props: PropType){
+function IssuesPullsStat(props: PropType) {
   const [issuesStatistics, setIssuesStat] = useState<IssuesStatistics>({})
 
   async function getIssuesData() {
@@ -56,25 +91,25 @@ function IssuesPullsStat(props: PropType){
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
-      body: JSON.stringify({reposName: `${props.reposName}`})
+      body: JSON.stringify({ reposName: `${props.reposName}` })
     })).json()
     setIssuesStat(repositoryIssues)
   }
-  
+
   useEffect(() => {
     getIssuesData()
   }, [])
-  
+
 
   let parsedData = GetLablesAndValues(issuesStatistics)
   return (
     <div className="userIssues">
-      <div className="head">
+      {/* <div className="head">
         <span>Close issues and pull requests statistics</span>
-      </div>
+      </div> */}
       <div className="issuesStatistics">
         {issuesStatistics && <>
-          <Chart options={options(parsedData.lables)} series={parsedData.values} type="pie" width={"300"} />          
+          <Chart options={options(parsedData.lables)} series={parsedData.values} type="pie" width={"450"} height={"250"} />
         </>}
       </div>
     </div>

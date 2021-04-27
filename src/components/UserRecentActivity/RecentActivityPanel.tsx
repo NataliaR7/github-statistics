@@ -55,7 +55,7 @@ function RecentActivityPanel(props: { type: string, repoName?: string, username?
     }
 
     const printActivity = () => {
-        const warning = (<span className="warning">{`This ${props.type === "user" ? "ures" : "repository"} has no activity in the past three months`}</span>);
+        const warning = (<span className="warning">{`This ${props.type === "user" ? "user" : "repository"} has no activity in the past three months`}</span>);
         if (activityData.length === 0) {
             return warning;
         }

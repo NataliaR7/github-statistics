@@ -6,6 +6,10 @@
     gap: 1vh;
     position: relative;
 }
+.labelIssue {
+    color: #5f5f5f;
+    font-size: 0.9vw;
+}
 
 .statisticLine {
     width: 50%;
@@ -13,6 +17,7 @@
     display: flex;
     flex-direction: row;
     position: relative;
+    overflow: hidden;
 }
 
 .statisticLine,
@@ -22,7 +27,7 @@
     border-radius: 2em;
 }
 
-.closedLine{
+.closedLine {
     position: absolute;
     /* background-color: #D83A48; */
     left: 0;
@@ -32,7 +37,7 @@
 
 .openLine {
     position: absolute;
-    background-color: #23A63C;
+    background-color: #23a63c;
     right: 0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -43,19 +48,19 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    color:#888888;
+    color: #888888;
 }
-.statisticData div{
+.statisticData div {
     display: flex;
     flex-direction: row;
     gap: 0.3vw;
     align-items: center;
 }
 
-.closedIssuesIcon, 
+.closedIssuesIcon,
 .openIssuesIcon,
 .mergedPRIcon,
-.openPRIcon{
+.openPRIcon {
     width: 1.2vw;
     height: 1.2vw;
 }

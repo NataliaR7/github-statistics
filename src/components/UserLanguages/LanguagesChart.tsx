@@ -28,10 +28,10 @@ function LanguagesChart(props: PropType) {
 
     const options = (lables: string[], legendOffset: number, legendPosition?: string) => {
         return {
-            chart: {
-                width: props.width || "99%",
-                height: props.height || "99%"
-            },
+            // chart: {
+            //     width: props.width || "99%",
+            //     height: props.height || "99%"
+            // },
             plotOptions: {
                 pie: {
                     startAngle: -90,

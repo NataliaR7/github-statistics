@@ -11,6 +11,23 @@
 .repositoryHead {
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+
+.upadateDate {
+    position: absolute;
+    right: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    color: #646464;
+    font-size: 0.9vw;
+    
+}
+
+.upadateDate span:first-child {
+    font-variant: small-caps;
+    font-size: 1.1vw;
 }
 
 .repositoryName {
@@ -34,34 +51,48 @@
     color: #686868;
 }
 
-
 .repositoryFork {
     color: #888888;
     font-size: 1.1vw;
     padding: 0 1.5vw;
 }
 
-.repository .statistics{
-    width: 100%;
+.repository .statistics {
+    width: 90%;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    grid-template-areas: 
-    'languageRepo issueAvgRepo'
-    'activityRepo issueCountRepo';
+    grid-template-areas:
+        'languageRepo issueAvgRepo'
+        'activityRepo issueCountRepo';
+    /* background-color: chartreuse; */
+    align-self: center;
+    column-gap: 3vw;
 }
 
 .repository .languageRepo {
     grid-area: languageRepo;
-    align-self: center;
+    /* align-self: center;
     justify-self: center;
-    /* background-color: burlywood; */
+    background-color: burlywood; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    /* background-color: chocolate; */
 }
 .repository .issueAvgRepo {
     grid-area: issueAvgRepo;
-    background-color: rgb(135, 222, 203);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+.repository .userIssues,
+.repository .langStatistics {
+    margin: auto 0;
+}
+
 .repository .activityRepo {
     grid-area: activityRepo;
 }
@@ -75,3 +106,44 @@
     /* background-color: rgb(207, 123, 255); */
 }
 
+.repository .head {
+    /* grid-area: head; */
+    display: flex;
+    color: #5f5f5f;
+    /* background-color: #eeeeee; */
+    font-variant: small-caps;
+    font-size: 1.3vw;
+    align-items: center;
+    padding: 0 0 1vh 2vw;
+    line-height: 3vh;
+    align-self: flex-start;
+    justify-self: flex-start;
+}
+
+.issueAvgRepo .head {
+    align-self: center;
+    padding-left: 0;
+}
+
+.repository .warning {
+    font-size: 1vw;
+    color: #888888;
+    align-self: center;
+    margin: auto auto;
+}
+
+.repository .link {
+    width: 1.6vw;
+    height: 1.5vw;
+    margin-left: 0.5vw;
+    fill: #646464;
+}
+.repository .link:hover {
+    cursor: pointer;
+    fill: #838383;
+}
+
+.repository .copyMessage {
+    font-size: 1vw;
+    padding-top: 1vh;
+}

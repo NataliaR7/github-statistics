@@ -84,4 +84,11 @@
     position: relative;
     margin-left: 1vh;
 }
+.squares .warning {
+    font-size: 1vw;
+    color: #888888;
+    align-self: center;
+    margin: auto auto;
+    padding-bottom: 2vh;
+}
 

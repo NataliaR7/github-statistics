@@ -56,9 +56,9 @@ function Repositories(props: ReposType) {
                 description: repo.description,
                 generalLanguage: additional && Object.keys(additional.languages)[0],
                 contributorsCount: additional?.contributors?.length || 0,
-                forksCount: repo.parent ? repo.parent.forks_count : repo.forks_count,
-                watchersCount: repo.parent ? repo.parent.watchers_count : repo.watchers_count,
-                starsCount: repo.parent ? repo.parent.stargazers_count : repo.stargazers_count,
+                forksCount: repo.forks_count,
+                watchersCount: repo.watchers_count,
+                starsCount: repo.stargazers_count,
                 updateDate: new Date(repo.pushed_at || repo.created_at),
                 cloneUrl: repo.clone_url
             }

@@ -5,26 +5,28 @@ import getMergedPRIcon from '../../resources/mergedPRSvg'
 import getOpenPRIcon from '../../resources/openPRSvg'
 
 interface PropsType {
+    openCount: number;
+    closedCount: number;
     isPullRequest?: boolean;
 }
 
 function IssueBar(props: PropsType) {
-
+    const generalCount = props.openCount + props.closedCount;
     return (
         <div className="issueBar">
-            <span>{props.isPullRequest ? 'Pull requests' : 'Issues'}</span>
+            <span className="labelIssue">{props.isPullRequest ? 'Pull requests' : 'Issues'}</span>
             <div className="statisticLine">
-                <div className="closedLine" style={{width: "40%", backgroundColor: `${props.isPullRequest ? '#7144C5' : '#D83A48'}`}}></div>
-                <div className="openLine" style={{width: "60%"}}></div>
+                <div className="closedLine" style={{width: `${props.closedCount / generalCount * 100}%`, backgroundColor: `${props.isPullRequest ? '#7144C5' : '#D83A48'}`}}></div>
+                <div className="openLine" style={{width: `${props.openCount / generalCount * 100}%`}}></div>
             </div>
             <div className="statisticData">
                 <div>
                     {props.isPullRequest ? getMergedPRIcon() : getClosedIssuesIcon()}
-                    <span>82 {props.isPullRequest ? 'Merged' : 'Closed'}</span>
+                    <span>{props.closedCount} {props.isPullRequest ? 'Merged' : 'Closed'}</span>
                 </div>
                 <div>
                     {props.isPullRequest ? getOpenPRIcon() : getOpenIssuesIcon()}
-                    <span>8 Open</span>
+                    <span>{props.openCount} Open</span>
                 </div>
             </div>
         </div>
