@@ -21,17 +21,18 @@ function isDataActual(lastDateInMilliseconds) {
     return Date.now() - lastDateInMilliseconds < delay;
 }
 
-function getLanguageStatistic(responses) {
-    let languageStatistic = {};
-    for (let response of responses) {
-        let reposLanguages = response.data;
-        for (let key in reposLanguages) {
-            if (!languageStatistic[key]) languageStatistic[key] = reposLanguages[key];
-            else languageStatistic[key] += reposLanguages[key];
-        }
-    }
-
-    return sortLanguageByFrequency(languageStatistic);
+function getLanguageStatistic(responses){
+    let languageStatistic = {}
+    for (let response of responses){
+        let reposLanguages = response.data
+        for (let key in reposLanguages){
+            if (!languageStatistic[key])
+                languageStatistic[key] = reposLanguages[key]
+            else
+                languageStatistic[key] += reposLanguages[key]
+          }
+    }    
+    return sortLanguageByFrequency(languageStatistic)
 }
 
 function sortLanguageByFrequency(languageStatistic) {
@@ -41,21 +42,22 @@ function sortLanguageByFrequency(languageStatistic) {
     }
     statisticArray.sort((prev, next) => next.bytes - prev.bytes);
     let mostPopularLanguages = statisticArray.splice(0, 5);
-    let otherLanguagesBytes = statisticArray.reduce((acc, item) => (acc += item.bytes), 0);
-    if (otherLanguagesBytes != 0) mostPopularLanguages.push({ language: 'Другое', bytes: otherLanguagesBytes });
-
-    let res = {};
-    for (let data of mostPopularLanguages) res[data.language] = data.bytes;
-    return res;
+    let otherLanguagesBytes = statisticArray.reduce((acc, item) => acc += item.bytes, 0)
+    if (otherLanguagesBytes != 0)
+        mostPopularLanguages.push({language: "Другое", bytes: otherLanguagesBytes})
+    
+    let res = {}
+    for (let data of mostPopularLanguages)
+        res[data.language] = data.bytes   
+    return res
 }
 
 function getLanguagesDataPromises(repositories, user, octokit) {
     let res = [];
-
-    for (let repos of repositories) {
-        res.push(getReposLanguagesPromise(repos.name, user, octokit));
-    }
-    // console.log(res)
+    
+    for (let repos of repositories){
+        res.push(getReposLanguagesPromise(repos.name, user, octokit))
+    } 
     return res;
 }
 
@@ -118,20 +120,18 @@ function parseIssuesData(data){
     let issuesStat = {}
     
     for (let issue of data){
-      if (issue["state"] === "open")
-        updateIssuesStatistics(issuesStat, "open")
-      else if (issue["state"] === "closed"){
+      if (issue["state"] === "closed"){
         let dateOpen = new Date(issue["created_at"])
         let dateClose = new Date(issue["closed_at"])
         let closingTimeInDays = getDatesDifferenceInDays(dateOpen, dateClose)     
         if (closingTimeInDays <= daysInWeek)
-             updateIssuesStatistics(issuesStat, "week")
+             updateIssuesStatistics(issuesStat, "Less then week")
         
           
         else if (closingTimeInDays <= daysInMonth)
-            updateIssuesStatistics(issuesStat, "month")
+            updateIssuesStatistics(issuesStat, "Less then month")
         else 
-            updateIssuesStatistics(issuesStat, "later")
+            updateIssuesStatistics(issuesStat, "More then month")
       }
     }
     return issuesStat
@@ -143,10 +143,10 @@ function updateIssuesStatistics(statistics, field){
     statistics[field] += 1
 }
 
-function getOpenClosed(response){
+function getOpenClosed(responseData){
     let open = 0
     let closed = 0    
-    for (let data of response.data){
+    for (let data of responseData){
         if (data["state"] === "open")
             open += 1
         else 
@@ -165,7 +165,6 @@ function parseIssues(responces){
         res.push(...responce.data)
     }
     return parseIssuesData(res)
-
 }
 
 

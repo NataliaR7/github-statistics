@@ -20,7 +20,13 @@ type PropType = {
     reposName?: string,
 };
 
-
+function formatLanguageBytes(value: number){
+    if (value > 1024 * 1024)
+        return `${(value / (1024 * 1024)).toFixed(1)}MB`
+    if (value > 1024)
+        return `${(value / 1024).toFixed(1)}KB`
+    return `${value}B`
+}
 
 
 function LanguagesChart(props: PropType) {
@@ -63,6 +69,11 @@ function LanguagesChart(props: PropType) {
                 // }
             },
             //colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800', '#ffd230'],
+            tooltip: {
+                y: {
+                    formatter: (value: number) => formatLanguageBytes(value)
+                }
+            },
             colors: graphColors,
             labels: lables,
             legend: {

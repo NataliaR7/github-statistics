@@ -40,6 +40,8 @@ function Repositories(props: ReposType) {
         const response = await repositories.json();
         const repoAdditionalInfo = await fetch('/repoAdditionalInfo');
 
+
+
         const additionalRes = await repoAdditionalInfo.json();
 
         const sortPeros = await sortReposData(response);
