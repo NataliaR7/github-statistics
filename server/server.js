@@ -442,7 +442,7 @@ app.post('/repoIssuesCount', (req, res) => {
             per_page: 100,
         })
         .then((response) => {
-            res.json(extensions.getOpenClosed(response.data.filter((data) => !data['pull_request'])));
+            res.json(extensions.getOpenClosed(response.data.filter(data => !data["pull_request"])));
         })
         .catch((err) => console.log(err));
 });
