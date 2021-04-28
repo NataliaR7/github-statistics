@@ -11,7 +11,7 @@ interface PropsType {
   resetStore: () => void;
 }
 
-export default function NicknameInput(props: PropsType) {
+const NicknameInput: React.FC<PropsType> = props => {
   const [isSubmit, setIsSubmit] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isLoadingData, setIsLoadingData] = useState(false);
@@ -26,7 +26,7 @@ export default function NicknameInput(props: PropsType) {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({ nickname: props.currentNickname })
-    })
+    });
 
     if (responseUser.status === 404) {
       setIsError(true);
@@ -51,10 +51,12 @@ export default function NicknameInput(props: PropsType) {
         <>
           <HeadLogo />
           <form action="" method="post" className="loginForm" onSubmit={(e) => submitHandler(e)}>
-            <NicknameForm title="enter your github nickname" setNickname={props.setNickname} />
+            <NicknameForm title="enter github nickname" setNickname={props.setNickname} />
           </form>
         </>
       }
     </div>
   );
 }
+
+export default NicknameInput;

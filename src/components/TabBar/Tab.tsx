@@ -1,34 +1,28 @@
 import './Tab.css';
-import { useEffect, useRef } from "react";
+import { PagePath } from '../../resources/constants'
 
-type TabType = {
-    title: string,
-    color: string,
-    path: string,
-    isActive: boolean,
-    activePage: string,
-    onNavigate: (e: string) => void
+interface PropsType {
+    title: string;
+    path: string;
+    isActive: boolean;
+    onNavigate: (e: string) => void;
 }
 
-function Tab(props: TabType) {
-    const currentTab = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        props.isActive
-            ? currentTab?.current?.classList.add("active")
-            : currentTab?.current?.classList.remove("active")
-    })
+const Tab: React.FC<PropsType> = props => {
     return (
-        <div className="tab" ref={currentTab} onClick={(e) => {
+        <div className={`tab ${props.isActive && 'active'}`} onClick={() => {
             props.onNavigate && props.onNavigate(props.path);
-            e.currentTarget.classList.add("active");
-
         }}>
             {props.title}
-            <div className="line" style={{ backgroundColor: props.color }}> </div>
-
+            <div className="line" style={{ backgroundColor: tabColors[props.path] }}></div>
         </div>
     );
+}
+
+const tabColors: { [key: string]: string } = {
+    [PagePath.Main]: "#F98365",
+    [PagePath.Repos]: "#CDDA95",
+    [PagePath.Compare]: "#A1DFFB",
 }
 
 export default Tab;

@@ -1,5 +1,5 @@
+import './General.css';
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
     Redirect,
@@ -9,10 +9,8 @@ import UserPanel from '../../components/UserPanel/UserPanel';
 import MainInfo from '../MainInfo/MainInfo';
 import Repositories from '../../containers/Repositories';
 import Comparation from '../../containers/Comparation';
-import './General.css'
 
-function General() {
-
+const General: React.FC = () => {
     return (
         <div className="General">
             <TabBar />

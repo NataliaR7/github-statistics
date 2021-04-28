@@ -1,31 +1,34 @@
 import './UserHead.css';
 import starSvg from '../../resources/starSvg';
 
-type PropType = {
-    userUrl?: string;
-    avatar?: string;
-    username?: string;
-    followerCount?: number;
-    followingCount?: number;
-    starCount?: string;
-    repoCount?: number;
-    forkCount?: number;
+interface PropsType {
+    data: {
+        userUrl: string;
+        avatar: string;
+        username: string;
+        followerCount: number;
+        followingCount: number;
+        starCount: string;
+        reposCount: number;
+        forkCount: number;
+    }
 };
 
-function UserHead(props: PropType) {
+const UserHead: React.FC<PropsType> = props => {
+    const data = props.data;
     return (
         <div className="userHead">
-            <a href={props.userUrl} target="_blank"><img src={props.avatar} alt="avatar" /></a>
-            <span className="username canSelect">{props.username}</span>
+            <a href={data.userUrl} target="_blank"><img src={data.avatar} alt="avatar" /></a>
+            <span className="username canSelect">{data.username}</span>
             <div className="separatorLine"></div>
             <div className="commonInfo">
-                <span className="follower">{props.followerCount} follower</span>
-                <span className="following">{props.followingCount} following</span>
-                {starSvg()}<span> {props.starCount}</span>
+                <span className="follower">{data.followerCount} follower</span>
+                <span className="following">{data.followingCount} following</span>
+                {starSvg()}<span> {data.starCount}</span>
             </div>
             <div className="repoInfo">
-                <span>{props.repoCount} public repositories</span>
-                <span>{props.forkCount} forks</span>
+                <span>{data.reposCount} public repositories</span>
+                <span>{data.forkCount} forks</span>
             </div>
         </div>
     );

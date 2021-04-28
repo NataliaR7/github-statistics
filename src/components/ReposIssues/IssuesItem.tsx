@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { color, generalColor, graphColors } from '../../resources/colors'
+import { color, generalColor, graphColors7 } from '../../resources/colors'
 import Chart from 'react-apexcharts';
 import { GetLablesAndValues } from "../../extentions/extentions"
 import "./IssuesItem.css"
@@ -38,10 +38,10 @@ let options = (labels: string[]) => {
         'Droid Sans', 'Helvetica Neue', sans-serif`
       },
     },
-    color: graphColors,
+    colors: graphColors7,
     labels: labels,
     legend: {
-      offsetX: 0,
+      offsetX: -10,
       horizontalAlign: 'left',
       // verticalAlign: 'center',
       fontSize: '17em',
@@ -53,7 +53,7 @@ let options = (labels: string[]) => {
       },
     },
     responsive: [{
-      breakpoint: 1500,
+      breakpoint: 1700,
       options: {
         chart: {
           width: 450,
@@ -109,7 +109,7 @@ function IssuesPullsStat(props: PropType) {
       </div> */}
       <div className="issuesStatistics">
         {issuesStatistics && <>
-          <Chart options={options(parsedData.lables)} series={parsedData.values} type="pie" width={"450"} height={"250"} />
+          <Chart options={options(parsedData.lables)} series={parsedData.values} type="pie" width={"460"} height={"250"} />
         </>}
       </div>
     </div>

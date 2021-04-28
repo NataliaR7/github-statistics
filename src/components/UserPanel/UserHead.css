@@ -6,6 +6,7 @@
     color: #f4f4f4;
     font-size: 1vw;
 }
+
 .userHead img {
     width: 12vw;
     border-radius: 50%;
@@ -13,6 +14,7 @@
     border: 0.2vw solid rgb(95, 95, 95);
     background-color: rgb(95, 95, 95);
 }
+
 .username {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -37,9 +39,11 @@
     margin: 1vw;
     align-items: center;
 }
+
 .follower {
     grid-area: follower;
 }
+
 .following {
     grid-area: following;
 }
@@ -52,10 +56,6 @@
     height: 2vw;
 }
 
-/* .userHead .star:hover {
-    fill: #F9DE59;
-} */
-
 .userHead .star + span {
     grid-area: count;
     font-size: 1.1vw;
@@ -67,4 +67,3 @@
     align-self: flex-start;
     margin-left: 1vw;
 }
-

@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import NicknameInput from '../pages/NicknameInput/NicknameInput';
 import { changeNickname, resetStore} from '../actionCreators';

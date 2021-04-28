@@ -12,8 +12,7 @@ import {
 } from "react-router-dom";
 import {store} from './store';
 
-function App() {
-
+const App: React.FC = () => {
   return (
     <div className="App">
       <Provider store={store}>

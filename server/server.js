@@ -156,9 +156,17 @@ app.get('/orgs', (req, res) => {
             username: currentUser,
         })
         .then((result) => {
-            // console.log(result.headers['x-ratelimit-used'], "orgs");
-            console.log(result.headers['x-ratelimit-limit'] - result.headers['x-ratelimit-remaining'], 'LimitOrgs');
-            res.json(result.data);
+            console.log(result, "userOrgs")
+            return Promise.all(extensions.getDetailedOrganizationPromises(result.data, octokit));
+        })
+        .then((result) => {
+            const orgs = result.map((response) => response.data);
+            // console.log(
+            //     orgs[orgs.length - 1].headers['x-ratelimit-limit'] -
+            //         orgs[orgs.length - 1].headers['x-ratelimit-remaining'],
+            //     'LimitOrgs'
+            // );
+            res.json(orgs);
         })
         .catch((err) => console.log(err, 'orgErr'));
 });
@@ -434,7 +442,7 @@ app.post('/repoIssuesCount', (req, res) => {
             per_page: 100,
         })
         .then((response) => {
-            res.json(extensions.getOpenClosed(response.data.filter(data => !data["pull_request"])));
+            res.json(extensions.getOpenClosed(response.data.filter((data) => !data['pull_request'])));
         })
         .catch((err) => console.log(err));
 });

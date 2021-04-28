@@ -4,14 +4,14 @@ export enum UserActivityType {
     PullRequestEvent = "PullRequestEvent",
     CreateEvent = "CreateEvent",
     ForkEvent = "ForkEvent",
-    IssuesEvent="IssuesEvent",
-    WatchEvent="WatchEvent"
+    IssuesEvent = "IssuesEvent",
+    WatchEvent = "WatchEvent"
 }
 export enum RepoActivityType {
     PushEvent = "PushEvent",
     PullRequestEvent = "PullRequestEvent",
-    PullRequestReviewEvent ="PullRequestReviewEvent",
-    IssuesEvent="IssuesEvent",
+    PullRequestReviewEvent = "PullRequestReviewEvent",
+    IssuesEvent = "IssuesEvent",
     // IssueCommentEvent="IssueCommentEvent"
 }
 
@@ -28,5 +28,10 @@ export enum Mouth {
     "Oct",
     "Nov",
     "Dec",
-  }
+}
+export enum PagePath {
+    "Main" = "/main",
+    "Repos" = "/repos",
+    "Compare" = "/compare",
+}
 

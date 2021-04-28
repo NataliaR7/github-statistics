@@ -100,6 +100,18 @@ function getDetailedRepositoryPromises(repos, user, octokit) {
     return res;
 }
 
+function getDetailedOrganizationPromises(orgs, octokit) {
+    let res = [];
+    for (let org of orgs) {
+        res.push(
+            octokit.request('GET /orgs/{org}', {
+                org: org.login
+            })
+        );
+    }
+    return res;
+}
+
 function getIssuesPromises(repos, user, octokit){
     let res = [];
     for (let i = 1; i < 3; i++)
@@ -179,6 +191,7 @@ module.exports = {
     getReposLanguagesPromise,
     parseIssues,
     getIssuesPromises,
-    getOpenClosed
+    getOpenClosed,
+    getDetailedOrganizationPromises,
 }
 

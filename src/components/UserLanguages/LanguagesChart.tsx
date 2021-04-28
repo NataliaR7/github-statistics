@@ -90,6 +90,15 @@ function LanguagesChart(props: PropType) {
                 },
             },
             responsive: [{
+                breakpoint: 1700,
+                options: {
+                    chart: {
+                        width: 450,
+                        height: 250
+                    },
+                },
+            },
+            {
                 breakpoint: 1500,
                 options: {
                     chart: {

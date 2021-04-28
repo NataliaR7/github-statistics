@@ -25,14 +25,13 @@
     margin-top: 2vh;
     font-size: 0.8vw;
     font-variant: small-caps;
-    /* color: #454545;
-    background-color: #dfdfdf; */
     color: #F4F4F4;
     background-color: #454545;
 }
 .submitButton:hover {
-   
-    /* background-color: #e2e2e2; */
     background-color: #535353;
-    /* border: #e2e2e2 solid 0.1vw; */
+}
+.submitButton:disabled{
+    background-color: #666666;
+    color: #aaaaaa;
 }

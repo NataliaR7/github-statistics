@@ -3,9 +3,13 @@ import getErrorSvg from "../../resources/errorSvg/errorSvg"
 import { useState, SetStateAction, Dispatch } from 'react';
 import { Redirect } from 'react-router';
 
+interface PropsType {
+    backPage?: Dispatch<SetStateAction<boolean>>;
+}
 
-function ErrorNotFound(props: { backPage?: Dispatch<SetStateAction<boolean>> }) {
+const ErrorNotFound: React.FC<PropsType> = props => {
     const [isBack, setIsBack] = useState(false);
+    
     return (
         <div className="errorNotFound">
             {isBack && !props.backPage && <Redirect to={`/nickname`} />}

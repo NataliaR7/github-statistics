@@ -1,7 +1,6 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import TabBar from '../components/TabBar/TabBar';
-import { navigateTo,  resetStore} from '../actionCreators';
+import { navigateTo } from '../actionCreators';
 import { RootState } from '../reducers';
 
 export default connect(

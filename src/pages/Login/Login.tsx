@@ -8,7 +8,7 @@ interface PropsType {
     isLoggedIn: boolean;
 }
 
-export default function Login(props: PropsType) {
+const Login: React.FC<PropsType> = props => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -49,3 +49,5 @@ export default function Login(props: PropsType) {
         </div>
     );
 }
+
+export default Login;

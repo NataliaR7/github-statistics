@@ -1,4 +1,3 @@
-
 .userAdditional {
     display: flex;
     flex-direction: column;
@@ -9,7 +8,6 @@
     max-width: 14vw;
     overflow: hidden;
 }
-
 
 .label {
     color: #989898;
@@ -36,6 +34,7 @@
     white-space: nowrap;
     max-width: 12vw;
 }
+
 a:hover {
     text-decoration: underline;
 }
@@ -54,7 +53,7 @@ a:hover {
     margin: 0.2vw 0.2vw;
     border: 0.1vw solid rgb(95, 95, 95);
     background-color: rgb(95, 95, 95);
-    cursor: pointer
+    cursor: pointer;
 }
 
 .small,

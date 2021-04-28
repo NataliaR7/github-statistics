@@ -1,13 +1,9 @@
 .nicknameInput {
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     width: 100vw;
     height: 100vh;
     background-color: #f4f4f4;
     display: grid;
     grid-template-rows: 0.5fr 1.2fr 15fr;
-    /* background-color: burlywood; */
 }
 
 .nicknameInput .headLogo {
@@ -18,27 +14,9 @@
     grid-row: 3;
     align-self: center;
     justify-self: center;
-    /* border-top: 0.2vw solid #F9DE59;
-    border-right: 0.2vw solid #E8A628;
-    border-bottom: 0.2vw solid #F98365;
-    border-left: 0.2vw solid #CDDA95;
-    border-radius: 10%; */
     border: #979797 solid 0.1vw;
     border-radius: 4vh;
     padding: 3vw;
     display: flex;
     flex-direction: column;
 }
-
-/* .hashLoader {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #454545;
-    gap: 2vw;
-    font-size: 1vw;
-} */
-

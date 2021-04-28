@@ -18,4 +18,4 @@ export const graphColors3 = ["#63a91f", "#c6dc93", "#b0d3bf", "#589d62","#1a512e
 export const graphColors4 = ["#5fa55aB3", "#01b4bcB3", "#f6d51fB3", "#fa8925B3","#fa5457B3", "#80575656"]
 export const graphColors = ["#008FFB", "#00E396", "#FEB019", "#FF4560","#775DD0", "#80575656"]
 export const graphColors6 = ["#A1DFFB", "#CDDA95", "#F98365", "#E8A628","#F9DE59", "#80575656"]
-export const graphColors7 = ["#FF0006B3", "#FFBF00B3", "#00FF11B3","#00FFE9B3", "#AD60FFB3", "#80575656"]
+export const graphColors7 = ["#00E396", "#FFBF00B3", "#FF0006B3","#00FFE9B3", "#AD60FFB3", "#80575656"]

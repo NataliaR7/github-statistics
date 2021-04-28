@@ -1,13 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import "./NicknameForm.css"
 
-function NicknameForm(props: { title: string, setNickname: (x: string) => void }) {
+interface PropsType {
+    title: string;
+    setNickname: (x: string) => void;
+}
+const NicknameForm: React.FC<PropsType> = props => {
+    const [isDisabled, setIsDisabled] = useState(true);
 
     return (
         <>
-            <span>{/* enter your github nickname */ props.title}</span>
-            <input className="inputForm" type="text"  onChange={(e) => props.setNickname(e.target.value) } />
-            <input className="submitButton" type="submit" value="ok" />
+            <span>{props.title}</span>
+            <input className="inputForm" type="text" onChange={(e) => {
+                const inputText = e.target.value;
+                if (inputText === '') {
+                    !isDisabled && setIsDisabled(true);
+                    return;
+                }
+                setIsDisabled(false);
+                props.setNickname(e.target.value)
+            }} />
+            <input className="submitButton" type="submit" value="ok" disabled={isDisabled} />
         </>
     );
 }
