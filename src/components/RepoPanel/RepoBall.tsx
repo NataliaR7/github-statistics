@@ -1,7 +1,7 @@
 import './RepoBall.css';
 import starSvg from '../../resources/starSvg';
 import linkSvg from '../../resources/linkSvg';
-import { getStylizedDate } from '../../generalLogic/repositoryLogic';
+import { getStylizedDate } from '../../extentions/extentions';
 import { useRef, useState } from 'react';
 import { Redirect } from 'react-router';
 import { cloneRepo } from '../../extentions/extentions';

@@ -17,7 +17,7 @@ interface PropsType {
 const UserHead: React.FC<PropsType> = props => {
     const data = props.data;
     return (
-        <div className="userHead">
+        <header className="userHead">
             <a href={data.userUrl} target="_blank"><img src={data.avatar} alt="avatar" /></a>
             <span className="username canSelect">{data.username}</span>
             <div className="separatorLine"></div>
@@ -30,7 +30,7 @@ const UserHead: React.FC<PropsType> = props => {
                 <span>{data.reposCount} public repositories</span>
                 <span>{data.forkCount} forks</span>
             </div>
-        </div>
+        </header>
     );
 }
 

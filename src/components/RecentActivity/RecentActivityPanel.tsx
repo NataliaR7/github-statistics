@@ -1,5 +1,5 @@
 import './UserRecentActivity.css';
-import UserActivityItem from './UserActivityItem';
+import ActivityItem from './ActivityItem';
 import { UserActivityType, RepoActivityType } from '../../resources/constants';
 import { useEffect, useState } from 'react';
 
@@ -77,10 +77,10 @@ function activityDataProcessing(activityData: any[], type: string) {
 function fillActivityItems(source: Map<number, Array<ActivityDataType>>, type: string) {
     const result: JSX.Element[] = [];
     for (let year of source.keys()) {
-        result.push(<span className="year">{year}</span>);
+        result.push(<span key={year} className="year">{year}</span>);
         const data = source.get(year)?.sort((a, b) => +b.date - +a.date);
         const topData = data?.slice(0, type === "user" ? 6 : 7);
-        topData?.forEach(e => result.push(<UserActivityItem groupData={e} type={type} />))
+        topData?.forEach((data, index) => result.push(<ActivityItem key={index} groupData={data} type={type}/>))
     }
 
     return result;

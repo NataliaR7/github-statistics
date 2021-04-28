@@ -6,12 +6,12 @@ export enum UserActivityType {
     IssuesEvent = "IssuesEvent",
     WatchEvent = "WatchEvent"
 }
+
 export enum RepoActivityType {
     PushEvent = "PushEvent",
     PullRequestEvent = "PullRequestEvent",
     PullRequestReviewEvent = "PullRequestReviewEvent",
     IssuesEvent = "IssuesEvent",
-    // IssueCommentEvent="IssueCommentEvent"
 }
 
 export enum Mouth {

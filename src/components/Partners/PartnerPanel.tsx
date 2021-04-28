@@ -1,4 +1,4 @@
-import './Partners.css';
+import './PartnerPanel.css';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import Contributor from './Contributor';
@@ -25,7 +25,7 @@ const PartnerPanel: React.FC<PropsType> = props => {
             setContributorsData(value => value = contributors.slice(0, contrCount <= 5 ? contrCount : 5));
             setIsLoadedData(true);
         });
-    }, []);
+    }, [props.username]);
 
     return (
         <div className="partnerPanel">
@@ -79,7 +79,7 @@ function isUsersEqual(firstUser: string, secondUser?: string) {
 
 function fillContributors(contributorsData: ContributorsDataType[]) {
     return contributorsData.map(people => {
-        return <Contributor data={people} />
+        return <Contributor data={people} key={people.url}/>
     });
 }
 

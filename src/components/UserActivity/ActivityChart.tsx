@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import ReactApexChart from 'react-apexcharts';
 import Chart from 'react-apexcharts'
 import { color, generalColor, graphColors, getRandomColor } from '../../resources/colors'
-import './UserActivity.css'
+import './ActivityChart.css'
 
 const dataLabels = {
     enabled: true, ///данные внизу столба

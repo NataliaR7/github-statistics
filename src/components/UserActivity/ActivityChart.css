@@ -1,0 +1,21 @@
+.userActivity {
+    color: #454545;
+    display: grid;
+    grid-template-rows: 0.5fr 6fr;
+    grid-template-areas:
+        'head'
+        'activityStatistics';
+}
+
+.userActivity .activityStatistics{
+    grid-area: activityStatistics;
+}
+
+.userActivity .head {
+    margin-top: 1vh;
+}
+.activityStatistics .backButton {
+    margin-right: 2.3vw;
+    display: flex;
+    align-items: center;
+}

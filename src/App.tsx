@@ -1,7 +1,7 @@
 import './App.css';
 import General from './pages/General/General';
 import NicknameInput from './containers/NicknameInput';
-import Login from './containers/Login';
+import Login from './pages/Login/Login';
 import ErrorNotFound from './pages/ErrorNotFound/ErrorNotFound';
 import { Provider } from 'react-redux';
 import {

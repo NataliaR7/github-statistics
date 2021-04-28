@@ -43,7 +43,7 @@ const UserPanel: React.FC<PropsType> = props => {
   }, []);
 
   return (
-    <div className="userPanel">
+    <article className="userPanel">
       {isLoadedData && <>
         <div
           title="change user"
@@ -53,12 +53,12 @@ const UserPanel: React.FC<PropsType> = props => {
         </div>
         <UserHead data={userData} />
         <UserAdditional data={userData} />
-        <div className="created">
+        <footer className="created">
           <span>created at</span>
-          <span>{`${userData.createdDate?.getDate() || ""}.${userData.createdDate?.getMonth() || ""}.${userData.createdDate?.getFullYear() || ""}`}</span>
-        </div>
+          <time>{`${userData.createdDate?.getDate() || ""}.${userData.createdDate?.getMonth() || ""}.${userData.createdDate?.getFullYear() || ""}`}</time>
+        </footer>
       </>}
-    </div>
+    </article>
   );
 }
 

@@ -3,8 +3,6 @@ import { rootReducer } from './reducers';
 
 type StateType = {
     activePage: string,
-    isLoggedIn: boolean,
-    currentNickname: string,
     activeRepoId: number,
     isRepoActive: boolean,
     currentReposPage: number,
@@ -13,8 +11,6 @@ type StateType = {
 
 export const preloadedState: StateType = {
     activePage: "/main",
-    isLoggedIn: false,
-    currentNickname: "",
     activeRepoId: 0,
     isRepoActive: false,
     currentReposPage: 1,

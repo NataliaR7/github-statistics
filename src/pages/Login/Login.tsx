@@ -4,24 +4,20 @@ import { Redirect } from "react-router-dom";
 import HeadLogo from '../../components/HeadLogo/HeadLogo';
 import getGitHubLogo from "../../resources/githubSvg";
 
-interface PropsType {
-    isLoggedIn: boolean;
-}
-
-const Login: React.FC<PropsType> = props => {
+const Login: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         getToken().then((res: any) => {
             if (!res) return;
-            if (res.ok && !props.isLoggedIn) {
+            if (res.ok) {
                 setIsLoading(true);
             }
         });
     }, [isLoading]);
 
     return (
-        <div className="login">
+        <main className="login">
             {isLoading && <Redirect to="/nickname" />}
             <HeadLogo />
             <div className="welcomeForm" >
@@ -32,7 +28,7 @@ const Login: React.FC<PropsType> = props => {
                     <span>login with github</span>
                 </a>
             </div>
-        </div>
+        </main>
     );
 }
 

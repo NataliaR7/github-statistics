@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
-import RepoBall from '../components/UserRepositories/RepoBall';
+import RepoBall from '../components/RepoPanel/RepoBall';
 import { setRepoActive } from '../stateManage/actionCreators';
 import { RootState } from '../stateManage/reducers';
 
 export default connect(
-    (state: RootState, props) => ({
+    (state: RootState) => ({
         isRepoActive: state.isRepoActive
     }),
-    (dispatch, props) => ({
+    (dispatch) => ({
         selectRepo: (value: number) => dispatch(setRepoActive(value))
     })
 )(RepoBall);

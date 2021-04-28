@@ -12,7 +12,7 @@ const Contributor: React.FC<PropsType> = props => {
     const data = props.data;
     return (
         <div className="partner" key={data.url}>
-            <a href={data.url} target="_blank">
+            <a href={data.url} target="_blank" rel="noreferrer">
                 <img src={data.avatar} alt="partnerAvatar"></img>
             </a>
             <span className="canSelect">{data.name}</span>

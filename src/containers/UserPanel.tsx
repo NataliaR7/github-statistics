@@ -1,13 +1,10 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import UserPanel from '../components/UserPanel/UserPanel';
-import { setCompareNickname} from '../stateManage/actionCreators';
-import { RootState } from '../stateManage/reducers';
+import { setCompareNickname } from '../stateManage/actionCreators';
 
 export default connect(
-    (state: RootState, props) => ({
-    }),
-    (dispatch, props) => ({
+    () => ({}),
+    (dispatch) => ({
         setCompareNickname: (value: string) => dispatch(setCompareNickname(value))
     })
 )(UserPanel);

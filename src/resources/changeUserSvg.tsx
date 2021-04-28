@@ -1,7 +1,7 @@
-function changeUserSvg() {
+export default function changeUserSvg() {
     return (
-        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" /* data-tooltip="Всплывающая подсказка" */  /* width="300" height="300" */ viewBox="0 0 300.000000 300.000000" preserveAspectRatio="xMidYMid" /*style={{ width: "256px", height: "256px" }} */>
-            <g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)" /* fill="#343434" */ stroke="none">
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300.000000 300.000000" preserveAspectRatio="xMidYMid">
+            <g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)" stroke="none">
                 <path d="M1330 2993 c-372 -50 -721 -254 -942 -553 -104 -141 -188 -312 -224
 -455 -9 -33 -20 -77 -25 -97 -34 -137 -26 -447 16 -606 36 -135 38 -126 -20
 -132 -57 -7 -89 -24 -104 -57 -30 -65 -9 -95 123 -180 55 -36 152 -99 214
@@ -27,6 +27,4 @@ function changeUserSvg() {
         </svg>
     );
 }
-
-export default changeUserSvg;
 

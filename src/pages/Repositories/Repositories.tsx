@@ -3,7 +3,7 @@ import RepositoryItem from "../../containers/RepositoryItem";
 import Repository from '../../containers/Repository';
 import NavigationPagePanel from '../../containers/NavigationPagePanel';
 import { useEffect, useState } from 'react';
-import { sortReposData } from '../../generalLogic/repositoryLogic';
+import { sortReposData } from '../../extentions/extentions';
 import Loader from '../../components/Loader/Loader';
 
 interface PropsType {
@@ -30,26 +30,20 @@ interface RepoDataType {
 const Repositories: React.FC<PropsType> = props => {
     const [repoData, setRepoData] = useState<Array<RepoDataType>>([]);
     const [isLoadedData, setIsLoadedData] = useState(false);
-    const [isStartLoader, setIsStartLoader] = useState(false);
 
     useEffect(() => {
-        delayToLoader();
         loadReposData().then((res) => {
             setRepoData(repoData => repoData = res);
             setIsLoadedData(true);
         });
     }, []);
 
-    const delayToLoader = () => {
-        setTimeout(() => setIsStartLoader(true), 100);
-    }
-
     return (
         <div className="repositoriesContent">
             {props.isRepoActive
                 ? <Repository />
                 : <div className="repositoriesPage">
-                    {!isLoadedData && isStartLoader && <Loader withoutLabel={true} />}
+                    {!isLoadedData && <Loader withoutLabel={true} delay={100} />}
                     {isLoadedData && (repoData.length === 0
                         ? <span className="warning">This user has no repositories</span>
                         : <>
@@ -98,7 +92,7 @@ function fillRepositoryItems(repoData: RepoDataType[], currentPage: number) {
         if (i >= repoData.length) {
             break;
         }
-        result.push(<RepositoryItem data={repoData[i]} />);
+        result.push(<RepositoryItem data={repoData[i]} key={repoData[i].id} />);
     }
     return result;
 }

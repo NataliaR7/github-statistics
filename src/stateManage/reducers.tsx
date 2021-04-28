@@ -11,21 +11,16 @@ export const rootReducer = (state?: RootState, action?: any)  => {
 }
 
 const appReducer = combineReducers({
-    //userHead: userHeadReducer,
     activePage: tabsReducer,
-    isLoggedIn: loginReducer,
-    currentNickname: nicknameReducer,
     activeRepoId: repoIdReducer,
     isRepoActive: repoActiveReducer,
     currentReposPage: repoPageReducer,
     compareNickname: compareNicknameReducer,
 });
 
-type actionType = {
+interface actionType {
     type: string;
     activePage: string;
-    isLoggedIn: boolean;
-    currentNickname: string;
     activeRepoId: number;
     isRepoActive: boolean;
     currentReposPage: number;
@@ -43,21 +38,6 @@ function tabsReducer(state = '/main', action: actionType) {
     return state;
 }
 
-function loginReducer(state = false, action: actionType) {
-    switch (action.type) {
-        case actionTypes.LOGIN:
-            return action.isLoggedIn;
-    }
-    return state;
-}
-
-function nicknameReducer(state = "", action: actionType) {
-    switch (action.type) {
-        case actionTypes.CHANGE_CURR_NICKNAME:
-            return action.currentNickname;
-    }
-    return state;
-}
 function repoIdReducer(state = 0, action: actionType) {
     switch (action.type) {
         case actionTypes.SET_REPO_ACTIVE: {

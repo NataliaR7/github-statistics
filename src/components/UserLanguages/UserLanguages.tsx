@@ -14,46 +14,41 @@ type PropType = {
   height?: string,
   legendPosition?: string,
   username?: string,
-  reposName?: string,
-  isComparetion?: boolean
+  reposName?: string
 };
 
-function formatLanguageBytes(value: number){
+function formatLanguageBytes(value: number) {
   if (value > 1024 * 1024)
-      return `${(value / (1024 * 1024)).toFixed(1)}MB`
+    return `${(value / (1024 * 1024)).toFixed(1)}MB`
   if (value > 1024)
-      return `${(value / 1024).toFixed(1)}KB`
+    return `${(value / 1024).toFixed(1)}KB`
   return `${value}B`
 }
 
 
 
 function UserLanguages(props: PropType) {
-  let [data, setData] = useState<{[key: string]: number}>({})
+  let [data, setData] = useState<{ [key: string]: number }>({})
 
 
 
   function getLanguagesPromise(data: PropType) {
-      if (data.reposName) {
-          return fetch(`/reposlangs`, {
-              method: "POST",
-              headers: {
-                  'Content-Type': 'application/json;charset=utf-8',
-              },
-              body: JSON.stringify({ reposName: props.reposName })
-          })
-      }
-      const queryUsername = props.username ? "?username=" + props.username : "";
-      // const repositories = await fetch(`/lang${queryUsername}`);
-      return fetch(`/userlangs${queryUsername}`);
+    if (data.reposName) {
+      return fetch(`/reposlangs`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify({ reposName: props.reposName })
+      })
+    }
+    const queryUsername = props.username ? "?username=" + props.username : "";
+    return fetch(`/userlangs${queryUsername}`);
   }
 
   async function getLanguagesStatistic() {
-      const languages = await (await getLanguagesPromise(props)).json()
-
-
-      console.log(languages, "LANG");
-      setData(languages)
+    const languages = await (await getLanguagesPromise(props)).json()
+    setData(languages)
   }
 
   useEffect(() => {
@@ -61,10 +56,8 @@ function UserLanguages(props: PropType) {
   }, [])
 
   return (
-    <div className="userLanguages">
-      <div className="langStatistics">
-      <LanguagesChart data={data}  width={props.width} height={props.height} tooltipFormater={formatLanguageBytes}/>
-      </div>
+    <div className="langStatistics">
+      <LanguagesChart data={data} width={props.width} height={props.height} tooltipFormater={formatLanguageBytes} />
     </div>
   );
 }

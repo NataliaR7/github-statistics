@@ -16,7 +16,7 @@ const TabBar: React.FC<PropsType> = props => {
   }
 
   return (
-    <div className="tabBar">
+    <header className="tabBar">
       {isBack && <Redirect to="/nickname" />}
       <div className="lineBar"></div>
       <div className="lineBar"></div>
@@ -25,7 +25,7 @@ const TabBar: React.FC<PropsType> = props => {
       <Tab title={"COMPARATION"} path={PagePath.Compare} isActive={isActive(PagePath.Compare)} />
       <Redirect to={props.activePage} />
       <button onClick={() => setIsBack(true)}>Change user</button>
-    </div>
+    </header>
   );
 }
 

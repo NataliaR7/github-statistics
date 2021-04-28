@@ -1,8 +1,8 @@
-import './UserRepositories.css';
+import './RepoPanel.css';
 import RepoBall from '../../containers/RepoBall';
-import RepoSquare from '../../components/UserRepositories/RepoSquare';
+import RepoSquare from './RepoSquare';
 import { useEffect, useState } from 'react';
-import { sortReposData } from '../../generalLogic/repositoryLogic';
+import { sortReposData } from '../../extentions/extentions';
 
 interface PropsType {
     type: "ball" | "square";
@@ -69,8 +69,8 @@ function fillRepos (repoData: RepoDataType[], type: string) {
     const result = [];
     for (let i = 0; i < 5; i++) {
         type === "ball"
-            ? repoData[i] && result.push(<RepoBall data={repoData[i]} />)
-            : repoData[i] && result.push(<RepoSquare data={repoData[i]} />);
+            ? repoData[i] && result.push(<RepoBall data={repoData[i]} key={repoData[i].id} />)
+            : repoData[i] && result.push(<RepoSquare data={repoData[i]} key={repoData[i].id} />);
     }
     return result;
 }

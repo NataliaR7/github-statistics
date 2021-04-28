@@ -1,7 +1,7 @@
-function getOpenIssuesIcon() {
+export default function getOpenIssuesIcon() {
     return (
         <svg version="1.1" className="openIssuesIcon" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            viewBox="0 0 512 550" fill="#23A63C" /* style="enable-background:new 0 0 512 512;" */ xmlSpace="preserve">
+            viewBox="0 0 512 550" fill="#23A63C" xmlSpace="preserve">
             <g>
                 <g>
                     <path d="M256,0C114.497,0,0,114.507,0,256c0,141.503,114.507,256,256,256c141.503,0,256-114.507,256-256
@@ -23,6 +23,4 @@ function getOpenIssuesIcon() {
         </svg>
     );
 }
-
-export default getOpenIssuesIcon;
 

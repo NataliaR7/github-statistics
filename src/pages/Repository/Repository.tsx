@@ -2,16 +2,15 @@ import "./Repository.css";
 import { Redirect } from "react-router-dom";
 import React, { useEffect, useState, useRef } from 'react';
 import RepositoryMainInfo from './RepositoryMainInfo';
-import RecentActivityPanel from '../../components/UserRecentActivity/RecentActivityPanel';
-import LanguagesChart from "../../components/UserLanguages/LanguagesChart";
+import RecentActivityPanel from '../../components/RecentActivity/RecentActivityPanel';
 import UserLanguages from '../../components/UserLanguages/UserLanguages';
 import IssuesPullsStat from "../../components/ReposIssues/IssuesItem";
-import IssueBar from "./IssueBar";
+import IssueBar from "../../components/IssueBar/IssueBar";
 import Loader from "../../components/Loader/Loader";
 import linkSvg from '../../resources/linkSvg';
-import { getStylizedDate } from '../../generalLogic/repositoryLogic';
+import { getStylizedDate } from '../../extentions/extentions';
 import { cloneRepo } from '../../extentions/extentions';
-import Head from "../../components/Head/Head";
+import Head from "../../components/Title/Title";
 
 interface PropsType {
     activeRepoId: number;
@@ -63,11 +62,10 @@ const Repository: React.FC<PropsType> = props => {
                         <div className="languageRepo">
                             <Head title="languages" />
                             <UserLanguages reposName={repoData.name} width={"450"} height={"250"} />
-                            {/* <LanguagesChart reposName={repoData.name} width={"450"} height={"250"} /> */}
                         </div>
                         <div className="issueAvgRepo">
                             <Head title="pull request and issue closings statistics" />
-                            <IssuesPullsStat reposName={repoData.name} width={"450"} height={"250"} />
+                            <IssuesPullsStat reposName={repoData.name} width={"460"} height={"240"} />
                         </div>
                         <div className="activityRepo">
                             <Head title="recent activity" />

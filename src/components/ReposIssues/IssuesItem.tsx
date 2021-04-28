@@ -1,7 +1,4 @@
 import { useEffect, useState } from 'react';
-import { color, generalColor, graphColors7 } from '../../resources/colors'
-import Chart from 'react-apexcharts';
-import { GetLablesAndValues } from "../../extentions/extentions"
 import LanguagesChart from "../UserLanguages/LanguagesChart"
 import "./IssuesItem.css"
 

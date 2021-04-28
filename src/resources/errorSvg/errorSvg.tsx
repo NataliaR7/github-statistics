@@ -1,11 +1,9 @@
 import "./errorSvg.css"
 
-function getErrorSvg() {
+export default function getErrorSvg() {
 	return (
 		<svg width="30vw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4657.86 3085.23">
 			<defs>
-				{/* <style>.cls-1{isolation:isolate;}.cls-2{fill:#fff;}.cls-3{fill:#f4dd7a;}.cls-4{fill:#3a2409;}.cls-5{fill:#e0e0e0;}.cls-6{fill:#231f20;mix-blend-mode:overlay;}.cls-7{fill:#7a6f6f;}.cls-8{fill:#e23b3b;}.cls-9{fill:#fce332;}.cls-10{fill:#46cc46;}.cls-11{fill:#60bc4a;}.cls-12{fill:#a5e291;}.cls-13{fill:#479b2f;}.cls-14{fill:#ffbc27;}.cls-15{fill:none;stroke:#3a2409;stroke-linecap:round;stroke-linejoin:round;stroke-width:25px;}.cls-16{fill:#bc2626;}
-		</style> */}
 			</defs>
 			<title>РњРѕРЅС‚Р°Р¶РЅР°СЏ РѕР±Р»Р°СЃС‚СЊ 20</title>
 			<g className="cls-1"><g id="Layer_1" data-name="Layer 1">
@@ -29,6 +27,4 @@ function getErrorSvg() {
 		</svg>
 	);
 }
-
-export default getErrorSvg;
 

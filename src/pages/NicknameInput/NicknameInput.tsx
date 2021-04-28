@@ -6,12 +6,11 @@ import NicknameForm from '../../components/NicknameForm/NicknameForm';
 import Loader from '../../components/Loader/Loader';
 
 interface PropsType {
-  currentNickname: string;
-  setNickname: (x: string) => void;
   resetStore: () => void;
 }
 
 const NicknameInput: React.FC<PropsType> = props => {
+  const [currentUserName, setCurrentUserName] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isLoadingData, setIsLoadingData] = useState(false);
@@ -27,7 +26,7 @@ const NicknameInput: React.FC<PropsType> = props => {
           <form action="" method="post" className="loginForm" onSubmit={(e) => {
             e.preventDefault();
             props.resetStore();
-            checkUserExist(props.currentNickname)
+            checkUserExist(currentUserName)
               .then((response) => {
                 if (response.status === 404) {
                   setIsError(true);
@@ -38,7 +37,7 @@ const NicknameInput: React.FC<PropsType> = props => {
                   .then(() => setIsLoadingData(true));
               });
           }}>
-            <NicknameForm title="enter github nickname" setNickname={props.setNickname} />
+            <NicknameForm title="enter github nickname" setNickname={setCurrentUserName} />
           </form>
         </>
       }

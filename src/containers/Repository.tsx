@@ -4,11 +4,11 @@ import { RootState } from '../stateManage/reducers';
 import { deactiveteRepo } from '../stateManage/actionCreators';
 
 export default connect(
-    (state: RootState, props) => ({
+    (state: RootState) => ({
         activeRepoId: state.activeRepoId,
         isRepoActive: state.isRepoActive
     }),
-    (dispatch, props) => ({
+    (dispatch) => ({
         deactiveteRepo: () => dispatch(deactiveteRepo()),
     })
 )(Repository);

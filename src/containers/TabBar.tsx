@@ -4,10 +4,10 @@ import { navigateTo } from '../stateManage/actionCreators';
 import { RootState } from '../stateManage/reducers';
 
 export default connect(
-    (state: RootState, props) => ({
+    (state: RootState) => ({
         activePage: state.activePage,
     }),
-    (dispatch, props) => ({
+    (dispatch) => ({
         onNavigate: (value: string) => dispatch(navigateTo(value))
     })
 )(TabBar);

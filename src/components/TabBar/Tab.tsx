@@ -6,16 +6,18 @@ interface PropsType {
     path: string;
     isActive: boolean;
     onNavigate: (e: string) => void;
+    deactiveteRepo: () => void;
 }
 
 const Tab: React.FC<PropsType> = props => {
     return (
-        <div className={`tab ${props.isActive && 'active'}`} onClick={() => {
+        <nav className={`tab ${props.isActive && 'active'}`} onClick={() => {
+            props.path !== PagePath.Repos && props.deactiveteRepo();
             props.onNavigate && props.onNavigate(props.path);
         }}>
             {props.title}
             <div className="line" style={{ backgroundColor: tabColors[props.path] }}></div>
-        </div>
+        </nav>
     );
 }
 

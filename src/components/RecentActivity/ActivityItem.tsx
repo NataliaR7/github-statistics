@@ -20,7 +20,7 @@ interface ActivityContentType {
     date: Date;
 }
 
-const UserActivityItem: React.FC<PropsType> = props => {
+const ActivityItem: React.FC<PropsType> = props => {
     const [actContent, setActContent] = useState<ActivityContentType>(activityContentDefault);
     const [isFill, setIsFill] = useState(false);
 
@@ -195,4 +195,4 @@ function getStylizedDate(date: Date) {
     return `${Mouth[date.getMonth()]} ${date.getDate()}`
 }
 
-export default UserActivityItem;
+export default ActivityItem;

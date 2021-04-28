@@ -2,7 +2,7 @@ import "./RepositoryItem.css";
 import getForksIcon from "../../resources/forksSvg";
 import getWatchIcon from "../../resources/watchSvg";
 import getStarLogo from "../../resources/starSvg";
-import { getStylizedDate } from '../../generalLogic/repositoryLogic';
+import { getStylizedDate } from '../../extentions/extentions';
 import { getRandomColor } from '../../resources/colors';
 import { languageColors } from '../../resources/constants';
 

@@ -1,14 +1,14 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import Tab from '../components/TabBar/Tab';
-import { navigateTo } from '../stateManage/actionCreators';
+import { navigateTo, deactiveteRepo } from '../stateManage/actionCreators';
 import { RootState } from '../stateManage/reducers';
 
 export default connect(
-    (state: RootState, props) => ({
+    (state: RootState) => ({
         activePage: state.activePage,
     }),
-    (dispatch, props) => ({
+    (dispatch) => ({
         onNavigate: (value: string) => dispatch(navigateTo(value)),
+        deactiveteRepo: () => dispatch(deactiveteRepo())
     })
 )(Tab);

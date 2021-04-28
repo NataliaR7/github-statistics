@@ -1,7 +1,7 @@
 import './RepoSquare.css';
 import starSvg from '../../resources/starSvg';
 import linkSvg from '../../resources/linkSvg';
-import { getStylizedDate } from '../../generalLogic/repositoryLogic';
+import { getStylizedDate } from '../../extentions/extentions';
 import { useRef } from 'react';
 import { cloneRepo } from '../../extentions/extentions';
 

@@ -15,7 +15,7 @@ const NavigationPagePanel: React.FC<PropsType> = props => {
     }, [props.currentReposPage]);
 
     return (
-        <div className="navigationPagePanel">
+        <nav className="navigationPagePanel">
             <button className="prevButton" onClick={() => props.setCurrentPage(props.currentReposPage > 1 ? props.currentReposPage - 1 : 1)}>
                 {"< Previous"}
             </button>
@@ -30,7 +30,7 @@ const NavigationPagePanel: React.FC<PropsType> = props => {
                 const lastPage = props.pageCount;
                 props.setCurrentPage(props.currentReposPage < lastPage ? props.currentReposPage + 1 : lastPage);
             }}>{"Next >"}</button>
-        </div>
+        </nav>
     );
 }
 
@@ -48,21 +48,21 @@ function setNavigationPagePanel(currentPage: number, pageCount: number) {
     const result = [];
     if (pageCount > 10 && currentPage < 6) {
         result.push(...fillNavigationButtons(1, 6));
-        result.push(<span>{"..."}</span>);
-        result.push(<button>{pageCount}</button>);
+        result.push(<span key={"points"}>{"..."}</span>);
+        result.push(<button key={`${result.length}`}>{pageCount}</button>);
         return result;
     }
     if (pageCount > 10 && currentPage >= 6 && currentPage < pageCount - 3) {
-        result.push(<button className="activePage">{1}</button>);
-        result.push(<span>{"..."}</span>);
+        result.push(<button className="activePage" key={`${result.length}`}>{1}</button>);
+        result.push(<span key={`${result.length}`}>{"..."}</span>);
         result.push(...fillNavigationButtons(currentPage - 2, currentPage + 2));
-        result.push(<span>{"..."}</span>);
-        result.push(<button>{pageCount}</button>);
+        result.push(<span key={`points`}>{"..."}</span>);
+        result.push(<button key={`${pageCount + 1}`}>{pageCount}</button>);
         return result;
     }
     if (pageCount > 10 && currentPage >= pageCount - 4) {
-        result.push(<button className="activePage">{1}</button>);
-        result.push(<span>{"..."}</span>);
+        result.push(<button className="activePage" key={`${result.length}`}>{1}</button>);
+        result.push(<span key={`${result.length}`}>{"..."}</span>);
         result.push(...fillNavigationButtons(pageCount - 4, pageCount));
         return result;
     }
@@ -74,10 +74,10 @@ function fillNavigationButtons(to: number, from: number) {
     const result = [];
     for (let i = to; i <= from; i++) {
         if (i === 1) {
-            result.push(<button className="activePage">{i}</button>);
+            result.push(<button className="activePage" key={`${i}`}>{i}</button>);
             continue;
         }
-        result.push(<button>{i}</button>);
+        result.push(<button key={i}>{i}</button>);
     }
     return result;
 }
