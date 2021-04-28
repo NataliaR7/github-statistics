@@ -1,10 +1,6 @@
 function addRepositoriesToDatabase(database, username, repositories, eTags, isUserExist) {
-    // console.log(isUserExist, "response4")
     if (isUserExist) {
         database.updateUserRepositories(username, repositories, eTags);
-    } else {
-        //database.insertUserRepositories(username, repositories)
-        console.log('НЕ ХОДИ СЮДА');
     }
 }
 
@@ -78,9 +74,6 @@ function getContributorsPromises(repos, user, octokit) {
                     username: user,
                     reposName: rep.name
                 })
-                /* .catch((err) => {
-                    console.log(err, 'ERR_CONTR');
-                }) */
         );
     }
     return res;
@@ -138,8 +131,6 @@ function parseIssuesData(data){
         let closingTimeInDays = getDatesDifferenceInDays(dateOpen, dateClose)     
         if (closingTimeInDays <= daysInWeek)
              updateIssuesStatistics(issuesStat, "Less then week")
-        
-          
         else if (closingTimeInDays <= daysInMonth)
             updateIssuesStatistics(issuesStat, "Less then month")
         else 
@@ -165,6 +156,21 @@ function getOpenClosed(responseData){
             closed += 1
     }
     return {open, closed}
+}
+
+function getUserReposPromises(user, octokit, pageCount, currEtag){
+    let res = []
+    for (let i = 1; i <= pageCount; i++){
+        res.push(octokit.request('GET /users/{username}/repos', {
+            username: user,
+            per_page: 100,
+            headers: {
+                'If-None-Match': currEtag,
+            },
+            page: i
+        }))
+    }
+    return res
 }
 
 function getDatesDifferenceInDays(dateOpen, dateClose){
@@ -193,5 +199,6 @@ module.exports = {
     getIssuesPromises,
     getOpenClosed,
     getDetailedOrganizationPromises,
+    getUserReposPromises,
 }
 

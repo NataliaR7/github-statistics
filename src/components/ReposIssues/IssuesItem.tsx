@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { color, generalColor, graphColors7 } from '../../resources/colors'
 import Chart from 'react-apexcharts';
 import { GetLablesAndValues } from "../../extentions/extentions"
-import LanguagesChart from "../UserLanguages/LanguagesChart"
+import PieChart from '../Charts/PieChart'
 import "./IssuesItem.css"
 
 
@@ -10,7 +10,7 @@ interface IssuesStatistics {
   [key: string]: number
 }
 
-type PropType = {
+interface PropType {
   reposName: string,
   width?: string,
   height?: string,
@@ -39,7 +39,8 @@ function IssuesPullsStat(props: PropType) {
     <div className="userIssues">
       <div className="issuesStatistics">
         {issuesStatistics && <>
-          <LanguagesChart data={issuesStatistics} width={props.width} height={props.height} />
+          <PieChart data={issuesStatistics} width={props.width} height={props.height}
+           noDataLabel="No closed issues and requests" colors={graphColors7}/>
         </>}
       </div>
     </div>

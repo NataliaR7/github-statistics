@@ -6,7 +6,7 @@ import { color, generalColor, graphColors, getRandomColor } from '../../resource
 import './UserActivity.css'
 
 const dataLabels = {
-    enabled: true, ///данные внизу столба
+    enabled: true,
     formatter: function (val: number) {
         return val === 0 ? "" : val
     },
@@ -33,7 +33,7 @@ const responsive = [{
 const plotOptions = {
     bar: {
         dataLabels: {
-            position: 'top', // top, center, bottom
+            position: 'top',
         },
     }
 }
@@ -44,32 +44,12 @@ const xaxis = (xaxisData: string[]) => {
         position: 'bottom',
         labels: {
             show: true,
-            style: {/// параметры верхних лейблов
+            style: {
                 colors: "#646464",
                 fontSize: '0.8em',
                 fontFamily: 'Segoe UI, Roboto',
-                // fontWeight: 400,
-                // cssClass: 'apexcharts-xaxis-label',
             },
         },
-        // axisBorder: {
-        //   show: false
-        // },
-        // axisTicks: {
-        //   show: false
-        // },
-        // crosshairs: {
-        //   fill: {
-        //     type: 'gradient',
-        //     gradient: {
-        //       colorFrom: '#D8E3F0',
-        //       colorTo: '#BED1E6',
-        //       stops: [0, 100],
-        //       opacityFrom: 0.4,
-        //       opacityTo: 0.5,
-        //     }
-        //   }
-        // },
         tooltip: {
             enabled: false,
         },
@@ -86,9 +66,6 @@ const yaxis = {
     },
     labels: {
         show: true,
-        // formatter: function (val: string) {
-        //   return val + "%";
-        // }
     },
 
 }
@@ -130,21 +107,21 @@ function getСolumnColor(value: number) {
     }
 }
 
-type series = {
+interface Series {
     name: string,
     data: number[]
 }
 
-type mainData = {
+interface MainData {
     xaxisData: string[],
-    series: series[]
+    series: Series[]
 }
 
 
 function ActivityChart(props: { data?: { [key: string]: number }, username?: string }) {
     let [data, setData] = useState<{ [key: string]: any }>({})
-    let [tempSeries, setTempSeries] = useState<mainData>()
-    let [mainData, setMainData] = useState<mainData>()
+    let [tempSeries, setTempSeries] = useState<MainData>()
+    let [mainData, setMainData] = useState<MainData>()
     let [isMainChart, setIsMainChart] = useState<boolean>(true)
 
     const options = (xaxisData: string[]) => {
@@ -183,10 +160,8 @@ function ActivityChart(props: { data?: { [key: string]: number }, username?: str
                 events: {
                     dataPointSelection: function (e: any, chart: any, opts: any) {
                         let dataPoints = chart.w.globals.selectedDataPoints
-                        // console.log(dataPoints)
                         for (let point of dataPoints) {
                             if (point && point.length !== 0 && isMainChart) {
-                                // console.log(point)
                                 let month = Object.keys(data)[point[0]]
                                 let ser = getTempSeries(data[month])
                                 setIsMainChart(false)
@@ -194,28 +169,15 @@ function ActivityChart(props: { data?: { [key: string]: number }, username?: str
                             }
                         }
                     },
-                    mounted: function (chartContext: any, config: any) {
-                        setTimeout(() => {
-                            // console.log(chartContext);
-                            // console.log(config.config.chart.width);
-                            // config.config.chart.width = "50%";
-                            // console.log(chartContext);
-                            // console.log(config.config.chart.width);
-                            // chartContext.width = '80%'
-                            // config.width = '70%'
-                        }, 1)
-                    }
                 }
             },
             responsive: responsive,
             plotOptions: plotOptions,
             fill: {
-                opacity: 1,     //прозрачность столбов
-            },
+                opacity: 1,            },
             colors: [function (data: { value: number, seriesIndex: number, w: any }) {
-
                 return getСolumnColor(data.value);
-            }],//цвет столбиков(если несколько - то для каждого отдельно)    
+            }],  
             dataLabels: dataLabels,
             xaxis: xaxis(xaxisData),
             yaxis: yaxis,
@@ -223,12 +185,6 @@ function ActivityChart(props: { data?: { [key: string]: number }, username?: str
                 position: 'right',
                 offsetY: 40
             },
-            // bar: {
-            //   dataLabels: {
-            //     position: 'top'
-            //   }
-            // },
-            // title: title
         }
     }
 
@@ -247,17 +203,14 @@ function ActivityChart(props: { data?: { [key: string]: number }, username?: str
     function backToMainChart() {
         if (!isMainChart) {
             setIsMainChart(true)
-            // console.log("back only if need")
         }
     }
     const chartHeight = "100%"
-    // let parsedData = GetLablesAndSeries(data);
     return (
         <div className="activityStatistics">
             {isMainChart
                 ? mainData && <Chart type="bar" height={chartHeight} width={chartHeight} options={options(mainData.xaxisData)} series={mainData.series} />
                 : tempSeries && <>
-                    {/* <button className="backButton" onClick={backToMainChart}>back</button> */}
                     <Chart type="bar" height={chartHeight} options={options(tempSeries.xaxisData)} series={tempSeries.series} />
                 </>
             }

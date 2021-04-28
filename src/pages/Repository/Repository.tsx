@@ -3,7 +3,6 @@ import { Redirect } from "react-router-dom";
 import React, { useEffect, useState, useRef } from 'react';
 import RepositoryMainInfo from './RepositoryMainInfo';
 import RecentActivityPanel from '../../components/UserRecentActivity/RecentActivityPanel';
-import LanguagesChart from "../../components/UserLanguages/LanguagesChart";
 import UserLanguages from '../../components/UserLanguages/UserLanguages';
 import IssuesPullsStat from "../../components/ReposIssues/IssuesItem";
 import IssueBar from "./IssueBar";

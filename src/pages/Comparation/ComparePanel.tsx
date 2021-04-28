@@ -1,6 +1,5 @@
 import './ComparePanel.css';
 import ActivityChart from '../../components/UserActivity/ActivityChart';
-import LanguagesChart from '../../components/UserLanguages/LanguagesChart';
 import RecentActivityPanel from '../../components/UserRecentActivity/RecentActivityPanel';
 import PartnerPanel from '../../components/Partners/PartnerPanel';
 import RepoPanel from '../../components/UserRepositories/RepoPanel';
@@ -50,8 +49,8 @@ function getCompareContent(location: string, currentState: number, compareName?:
         }
         case 1: {
             return location === "left" 
-                ? <UserLanguages width="530" height="300" isComparetion={true} />
-                : <UserLanguages username={compareName} width="530" height="300" isComparetion={true} />
+                ? <UserLanguages width="530" height="300" />
+                : <UserLanguages username={compareName} width="530" height="300" />
         }
         case 2: {
             return location === "left"

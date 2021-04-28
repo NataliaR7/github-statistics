@@ -2,20 +2,15 @@ import { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import './UserLanguages.css';
 import { color, generalColor, graphColors } from '../../resources/colors'
-import LanguagesChart from './LanguagesChart'
-
-type LanguageData = {
-  [key: string]: number;
-}
+import PieChart from '../Charts/PieChart'
 
 
-type PropType = {
+interface PropType {
   width?: string,
   height?: string,
   legendPosition?: string,
   username?: string,
   reposName?: string,
-  isComparetion?: boolean
 };
 
 function formatLanguageBytes(value: number){
@@ -26,13 +21,6 @@ function formatLanguageBytes(value: number){
   return `${value}B`
 }
 
-
-
-function UserLanguages(props: PropType) {
-  let [data, setData] = useState<{[key: string]: number}>({})
-
-
-
   function getLanguagesPromise(data: PropType) {
       if (data.reposName) {
           return fetch(`/reposlangs`, {
@@ -40,19 +28,21 @@ function UserLanguages(props: PropType) {
               headers: {
                   'Content-Type': 'application/json;charset=utf-8',
               },
-              body: JSON.stringify({ reposName: props.reposName })
+              body: JSON.stringify({ reposName: data.reposName })
           })
       }
-      const queryUsername = props.username ? "?username=" + props.username : "";
-      // const repositories = await fetch(`/lang${queryUsername}`);
+      const queryUsername = data.username ? "?username=" + data.username : "";
       return fetch(`/userlangs${queryUsername}`);
   }
 
+
+
+function UserLanguages(props: PropType) {
+  let [data, setData] = useState<{[key: string]: number}>({})
+
+
   async function getLanguagesStatistic() {
       const languages = await (await getLanguagesPromise(props)).json()
-
-
-      console.log(languages, "LANG");
       setData(languages)
   }
 
@@ -63,7 +53,8 @@ function UserLanguages(props: PropType) {
   return (
     <div className="userLanguages">
       <div className="langStatistics">
-      <LanguagesChart data={data}  width={props.width} height={props.height} tooltipFormater={formatLanguageBytes}/>
+      <PieChart data={data}  width={props.width} height={props.height}
+       noDataLabel="No languages" tooltipFormater={formatLanguageBytes}/>
       </div>
     </div>
   );
