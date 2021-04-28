@@ -1,5 +1,5 @@
 import './MainInfo.css';
-import LanguagesChart from '../../components/UserLanguages/LanguagesChart';
+import UserLanguages from '../../components/UserLanguages/UserLanguages';
 import ActivityChart from '../../components/UserActivity/ActivityChart';
 import RecentActivityPanel from '../../components/UserRecentActivity/RecentActivityPanel';
 import RepoPanel from '../../components/UserRepositories/RepoPanel';
@@ -11,7 +11,7 @@ const MainInfo: React.FC = () => {
         <div className="mainInfo">
             <div className="userLanguages">
                 <Head title="languages" />
-                <LanguagesChart width="500" height="300" />
+                <UserLanguages width="500" height="300" />
             </div>
             <div className="partners">
                 <Head title="work partners" />

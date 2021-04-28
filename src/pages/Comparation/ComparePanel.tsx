@@ -4,7 +4,8 @@ import LanguagesChart from '../../components/UserLanguages/LanguagesChart';
 import RecentActivityPanel from '../../components/UserRecentActivity/RecentActivityPanel';
 import PartnerPanel from '../../components/Partners/PartnerPanel';
 import RepoPanel from '../../components/UserRepositories/RepoPanel';
-import { useState } from 'react';
+import UserLanguages from '../../components/UserLanguages/UserLanguages';
+import { useEffect, useState } from 'react';
 
 interface PropsType {
     compareName: string;
@@ -48,9 +49,9 @@ function getCompareContent(location: string, currentState: number, compareName?:
                 : <ActivityChart username={compareName} />;
         }
         case 1: {
-            return location === "left"
-                ? <LanguagesChart width="530" height="350" />
-                : <LanguagesChart width="530" height="350" username={compareName} />
+            return location === "left" 
+                ? <UserLanguages width="530" height="300" isComparetion={true} />
+                : <UserLanguages username={compareName} width="530" height="300" isComparetion={true} />
         }
         case 2: {
             return location === "left"
