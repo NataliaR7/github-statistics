@@ -62,9 +62,6 @@ function UserLanguages(props: PropType) {
 
   return (
     <div className="userLanguages">
-      {!props.isComparetion && <div className="head">
-        <span>languages</span>
-      </div>}
       <div className="langStatistics">
       <LanguagesChart data={data}  width={props.width} height={props.height} tooltipFormater={formatLanguageBytes}/>
       </div>

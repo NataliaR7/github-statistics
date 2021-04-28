@@ -37,12 +37,9 @@ function IssuesPullsStat(props: PropType) {
 
   return (
     <div className="userIssues">
-      <div className="head">
-        <span>Close issues and pull requests statistics</span>
-      </div>
       <div className="issuesStatistics">
         {issuesStatistics && <>
-          <LanguagesChart data={issuesStatistics}  width={props.width} height={props.height} />
+          <LanguagesChart data={issuesStatistics} width={props.width} height={props.height} />
         </>}
       </div>
     </div>
