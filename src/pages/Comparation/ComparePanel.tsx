@@ -1,6 +1,5 @@
 import './ComparePanel.css';
 import ActivityChart from '../../components/UserActivity/ActivityChart';
-import LanguagesChart from '../../components/UserLanguages/LanguagesChart';
 import RecentActivityPanel from '../../components/RecentActivity/RecentActivityPanel';
 import PartnerPanel from '../../components/Partners/PartnerPanel';
 import RepoPanel from '../../components/RepoPanel/RepoPanel';

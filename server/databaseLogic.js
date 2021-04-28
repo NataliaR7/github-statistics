@@ -36,7 +36,6 @@ class DatabaseLogic{
   }
 
   updateUserLanguages(username, languages){
-    console.log(languages, "database")
     this.db.run(`UPDATE gitstat SET languages=? where username=?`,
      [JSON.stringify(languages), username]);
   }
