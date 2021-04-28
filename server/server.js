@@ -1,5 +1,3 @@
-//для рефакторинга: методы, в которых просто запрос через octokit вынести.
-
 const express = require('express');
 const { createOAuthAppAuth } = require('@octokit/auth-oauth-app');
 const { Octokit } = require('@octokit/rest');
@@ -7,8 +5,6 @@ const DatabaseLogic = require('./databaseLogic');
 const extensions = require('./extensions');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const { json } = require('express');
-const { idText } = require('typescript');
 const activityParser = require('./activityparser');
 
 const auth = createOAuthAppAuth({
@@ -141,9 +137,6 @@ app.get('/orgs', (req, res) => {
         })
         .catch((err) => console.log(err, 'orgErr'));
 });
-
-
-
 
 app.get('/repos', (req, res) => {
     const additionalReposInfo = new Map();
@@ -324,7 +317,6 @@ app.get('/repo', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
-
 
 function getRepositoriesData(currentUser, currEtag){
     return (
