@@ -23,11 +23,10 @@ function MainInfo() {
         l: 11,
         m: 12,
     };
-    const languagesData = { "c#": 5, "ht": 3, "gh": 7, "js": 2 }
     return (
         <div className="mainInfo">
             <Partners />
-            <UserLanguages /* url="userlangs" */ />
+            <UserLanguages width="500" height="300" />
             <UserActivity data={activityData} />
             <UserRecentActivity type="user"/>
             <UserRepositories />

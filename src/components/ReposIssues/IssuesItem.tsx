@@ -2,76 +2,8 @@ import { useEffect, useState } from 'react';
 import { color, generalColor, graphColors } from '../../resources/colors'
 import Chart from 'react-apexcharts';
 import { GetLablesAndValues } from "../../extentions/extentions"
+import LanguagesChart from "../UserLanguages/LanguagesChart"
 import "./IssuesItem.css"
-
-
-let options = (labels: string[]) => {
-  return {
-    chart: {
-      type: 'pie',
-      width: 300,
-      height: 150,
-    },
-    plotOptions: {
-      pie: {
-        startAngle: -90,
-        endAngle: 270,
-        // offsetY: 10,        
-      }
-    },
-    animations: {
-      enabled: true,
-    },
-    // noData: {
-    //   text: "No issues and pull requests",
-    //   align: 'center',
-    //   verticalAlign: 'top',
-    // },
-    noData: {
-      text: 'No issues and pull requests',
-      align: 'center',
-      verticalAlign: 'middle',
-      style: {
-        color: "#888888",
-        fontSize: '1vw',
-        fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-        'Droid Sans', 'Helvetica Neue', sans-serif`
-      },
-    },
-    color: graphColors,
-    labels: labels,
-    legend: {
-      offsetX: 0,
-      horizontalAlign: 'left',
-      // verticalAlign: 'center',
-      fontSize: '17em',
-      itemMargin: {
-        vertical: 5,
-      },
-      formatter: function (seriesName: any, opts: any) {
-        return [" " + seriesName]
-      },
-    },
-    responsive: [{
-      breakpoint: 1500,
-      options: {
-        chart: {
-          width: 450,
-          height: 250
-        },
-      },
-    },
-    {
-      breakpoint: 1000,
-      options: {
-        chart: {
-          width: 300,
-          height: 150
-        },
-      },
-    }]
-  }
-};
 
 
 interface IssuesStatistics {
@@ -79,7 +11,10 @@ interface IssuesStatistics {
 }
 
 type PropType = {
-  reposName: string
+  reposName: string,
+  width?: string,
+  height?: string,
+  legendPosition?: string,
 };
 
 function IssuesPullsStat(props: PropType) {
@@ -100,16 +35,14 @@ function IssuesPullsStat(props: PropType) {
     getIssuesData()
   }, [])
 
-
-  let parsedData = GetLablesAndValues(issuesStatistics)
   return (
     <div className="userIssues">
-      {/* <div className="head">
+      <div className="head">
         <span>Close issues and pull requests statistics</span>
-      </div> */}
+      </div>
       <div className="issuesStatistics">
         {issuesStatistics && <>
-          <Chart options={options(parsedData.lables)} series={parsedData.values} type="pie" width={"450"} height={"250"} />
+          <LanguagesChart data={issuesStatistics}  width={props.width} height={props.height} />
         </>}
       </div>
     </div>

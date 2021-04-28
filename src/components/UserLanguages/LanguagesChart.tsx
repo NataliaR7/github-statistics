@@ -5,39 +5,19 @@ import { color, generalColor, graphColors } from '../../resources/colors'
 import { GetLablesAndValues } from "../../extentions/extentions"
 
 
-
-type LanguageData = {
-    [key: string]: number;
-}
-
-
 type PropType = {
+    data: {[key: string]: number},
     width?: string,
     height?: string,
     legendPosition?: string,
-    username?: string,
-    url?: string,
-    reposName?: string,
+    tooltipFormater?: (value: number) => string
 };
-
-function formatLanguageBytes(value: number){
-    if (value > 1024 * 1024)
-        return `${(value / (1024 * 1024)).toFixed(1)}MB`
-    if (value > 1024)
-        return `${(value / 1024).toFixed(1)}KB`
-    return `${value}B`
-}
 
 
 function LanguagesChart(props: PropType) {
-    let [data, setData] = useState<LanguageData>({});
 
     const options = (lables: string[], legendOffset: number, legendPosition?: string) => {
         return {
-            // chart: {
-            //     width: props.width || "99%",
-            //     height: props.height || "99%"
-            // },
             plotOptions: {
                 pie: {
                     startAngle: -90,
@@ -57,21 +37,10 @@ function LanguagesChart(props: PropType) {
               },
             animations: {
                 enabled: true,
-                // easing: 'line',
-                // speed: 800,
-                // animateGradually: {
-                //   enabled: true,
-                //   delay: 150
-                // },
-                // dynamicAnimation: {
-                //   enabled: true,
-                //   speed: 350
-                // }
             },
-            //colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800', '#ffd230'],
             tooltip: {
                 y: {
-                    formatter: (value: number) => formatLanguageBytes(value)
+                    formatter: props.tooltipFormater
                 }
             },
             colors: graphColors,
@@ -90,7 +59,7 @@ function LanguagesChart(props: PropType) {
                 },
             },
             responsive: [{
-                breakpoint: 1500,
+                breakpoint: 1700,
                 options: {
                     chart: {
                         width: 450,
@@ -110,37 +79,9 @@ function LanguagesChart(props: PropType) {
         }
     };
 
-    function getLanguagesPromise(data: PropType) {
-        if (data.reposName) {
-            return fetch(`/reposlangs`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8',
-                },
-                body: JSON.stringify({ reposName: data.reposName })
-            })
-        }
-        const queryUsername = props.username ? "?username=" + props.username : "";
-        // const repositories = await fetch(`/lang${queryUsername}`);
-        return fetch(`/userlangs${queryUsername}`);
-    }
-
-    async function getLanguagesStatistic() {
-        const languages = await (await getLanguagesPromise(props)).json()
-
-
-        console.log(languages, "LANG");
-        setData(languages)
-    }
-
-    useEffect(() => {
-        getLanguagesStatistic();
-    }, [])
-
-    let parsedData = GetLablesAndValues(data)
+    let parsedData = GetLablesAndValues(props.data)
     const legendOffset = props.legendPosition === "left" ? 0 : -15;
     return (
-        <div className="langStatistics">
             <div>
                 <Chart
                     options={options(parsedData.lables, props.width ? legendOffset : 20, props.legendPosition)}
@@ -151,7 +92,6 @@ function LanguagesChart(props: PropType) {
                     /* height={"100%"} */ />
 
             </div>
-        </div>
     );
 }
 

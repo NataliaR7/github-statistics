@@ -114,7 +114,7 @@ function getTempSeries(data: { [key: string]: number }) {
         xaxisData.push(key)
         values.push(data[key])
     }
-    return { xaxisData: xaxisData, series: [{ name: "asd", data: values }] }
+    return { xaxisData: xaxisData, series: [{ name: "Activity", data: values }] }
 }
 
 function getСolumnColor(value: number) {

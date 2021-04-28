@@ -6,6 +6,7 @@ import RepositoryMainInfo from './RepositoryMainInfo';
 import UserRecentActivity from '../../components/UserRecentActivity/UserRecentActivity';
 import RecentActivityPanel from '../../components/UserRecentActivity/RecentActivityPanel';
 import LanguagesChart from "../../components/UserLanguages/LanguagesChart";
+import UserLanguages from '../../components/UserLanguages/UserLanguages';
 import IssuesPullsStat from "../../components/ReposIssues/IssuesItem";
 import IssueBar from "./IssueBar";
 import Loader from "../../components/Loader/Loader";
@@ -118,16 +119,16 @@ function Repository(props: RepoType) {
                     <RepositoryMainInfo data={getRepoMainInfo()} />
                     <div className="statistics">
                         <div className="languageRepo">
-                            <div className="head">
+                            {/* <div className="head">
                                 <span>languages</span>
-                            </div>
-                            <LanguagesChart reposName={repoData.name} width={"450"} height={"250"} />
+                            </div> */}
+                            <UserLanguages reposName={repoData.name} width={"450"} height={"250"} />
                         </div>
                         <div className="issueAvgRepo">
-                            <div className="head">
+                            {/* <div className="head">
                                 <span>pull request and issue closings statistics</span>
-                            </div>
-                            <IssuesPullsStat reposName={repoData.name} />
+                            </div> */}
+                            <IssuesPullsStat reposName={repoData.name} width={"450"} height={"250"}/>
                         </div>
                         <div className="activityRepo">
                             {/* <UserRecentActivity type="repo" repoName={repoData.name} /> */}

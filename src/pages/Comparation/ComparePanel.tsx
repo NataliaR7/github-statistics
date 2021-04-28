@@ -4,6 +4,7 @@ import LanguagesChart from '../../components/UserLanguages/LanguagesChart'
 import RecentActivityPanel from '../../components/UserRecentActivity/RecentActivityPanel'
 import PartnerPanel from '../../components/Partners/PartnerPanel'
 import RepoPanel from '../../components/UserRepositories/RepoPanel'
+import UserLanguages from '../../components/UserLanguages/UserLanguages';
 import { useEffect, useState } from 'react';
 
 interface PropsType {
@@ -32,8 +33,8 @@ function ComparePanel(props: PropsType) {
             }
             case 1: {
                 return location === "left" 
-                ? <LanguagesChart width="530" height="350" /* legendPosition="left" */ />
-                : <LanguagesChart width="530" height="350" username={props.compareName} />
+                ? <UserLanguages width="530" height="300" isComparetion={true} /* legendPosition="left" */ />
+                : <UserLanguages username={props.compareName} width="530" height="300" isComparetion={true} />
             }
             case 2: {
                 return location === "left" 
