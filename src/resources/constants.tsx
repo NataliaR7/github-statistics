@@ -1,4 +1,3 @@
-
 export enum UserActivityType {
     PushEvent = "PushEvent",
     PullRequestEvent = "PullRequestEvent",
@@ -29,9 +28,17 @@ export enum Mouth {
     "Nov",
     "Dec",
 }
+
 export enum PagePath {
     "Main" = "/main",
     "Repos" = "/repos",
     "Compare" = "/compare",
 }
 
+export const languageColors = new Map([
+    ["JavaScript", "#F9DE59"],
+    ["HTML", "#F98365"],
+    ["TypeScript", "#A1DFFB"],
+    ["C#", "#CDDA95"],
+    ["CSS", "#D1A4FF"],
+]);

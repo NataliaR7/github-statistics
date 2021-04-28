@@ -1,8 +1,6 @@
 .activityItem {
-    /* background-color: hsl(0, 100%, 78%); */
     display: flex;
     flex-direction: row;
-    /* height: 1.5vw; */
     align-items: center;
     color: #454545;
     font-size: 0.9vw;
@@ -34,6 +32,7 @@
     display: flex;
     justify-content: flex-end;
 }
+
 .activityItem .repo{
     color: #888888;
     font-style: italic;

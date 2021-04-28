@@ -1,24 +1,9 @@
-/* .mainInfo {
-    display: grid;
-    height: 100%;
-    width: 100%;
-    grid-template-columns: 1fr 1.2fr;
-    grid-template-rows: 1.5fr 1.2fr 2.5fr 2.5fr;
-    grid-template-areas:
-        'people activity'
-        'languages activity'
-        'languages recentActivity'
-        'repositories repositories';
-    background-color: #f4f4f4;
-} */
 .mainInfo {
     display: grid;
     height: 100%;
     width: 100%;
     grid-template-columns: 1fr 1.2fr;
-    /* grid-template-rows: 1.7fr 1fr 2.5fr 2.5fr; */
     grid-template-rows: 1fr 0.7fr 1.3fr 2.4fr;
-    /* grid-template-rows: 2.7fr 1fr 1.5fr 2.5fr; */
     grid-template-areas:
         'languages activity'
         'languages recentActivity'
@@ -45,26 +30,6 @@
 
 .userRepositories {
     grid-area: repositories;
-}
-
-/* .mainInfo .head {
-    grid-area: head;
-    display: flex;
-    background-color: #eeeeee;
-    font-variant: small-caps;
-    font-size: 1.3vw;
-    align-items: center;
-    padding: 0 0 0.5vh 1vw;
-} */
-.mainInfo .head {
-    grid-area: head;
-    display: flex;
-    background-color: #eeeeee;
-    font-variant: small-caps;
-    font-size: 1.3vw;
-    align-items: center;
-    padding: 0 0 0.5vh 1vw;
-    line-height: 3vh;
 }
 
 .mainInfo .warning {

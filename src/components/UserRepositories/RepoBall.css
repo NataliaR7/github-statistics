@@ -1,6 +1,4 @@
 .repoBall {
-    /* width: 13.5vw;
-    height: 13.5vw; */
     width: 13.5vw;
     height: 13.4vw;
     border: 0.3vw solid #F9DE59;
@@ -124,7 +122,3 @@
     opacity: 0;
     filter: alpha(opacity=0);
 }
-
-/* .repoBall .star + span {
-    font-size: 1vw;
-} */

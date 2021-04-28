@@ -18,6 +18,7 @@ interface PropsType {
 const UserAdditional: React.FC<PropsType> = props => {
     const data = props.data;
     const isSmall = (data.name && data.location && data.email && data.site) ? true : false;
+    
     return (
         <div className="userAdditional">
             { data.name && <InfoBlock label="name" content={data.name} isSmall />}

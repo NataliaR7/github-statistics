@@ -5,23 +5,16 @@
     border-radius: 0.5vh;
     display: grid;
     grid-template-columns: 8fr 1.8fr 3fr;
-    /* grid-template-rows: 1fr; */
-    /* align-items: center; */
     padding: 0 0.9vw 0 1vw;
-    /* background-color: rgb(255, 214, 223); */
     color: #646464;
-    /*stop*/
     gap: 0.5vw;
 }
+
 .repoSquare .mainInfo{
-    /* background-color: crimson; */
     grid-column: 1;
     grid-row: 1;
      display: flex;
-   /* flex-direction: row;*/
-    align-items: center; 
-    /* max-width: 90%;
-    height: 3vh; */
+    align-items: center;
     max-width: 17vw;
 }
 
@@ -31,19 +24,15 @@
     white-space: nowrap;
     text-align: center;
     font-size: 1.1vw;
-    /* margin-bottom: 0.5vw; */
 }
 
 .repoSquare .updateRepo{
     grid-column: 3;
-    /* grid-row: 1; */
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     color: #888888;
     font-size: 1.1vw;
-    /* background-color: cyan; */
-    /* line-height: 2.2vh; */
 }
 
 .repoSquare .updateRepo span:first-child {
@@ -53,7 +42,6 @@
 .repoSquare .stars {
     grid-column: 2;
     display: flex;
-    /* align-items: center; */
     align-self: center;
     justify-self: flex-start;
     font-size: 1vw;
@@ -67,6 +55,7 @@
     margin-left: 0.4vw;
     fill: #646464;
 }
+
 .repoSquare .link:hover {
     cursor: pointer;
     fill: #838383;
@@ -75,7 +64,6 @@
 .repoSquare .star {
     width: 1.4vw;
     height: 1.4vw;
-    /* margin-bottom: 0.15vw; */
     fill: #646464;
     align-self: center;
 }
@@ -84,6 +72,7 @@
     position: relative;
     margin-left: 1vh;
 }
+
 .squares .warning {
     font-size: 1vw;
     color: #888888;
@@ -91,4 +80,3 @@
     margin: auto auto;
     padding-bottom: 2vh;
 }
-

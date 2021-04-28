@@ -13,10 +13,12 @@
     white-space: nowrap;
     max-width: 7.5vw;
 }
+
 .partners .partner img {
     width: 5.3vw;
     border-radius: 1vw;
 }
+
 .comparePanel .partner img {
     width: 7.1vw;
     border-radius: 1vw;

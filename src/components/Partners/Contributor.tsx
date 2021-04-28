@@ -1,8 +1,6 @@
 import './Contributor.css';
-import { useEffect, useRef, useState } from 'react';
-import Cookies from 'js-cookie';
 
-interface ContributorType {
+interface PropsType {
     data: { 
         count: number, 
         name: string, 
@@ -10,11 +8,10 @@ interface ContributorType {
         url: string 
     }
 }
-
-function Contributor(props: ContributorType) {
+const Contributor: React.FC<PropsType> = props => {
     const data = props.data;
     return (
-        <div className="partner">
+        <div className="partner" key={data.url}>
             <a href={data.url} target="_blank">
                 <img src={data.avatar} alt="partnerAvatar"></img>
             </a>

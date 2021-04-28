@@ -8,8 +8,7 @@ interface PropsType {
     withoutLabel?: boolean;
 }
 
-function Loader(props: PropsType) {
-
+const Loader: React.FC<PropsType> = props => {
     return (
         <div className="hashLoader">
             <HashLoader size={150} color={getRandomGeneralColor()} />

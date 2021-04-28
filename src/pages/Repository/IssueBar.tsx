@@ -1,8 +1,8 @@
-import "./IssueBar.css"
-import getClosedIssuesIcon from '../../resources/closedIssuesSvg'
-import getOpenIssuesIcon from '../../resources/openIssuesSvg'
-import getMergedPRIcon from '../../resources/mergedPRSvg'
-import getOpenPRIcon from '../../resources/openPRSvg'
+import "./IssueBar.css";
+import getClosedIssuesIcon from '../../resources/closedIssuesSvg';
+import getOpenIssuesIcon from '../../resources/openIssuesSvg';
+import getMergedPRIcon from '../../resources/mergedPRSvg';
+import getOpenPRIcon from '../../resources/openPRSvg';
 
 interface PropsType {
     openCount: number;
@@ -10,14 +10,14 @@ interface PropsType {
     isPullRequest?: boolean;
 }
 
-function IssueBar(props: PropsType) {
+const IssueBar: React.FC<PropsType> = props => {
     const generalCount = props.openCount + props.closedCount;
     return (
         <div className="issueBar">
             <span className="labelIssue">{props.isPullRequest ? 'Pull requests' : 'Issues'}</span>
             <div className="statisticLine">
-                <div className="closedLine" style={{width: `${props.closedCount / generalCount * 100}%`, backgroundColor: `${props.isPullRequest ? '#7144C5' : '#D83A48'}`}}></div>
-                <div className="openLine" style={{width: `${props.openCount / generalCount * 100}%`}}></div>
+                <div className="closedLine" style={{ width: `${props.closedCount / generalCount * 100}%`, backgroundColor: `${props.isPullRequest ? '#7144C5' : '#D83A48'}` }}></div>
+                <div className="openLine" style={{ width: `${props.openCount / generalCount * 100}%` }}></div>
             </div>
             <div className="statisticData">
                 <div>

@@ -4,8 +4,9 @@ import getWatchIcon from "../../resources/watchSvg"
 import getStarLogo from "../../resources/starSvg"
 import { getStylizedDate } from '../../generalLogic/repositoryLogic';
 import { getRandomColor } from '../../resources/colors'
+import { languageColors } from '../../resources/constants'
 
-type RepoItemType = {
+interface PropsType {
     data: {
         id: number;
         repoName: string;
@@ -22,32 +23,11 @@ type RepoItemType = {
     }
     selectRepo: (e: number) => void;
 }
-const languageColors = new Map([
-    ["JavaScript", "#F9DE59"],
-    ["HTML", "#F98365"],
-    ["TypeScript", "#A1DFFB"],
-    ["C#", "#CDDA95"],
-    ["CSS", "#D1A4FF"],
-]);
-function getColorToLanguage(language: string) {
-    if (languageColors.has(language)) {
-        return languageColors.get(language);
-    }
-    let newColor = getRandomColor();
-    while (languageColors.has(newColor) || languageColors.keys.length > 15) {
-        newColor = getRandomColor();
-    }
-    languageColors.set(language, newColor);
-    console.log(language, "language");
-    console.log(languageColors, "languageColors");
-}
 
-function RepositoryItem(props: RepoItemType) {
+const RepositoryItem: React.FC<PropsType> = props => {
     const data = props.data;
     return (
-        <div className="repositoryItem" key={data.id} onClick={() => {
-            props.selectRepo(data.id);
-        }}>
+        <div className="repositoryItem" key={data.id} onClick={() => props.selectRepo(data.id)}>
             <span className="repoName">{data.repoName}</span>
             {data.isFork && <div className="repoFork">
                 <span>{"Forked from "} </span>
@@ -81,6 +61,17 @@ function RepositoryItem(props: RepoItemType) {
             <span className="repoDate">Updated {getStylizedDate(data.updateDate)}</span>
         </div>
     );
+}
+
+function getColorToLanguage(language: string) {
+    if (languageColors.has(language)) {
+        return languageColors.get(language);
+    }
+    let newColor = getRandomColor();
+    while (languageColors.has(newColor) || languageColors.keys.length > 15) {
+        newColor = getRandomColor();
+    }
+    languageColors.set(language, newColor);
 }
 
 export default RepositoryItem;

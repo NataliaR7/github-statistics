@@ -35,7 +35,7 @@ const UserPanel: React.FC<PropsType> = props => {
   const [isLoadedData, setIsLoadedData] = useState(false);
 
   useEffect(() => {
-    loadUserData()
+    loadUserData(props.username)
       .then((result) => {
         setUserData(userData => userData = getNewUserDataState(result));
         setIsLoadedData(true);

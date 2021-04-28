@@ -9,15 +9,16 @@
     font-size: 0.9vw;
     color: #454545;
 }
+
 .navigationPagePanel button:hover{
     background-color: #E3E3E3;
     border-radius: 1vw;
 }
+
 .navigationPagePanel .activePage{
     background-color: #E3E3E3;
     border-radius: 1vw;
 }
-
 
 .navigationPagePanel .prevButton,
 .navigationPagePanel .nextButton

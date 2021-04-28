@@ -1,36 +1,34 @@
 import './MainInfo.css';
-import UserLanguages from '../../components/UserLanguages/UserLanguages';
-import UserActivity from '../../components/UserActivity/UserActivity';
-import UserRecentActivity from '../../components/UserRecentActivity/UserRecentActivity';
-import UserRepositories from '../../components/UserRepositories/UserRepositories';
-import Partners from '../../components/Partners/Partners';
+import LanguagesChart from '../../components/UserLanguages/LanguagesChart';
+import ActivityChart from '../../components/UserActivity/ActivityChart';
+import RecentActivityPanel from '../../components/UserRecentActivity/RecentActivityPanel';
+import RepoPanel from '../../components/UserRepositories/RepoPanel';
+import PartnerPanel from '../../components/Partners/PartnerPanel';
+import Head from '../../components/Head/Head';
 
-
-function MainInfo() {
-
-
-    const activityData = {
-        a: 0,
-        b: 1,
-        c: 2,
-        d: 3,
-        e: 4,
-        f: 5,
-        g: 9,
-        h: 7,
-        i: 8,
-        k: 10,
-        l: 11,
-        m: 12,
-    };
-    const languagesData = { "c#": 5, "ht": 3, "gh": 7, "js": 2 }
+const MainInfo: React.FC = () => {
     return (
         <div className="mainInfo">
-            <Partners />
-            <UserLanguages /* url="userlangs" */ />
-            <UserActivity data={activityData} />
-            <UserRecentActivity type="user"/>
-            <UserRepositories />
+            <div className="userLanguages">
+                <Head title="languages" />
+                <LanguagesChart width="500" height="300" />
+            </div>
+            <div className="partners">
+                <Head title="work partners" />
+                <PartnerPanel />
+            </div>
+            <div className="userActivity">
+                <Head title="contributions" />
+                <ActivityChart />
+            </div>
+            <div className="userRecentActivity">
+                <Head title="recent activity" />
+                <RecentActivityPanel type="user" />
+            </div>
+            <div className="userRepositories">
+                <Head title="repositories" />
+                <RepoPanel type="ball" />
+            </div>
         </div>
     );
 }

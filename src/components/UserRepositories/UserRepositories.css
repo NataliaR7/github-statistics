@@ -7,23 +7,11 @@
         'balls';
 }
 
-/* .userRepositories .head {
-    grid-area: head;
-    display: flex;
-    background-color: #eeeeee;
-    font-variant: small-caps;
-    font-size: 1.3vw;
-    
-    align-items: center;
-    padding: 0 0 0.5vh 1vw;
-} */
-
 .balls {
     grid-area: balls;
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* justify-content: space-around; */
     padding: 0 2vw;
 }
 
@@ -32,8 +20,6 @@
     flex-direction: column;
     align-items: center;
     gap: 0.8vw;
-    /* justify-content: space-around; */
-    /* padding: 0 2vw; */
 }
 
 .repoBall:first-child,
@@ -42,7 +28,6 @@
 }
 .repoBall:first-child:hover {
     background-color: rgba(249, 222, 89, 0.5);
-    /* border: 0.5vw solid #F9DE59; */
 }
 
 .repoBall:first-child + div,
@@ -81,8 +66,6 @@
     background-color: rgba(161, 223, 251, 0.5);
 }
 
-
-
 .repoSquare:first-child,
 .repoSquare:first-child + div,
 .repoSquare:first-child + div + div,
@@ -90,10 +73,3 @@
 .repoSquare:last-child {
     border-width: 0.2vw;
 }
-
-/* .userRepositories .warning {
-    font-size: 1vw;
-    color: #888888;
-    align-self: center;
-    margin: auto auto;
-} */

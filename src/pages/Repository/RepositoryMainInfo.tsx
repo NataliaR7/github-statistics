@@ -1,7 +1,7 @@
-import "./RepositoryMainInfo.css"
-import React, { useEffect, useState } from 'react';
+import "./RepositoryMainInfo.css";
+import { useEffect, useState } from 'react';
 
-interface RepoInfoType {
+interface PropsType {
     data: {
         repoName: string;
         ownerName: string;
@@ -15,7 +15,7 @@ interface RepoInfoType {
     }
 }
 
-function RepositoryMainInfo(props: RepoInfoType) {
+const RepositoryMainInfo: React.FC<PropsType> = props => {
     const data = props.data;
     const [contributors, setContributors] = useState<any[]>([]);
     const [isLoadedData, setIsLoadedData] = useState(false);
@@ -24,27 +24,14 @@ function RepositoryMainInfo(props: RepoInfoType) {
         fetch(`/repoAdditionalInfo`)
             .then((res) => res.json())
             .then((repo) => {
-                const mainContributors = getContributors(repo);
+                const mainContributors = getContributors(repo, data.repoName);
                 setContributors(mainContributors);
                 setIsLoadedData(true);
             });
     }, []);
 
-    const getContributors = (source: any[]) => {
-        const currentRepo = source.find(repo => repo.repoName === data.repoName);
-        const contributors = currentRepo && currentRepo.contributors?.filter((c: any) => c.type === "User");
-        return contributors ? contributors.splice(0, contributors.length > 3 ? 3 : contributors.length) : [];
-    }
-    const fillContributors = () => {
-        return contributors.map(people =>
-            <a href={people.html_url} target="_blank">
-                <img src={people.avatar_url} alt="contributorAvatar" title={people.login} />
-            </a>)
-    }
-
     return (
         <div className="repositoryMainInfo">
-            {/* <div className="repoAdditionalPanel"> */}
             <div className="repoInfoComponent">
                 <div className="ownerPanel">
                     <span className="header">owner</span>
@@ -64,22 +51,30 @@ function RepositoryMainInfo(props: RepoInfoType) {
                     <span className="header">main contributors</span>
                     {isLoadedData && <div className="contributors">
                         {contributors.length !== 0
-                            ? fillContributors()
+                            ? fillContributors(contributors)
                             : "No contributors"}
-                        {/* <img src="https://avatars.githubusercontent.com/u/6056107?v=4" alt="contributorAvatar" />
-                            <img src="https://avatars.githubusercontent.com/u/6056107?v=4" alt="contributorAvatar" />
-                            <img src="https://avatars.githubusercontent.com/u/6056107?v=4" alt="contributorAvatar" /> */}
                     </div>}
                 </div>
             </div>
-            {/* </div> */}
-
             <div className="repoAbout">
                 <span className="title">about</span>
                 <span className="repositoryDescription canSelect">{data.description || "No description"}</span>
             </div>
         </div>
     );
+}
+
+function getContributors(source: any[], repoName: string) {
+    const currentRepo = source.find(repo => repo.repoName === repoName);
+    const contributors = currentRepo && currentRepo.contributors?.filter((c: any) => c.type === "User");
+    return contributors ? contributors.splice(0, contributors.length > 3 ? 3 : contributors.length) : [];
+}
+
+function fillContributors(contributors: any[]) {
+    return contributors.map(people =>
+        <a href={people.html_url} target="_blank" key={people.login}>
+            <img src={people.avatar_url} alt="contributorAvatar" title={people.login} />
+        </a>);
 }
 
 export default RepositoryMainInfo;

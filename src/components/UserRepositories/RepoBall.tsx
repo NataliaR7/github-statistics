@@ -4,8 +4,9 @@ import linkSvg from '../../resources/linkSvg';
 import { getStylizedDate } from '../../generalLogic/repositoryLogic';
 import { useRef, useState } from 'react';
 import { Redirect } from 'react-router';
+import { cloneRepo } from '../../extentions/extentions'
 
-type RepoBallType = {
+interface PropsType {
     data: {
         id: number;
         starsCount: number;
@@ -18,31 +19,15 @@ type RepoBallType = {
     isRepoActive: boolean;
 }
 
-function RepoBall(props: RepoBallType) {
+const RepoBall: React.FC<PropsType> = props => {
     const [isSelectedRepo, setIsSelectedRepo] = useState(false);
     const message = useRef<HTMLSpanElement>(null);
     const data = props.data;
 
-    function cloneRepo(text: string, target: EventTarget & HTMLSpanElement) {
-        navigator.clipboard.writeText(text).then(() => {
-            target.classList.add("hidden");
-            message?.current?.classList.remove("hide");
-            setTimeout(() => {
-                target.classList.remove("hidden");
-            }, 80);
-            setTimeout(() => {
-                message?.current?.classList.add("hide");
-            }, 500);
-
-        })
-    }
-
     return (
         <div className="repoBall" key={data.id} onClick={(e) => {
-            const target:any = e.target;
-            console.log(target.tagName, "TN")
-            console.log(target, "TN")
-            if(target.tagName === 'path' || target.tagName === 'svg') {
+            const target: any = e.target;
+            if (target.tagName === 'path' || target.tagName === 'svg') {
                 return;
             }
             props.selectRepo(data.id);
@@ -56,7 +41,7 @@ function RepoBall(props: RepoBallType) {
                     <span>{data.repoName}</span>
                     {data.isFork && <span className="fork">{"Forked"}</span>}
                 </div>
-                <span onClick={(e) => cloneRepo(data.cloneUrl, e.currentTarget)}>{linkSvg()}</span>
+                <span onClick={(e) => cloneRepo(data.cloneUrl, e.currentTarget, message)}>{linkSvg()}</span>
             </div>
             <div className="updateRepo">
                 <span>{"updated"}</span>

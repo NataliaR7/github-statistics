@@ -2,23 +2,7 @@
     height: 100%;
     width: 100%;
     background-color: #f4f4f4;
-    /* display: grid;
-    grid-template-columns: 9.5fr 2fr;
-    grid-template-areas: 
-    "info user"; */
-    
 }
-
-/* .comparation .userPanel {
-    grid-area: user;
-    
-}
-
-.comparation .dataCompare {
-    grid-area: info;
-    display: flex;
-    flex-direction: column;
-} */
 
 .comparationForm {
     display: flex;
@@ -34,6 +18,7 @@
     "compareContent compareUser"; 
     height: 100%;
 }
+
 .comparationContent .userPanel{
     grid-area: compareUser;
     height: 100%;
@@ -47,5 +32,3 @@
     "upPanel"
     "downPanel"; 
 }
-
-

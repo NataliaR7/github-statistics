@@ -8,9 +8,8 @@
     align-content: center;
     row-gap: 0.5vw;
 }
+
 .repositoryItem:hover {
-    /* background-color: #f0efef;
-    box-shadow: 0 0 1.5vw white; */
     background-color: rgba(255, 255, 255, 0.4);
     box-shadow: 0 0 1vw #dfdfdf;
 }
@@ -27,7 +26,6 @@
     justify-self: center;
 }
 
-
 .repoFork {
     grid-row: 2;
     color: #888888;
@@ -38,6 +36,7 @@
     display: flex;
     flex-direction: column;
 }
+
 .repoFork span{
     overflow: hidden;
     text-overflow: ellipsis;
@@ -68,7 +67,6 @@
 }
 
 .repoLanguage {
-    /* background-color: lightsalmon; */
     border-radius: 1vw;
     padding: 0 1.2vw;
     height: 60%;
@@ -84,6 +82,7 @@
     justify-content: center;
     font-size: 0.9vw;
 }
+
 .repoContributors span:first-child {
     color: #757575;
 }
@@ -94,6 +93,7 @@
     flex-direction: row;
     justify-content: space-around;
 }
+
 .repoAdditional div{
     display: flex;
     flex-direction: row;
@@ -103,10 +103,6 @@
     font-size: 1vw;
 }
 
-/* .repoAdditional div span{
-    vertical-align: baseline;
-} */
-
 .repoDate{
     grid-row: 6;
     align-self: center;
@@ -115,7 +111,6 @@
     color: #757575;
     font-size: 0.8vw;
 }
-
 
 .repositoryItem .forksIcon {
     fill: #888888;
@@ -129,6 +124,7 @@
     margin-right: 0.1vw;
     margin-top: 0.1vh;
 }
+
 .repositoryItem .star {
     fill: #454545;
     height: 1.3vw;

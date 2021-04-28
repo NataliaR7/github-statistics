@@ -4,6 +4,7 @@
     flex-direction: column;
     height: 100%;
 }
+
 .repositories {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -19,37 +20,4 @@
     align-self: center;
     margin: auto auto;
 }
-
-/* .pageButtons {
-    align-self: center;
-    display: flex;
-    flex-direction: row;
-}
-
-.pageButtons button{
-    border: none;
-    font-size: 0.9vw;
-    color: #454545;
-}
-.pageButtons button:hover{
-    background-color: #E3E3E3;
-    border-radius: 1vw;
-}
-.pageButtons .activePage{
-    background-color: #E3E3E3;
-    border-radius: 1vw;
-}
-
-
-.pageButtons .prevButton,
-.pageButtons .nextButton
-{
-    color: #888888;
-    margin: 0 1vw;
-}
-
-.pageButtons .prevButton + button {
-    background-color: #E3E3E3;
-    border-radius: 1vw;
-} */
 
