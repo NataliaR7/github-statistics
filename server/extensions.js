@@ -130,11 +130,11 @@ function parseIssuesData(data){
         let dateClose = new Date(issue["closed_at"])
         let closingTimeInDays = getDatesDifferenceInDays(dateOpen, dateClose)     
         if (closingTimeInDays <= daysInWeek)
-             updateIssuesStatistics(issuesStat, "Less then week")
+             updateIssuesStatistics(issuesStat, "Closed in week")
         else if (closingTimeInDays <= daysInMonth)
-            updateIssuesStatistics(issuesStat, "Less then month")
+            updateIssuesStatistics(issuesStat, "Closed in month")
         else 
-            updateIssuesStatistics(issuesStat, "More then month")
+            updateIssuesStatistics(issuesStat, "Longer")
       }
     }
     return issuesStat

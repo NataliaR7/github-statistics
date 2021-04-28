@@ -360,7 +360,6 @@ function getContributors(currentUser, additionalReposInfo, repositories, languag
                     });
                 }
             }
-
             const resultInfo = [];
             additionalReposInfo.forEach((value, key) => {
                 resultInfo.push({ repoName: key, ...value });
