@@ -1,6 +1,6 @@
 import { combineReducers, CombinedState, Reducer } from 'redux';
-import * as actionTypes from '../actionTypes';
-import { preloadedState } from '../store'
+import * as actionTypes from './actionTypes';
+import { preloadedState } from './store'
 
 
 export const rootReducer = (state?: RootState, action?: any)  => {

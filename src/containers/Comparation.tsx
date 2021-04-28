@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Comparation from '../pages/Comparation/Comparation';
-import { setCompareNickname} from '../actionCreators';
-import { RootState } from '../reducers';
+import { setCompareNickname} from '../stateManage/actionCreators';
+import { RootState } from '../stateManage/reducers';
 
 export default connect(
     (state: RootState, props) => ({

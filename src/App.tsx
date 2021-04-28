@@ -10,7 +10,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import {store} from './store';
+import {store} from './stateManage/store';
 
 const App: React.FC = () => {
   return (

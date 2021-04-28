@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NavigationPagePanel from '../pages/Repositories/NavigationPagePanel';
-import { changeReposPage } from '../actionCreators';
-import { RootState } from '../reducers';
+import { changeReposPage } from '../stateManage/actionCreators';
+import { RootState } from '../stateManage/reducers';
 
 export default connect(
     (state: RootState, props) => ({

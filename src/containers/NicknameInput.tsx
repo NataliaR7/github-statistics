@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import NicknameInput from '../pages/NicknameInput/NicknameInput';
-import { changeNickname, resetStore} from '../actionCreators';
-import { RootState } from '../reducers';
+import { changeNickname, resetStore} from '../stateManage/actionCreators';
+import { RootState } from '../stateManage/reducers';
 
 export default connect(
     (state: RootState, props) => ({

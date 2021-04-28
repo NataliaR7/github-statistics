@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Repository from '../pages/Repository/Repository';
-import { RootState } from '../reducers';
-import { deactiveteRepo } from '../actionCreators';
+import { RootState } from '../stateManage/reducers';
+import { deactiveteRepo } from '../stateManage/actionCreators';
 
 export default connect(
     (state: RootState, props) => ({
