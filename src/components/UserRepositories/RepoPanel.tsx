@@ -1,6 +1,6 @@
 import './UserRepositories.css';
-import RepoBall from '../../containers/RepoBall'
-import RepoSquare from '../../components/UserRepositories/RepoSquare'
+import RepoBall from '../../containers/RepoBall';
+import RepoSquare from '../../components/UserRepositories/RepoSquare';
 import { useEffect, useState } from 'react';
 import { sortReposData } from '../../generalLogic/repositoryLogic';
 

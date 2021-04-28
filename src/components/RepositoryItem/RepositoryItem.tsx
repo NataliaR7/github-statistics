@@ -1,10 +1,10 @@
-import "./RepositoryItem.css"
-import getForksIcon from "../../resources/forksSvg"
-import getWatchIcon from "../../resources/watchSvg"
-import getStarLogo from "../../resources/starSvg"
+import "./RepositoryItem.css";
+import getForksIcon from "../../resources/forksSvg";
+import getWatchIcon from "../../resources/watchSvg";
+import getStarLogo from "../../resources/starSvg";
 import { getStylizedDate } from '../../generalLogic/repositoryLogic';
-import { getRandomColor } from '../../resources/colors'
-import { languageColors } from '../../resources/constants'
+import { getRandomColor } from '../../resources/colors';
+import { languageColors } from '../../resources/constants';
 
 interface PropsType {
     data: {

@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: column;
     color: #454545;
-    /* padding: 1vw 0; */
     height: 100%;
     width: 100%;
 }
@@ -66,28 +65,24 @@
     grid-template-areas:
         'languageRepo issueAvgRepo'
         'activityRepo issueCountRepo';
-    /* background-color: chartreuse; */
     align-self: center;
     column-gap: 3vw;
 }
 
 .repository .languageRepo {
     grid-area: languageRepo;
-    /* align-self: center;
-    justify-self: center;
-    background-color: burlywood; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
-    /* background-color: chocolate; */
 }
+
 .repository .issueAvgRepo {
     grid-area: issueAvgRepo;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .repository .userIssues,
 .repository .langStatistics {
     margin: auto 0;
@@ -96,21 +91,18 @@
 .repository .activityRepo {
     grid-area: activityRepo;
 }
+
 .repository .issueCountRepo {
     grid-area: issueCountRepo;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     justify-content: center;
     gap: 5vh;
-    /* background-color: rgb(207, 123, 255); */
 }
 
 .repository .head {
-    /* grid-area: head; */
     display: flex;
     color: #5f5f5f;
-    /* background-color: #eeeeee; */
     font-variant: small-caps;
     font-size: 1.3vw;
     align-items: center;
@@ -138,6 +130,7 @@
     margin-left: 0.5vw;
     fill: #646464;
 }
+
 .repository .link:hover {
     cursor: pointer;
     fill: #838383;

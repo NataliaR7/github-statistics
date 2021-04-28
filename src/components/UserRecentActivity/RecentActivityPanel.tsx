@@ -1,6 +1,6 @@
-import './UserRecentActivity.css'
-import UserActivityItem from './UserActivityItem'
-import { UserActivityType, RepoActivityType } from '../../resources/constants'
+import './UserRecentActivity.css';
+import UserActivityItem from './UserActivityItem';
+import { UserActivityType, RepoActivityType } from '../../resources/constants';
 import { useEffect, useState } from 'react';
 
 interface PropsType {

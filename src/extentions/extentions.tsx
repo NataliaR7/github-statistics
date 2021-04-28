@@ -1,5 +1,3 @@
-
-
 export function GetLablesAndValues(data: { [key: string]: number }) {
   let lables: string[] = []
   let values: number[] = []

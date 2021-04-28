@@ -1,10 +1,10 @@
-import "./Repositories.css"
-import RepositoryItem from "../../containers/RepositoryItem"
-import Repository from '../../containers/Repository'
-import NavigationPagePanel from '../../containers/NavigationPagePanel'
+import "./Repositories.css";
+import RepositoryItem from "../../containers/RepositoryItem";
+import Repository from '../../containers/Repository';
+import NavigationPagePanel from '../../containers/NavigationPagePanel';
 import { useEffect, useState } from 'react';
 import { sortReposData } from '../../generalLogic/repositoryLogic';
-import Loader from '../../components/Loader/Loader'
+import Loader from '../../components/Loader/Loader';
 
 interface PropsType {
     activeRepoId: number;

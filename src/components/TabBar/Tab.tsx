@@ -1,5 +1,5 @@
 import './Tab.css';
-import { PagePath } from '../../resources/constants'
+import { PagePath } from '../../resources/constants';
 
 interface PropsType {
     title: string;

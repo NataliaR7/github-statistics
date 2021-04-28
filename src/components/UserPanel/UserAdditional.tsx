@@ -1,5 +1,5 @@
 import './UserAdditional.css';
-import InfoBlock from './InfoBlock'
+import InfoBlock from './InfoBlock';
 
 interface PropsType {
     data: {

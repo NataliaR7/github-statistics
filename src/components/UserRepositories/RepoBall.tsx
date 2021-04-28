@@ -4,7 +4,7 @@ import linkSvg from '../../resources/linkSvg';
 import { getStylizedDate } from '../../generalLogic/repositoryLogic';
 import { useRef, useState } from 'react';
 import { Redirect } from 'react-router';
-import { cloneRepo } from '../../extentions/extentions'
+import { cloneRepo } from '../../extentions/extentions';
 
 interface PropsType {
     data: {

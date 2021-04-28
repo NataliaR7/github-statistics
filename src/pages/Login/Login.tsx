@@ -12,27 +12,13 @@ const Login: React.FC<PropsType> = props => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        const url = window.location.href;
-        const hasCode = url.includes("?code=");
-        if (hasCode) {
-            const userToken = url.split("?code=");
-            fetch('/login', {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8',
-                },
-                body: JSON.stringify({ code: userToken[1] })
-            })
-                .then(res => {
-                    if (res.ok && !props.isLoggedIn) {
-                        setIsLoading(true);
-                    }
-                });
-        }
+        getToken().then((res: any) => {
+            if (!res) return;
+            if (res.ok && !props.isLoggedIn) {
+                setIsLoading(true);
+            }
+        });
     }, [isLoading]);
-
-    const clientId = "9607ea01165c834b3511";
-    const redirectUri = "http://localhost:3000/login";
 
     return (
         <div className="login">
@@ -48,6 +34,24 @@ const Login: React.FC<PropsType> = props => {
             </div>
         </div>
     );
+}
+
+const clientId = "9607ea01165c834b3511";
+const redirectUri = "http://localhost:3000/login";
+
+async function getToken() {
+    const url = window.location.href;
+    const hasCode = url.includes("?code=");
+    if (hasCode) {
+        const userToken = url.split("?code=");
+        return await fetch('/login', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify({ code: userToken[1] })
+        })
+    }
 }
 
 export default Login;

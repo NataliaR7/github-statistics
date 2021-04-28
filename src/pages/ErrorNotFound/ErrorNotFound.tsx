@@ -1,5 +1,5 @@
 import './ErrorNotFound.css';
-import getErrorSvg from "../../resources/errorSvg/errorSvg"
+import getErrorSvg from "../../resources/errorSvg/errorSvg";
 import { useState, SetStateAction, Dispatch } from 'react';
 import { Redirect } from 'react-router';
 

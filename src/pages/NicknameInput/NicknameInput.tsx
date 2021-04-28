@@ -16,32 +16,6 @@ const NicknameInput: React.FC<PropsType> = props => {
   const [isError, setIsError] = useState(false);
   const [isLoadingData, setIsLoadingData] = useState(false);
 
-  const submitHandler = async function (e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    props.resetStore();
-
-    const responseUser = await fetch('/nickname', {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify({ nickname: props.currentNickname })
-    });
-
-    if (responseUser.status === 404) {
-      setIsError(true);
-    }
-    setIsSubmit(true);
-    loadData();
-  }
-
-  async function loadData() {
-    await (await fetch('/user')).json();
-    await (await fetch("/repos")).json();
-    await (await fetch('/activity')).json()
-    setIsLoadingData(true);
-  }
-
   return (
     <div className="nicknameInput">
       {isError && <Redirect to="/notFound" />}
@@ -50,13 +24,42 @@ const NicknameInput: React.FC<PropsType> = props => {
       {!isSubmit &&
         <>
           <HeadLogo />
-          <form action="" method="post" className="loginForm" onSubmit={(e) => submitHandler(e)}>
+          <form action="" method="post" className="loginForm" onSubmit={(e) => {
+            e.preventDefault();
+            props.resetStore();
+            checkUserExist(props.currentNickname)
+              .then((response) => {
+                if (response.status === 404) {
+                  setIsError(true);
+                  return;
+                }
+                setIsSubmit(true);
+                loadData()
+                  .then(() => setIsLoadingData(true));
+              });
+          }}>
             <NicknameForm title="enter github nickname" setNickname={props.setNickname} />
           </form>
         </>
       }
     </div>
   );
+}
+
+async function checkUserExist(currentNickname: string) {
+  return await fetch('/nickname', {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify({ nickname: currentNickname })
+  });
+}
+
+async function loadData() {
+  await (await fetch('/user')).json();
+  await (await fetch("/repos")).json();
+  await (await fetch('/activity')).json();
 }
 
 export default NicknameInput;

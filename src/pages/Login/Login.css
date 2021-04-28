@@ -4,6 +4,7 @@
     height: 100%;
     grid-template-rows: 0.5fr 1.2fr 15fr;
 }
+
 .login .headLogo {
     grid-row: 2;
 }
@@ -46,6 +47,7 @@
     margin-top: 3vw;
     
 }
+
 .authButton span {
     font-variant: small-caps;
     font-size: 1.5vw;

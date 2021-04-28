@@ -16,14 +16,6 @@
     color: #9B9B9B;
 }
 
-/* .repoAdditionalPanel {
-    grid-area: info;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-} */
-
 .repoInfoComponent {
     grid-area: info;
     display: flex;

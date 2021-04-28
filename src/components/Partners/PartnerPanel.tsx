@@ -1,11 +1,12 @@
 import './Partners.css';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import Contributor from './Contributor'
+import Contributor from './Contributor';
 
 interface PropsType {
     username?: string;
 }
+
 interface ContributorsDataType {
     count: number,
     name: string,

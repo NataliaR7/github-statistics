@@ -1,5 +1,5 @@
-import './ActivityItem.css'
-import { UserActivityType, RepoActivityType, Mouth } from '../../resources/constants'
+import './ActivityItem.css';
+import { UserActivityType, RepoActivityType, Mouth } from '../../resources/constants';
 import { useEffect, useState } from 'react';
 
 interface PropsType {

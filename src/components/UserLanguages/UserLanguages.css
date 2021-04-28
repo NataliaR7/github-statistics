@@ -5,19 +5,8 @@
     grid-template-areas:
         'head'
         'lang';
-    /* overflow: hidden; */
     overflow: hidden;
 }
-
-/* .userLanguages .head {
-    grid-area: head;
-    display: flex;
-    background-color: #eeeeee;
-    font-variant: small-caps;
-    font-size: 1.3vw;
-    align-items: center;
-    padding: 0 0 0.5vh 1vw;
-} */
 
 .userLanguages .langStatistics {
     grid-area: lang;
@@ -26,34 +15,17 @@
     width: 90%;
     align-self: center;
     justify-self: center;
-    /* align-items: center; 
-    /*overflow: hidden;*/
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .comparePanel .langStatistics {
     grid-area: lang;
     display: grid;
-    /* height: 90%;
-    width: 90%; */
     align-self: center;
     justify-self: center;
-    /* align-items: center; 
-    /*overflow: hidden;
-    /* display: flex;
-    align-self: center;
-    justify-self: center; */
 }
-/* .userLanguages .langStatistics {
-    grid-area: lang;
-    /* display: flex;
-    height: 90%;
-    width: 90%;
-    align-self: center;
-    justify-self: center; 
-} */
-
 
 .userLanguages .head {
     margin-top: 1vh;

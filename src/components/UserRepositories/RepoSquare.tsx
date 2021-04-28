@@ -3,7 +3,7 @@ import starSvg from '../../resources/starSvg';
 import linkSvg from '../../resources/linkSvg';
 import { getStylizedDate } from '../../generalLogic/repositoryLogic';
 import { useRef } from 'react';
-import { cloneRepo } from '../../extentions/extentions'
+import { cloneRepo } from '../../extentions/extentions';
 
 interface PropsType {
     data: {

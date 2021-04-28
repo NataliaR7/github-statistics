@@ -16,6 +16,7 @@
     user-select: text;
     cursor: default;
 }
+
 .noSelect {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -23,21 +24,3 @@
     -o-user-select: none;
     user-select: none;
 }
-
-/*.tabBar {
-  grid-area: tabBar;
-  background-color: #454545;
-}
-
-.userPanel {
-  grid-area: userPanel;
-  background-color: #575656;
-}
-
-.mainInfo {
-  grid-area: mainInfo;
-}
-
-.App-link {
-    color: #61dafb;
-} */

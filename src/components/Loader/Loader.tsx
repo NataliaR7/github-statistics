@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import "./Loader.css";
+import React from 'react';
 import HashLoader from "react-spinners/HashLoader";
-import PropagateLoader from "react-spinners/PropagateLoader";
-import { getRandomGeneralColor } from "../../resources/colors"
-import "./Loader.css"
+import { getRandomGeneralColor } from "../../resources/colors";
 
 interface PropsType {
     withoutLabel?: boolean;

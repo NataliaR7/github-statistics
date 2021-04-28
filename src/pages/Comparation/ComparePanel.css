@@ -7,11 +7,6 @@
         'leftData rightData';
 }
 
-/* .comparePanel .leftUserData {
-    grid-area: leftData;
-    background-color: rgb(93, 187, 124);
-    align-self: center; 
-} */
 .comparePanel .leftUserData {
     grid-area: leftData;
     display: grid;
@@ -19,7 +14,6 @@
     width: 95%;
     align-self: center;
     justify-self: center;
-    /* background-color: rgb(135, 222, 171); */
 }
 
 .comparePanel .rightUserData {
@@ -29,8 +23,6 @@
     width: 95%;
     align-self: center;
     justify-self: center;
-    /* justify-content: space-around; */
-    /* background-color: burlywood; */
 }
 
 .comparePanel .header {
@@ -55,6 +47,7 @@
     font-size: 1vw;
     cursor: pointer;
 }
+
 .header .navArrow:hover {
     color: #7c7c7c;
 }

@@ -1,4 +1,4 @@
-import './NavigationPagePanel.css'
+import './NavigationPagePanel.css';
 import { useEffect, useRef, RefObject } from 'react';
 
 interface PropsType {
@@ -10,7 +10,7 @@ interface PropsType {
 const NavigationPagePanel: React.FC<PropsType> = props => {
     const navButtonPanel = useRef<HTMLDivElement>(null);
 
-    useEffect(()=>{
+    useEffect(() => {
         setButtonsStyle(props.currentReposPage, navButtonPanel);
     }, [props.currentReposPage]);
 
@@ -73,7 +73,7 @@ function setNavigationPagePanel(currentPage: number, pageCount: number) {
 function fillNavigationButtons(to: number, from: number) {
     const result = [];
     for (let i = to; i <= from; i++) {
-        if(i === 1) {
+        if (i === 1) {
             result.push(<button className="activePage">{i}</button>);
             continue;
         }

@@ -2,7 +2,7 @@ import './TabBar.css';
 import { useState } from 'react';
 import { Redirect } from 'react-router';
 import Tab from '../../containers/Tab';
-import { PagePath } from '../../resources/constants'
+import { PagePath } from '../../resources/constants';
 
 interface PropsType {
   activePage: string
