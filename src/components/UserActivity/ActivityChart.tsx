@@ -128,9 +128,6 @@ function ActivityChart(props: { data?: { [key: string]: number }, username?: str
         return {
             chart: {
                 type: 'bar',
-                // redrawOnParentResize: true,
-                // redrawOnWindowResize: true,
-                // stacked: true,
                 toolbar: {
                     show: true,
                     offsetX: -15,

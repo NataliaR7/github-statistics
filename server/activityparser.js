@@ -1,6 +1,3 @@
-// import { Mouth } from '../src/resources/constants.tsx'
-// const { Mouth } = require('../src/resources/constants.tsx');
-
 function filterActualActivity(activData){
     let currentDate = new Date()
     let yearAgoDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 11, 1, 5)
@@ -18,7 +15,6 @@ function filterActualActivity(activData){
     let actualActivityData = filterActualActivity(activityData)
     let result= {}
     let tempMonthStat = {}
-    // let parts = Object.keys(tempMonthStat)
     let tempMonthName = ""
     let isFirst = true
     for (let data of actualActivityData.reverse()){
@@ -30,7 +26,6 @@ function filterActualActivity(activData){
         tempMonthName = MONTHNAMES[month]
         isFirst = false
       }
-      // let partOfMonth = parts[getPartNumber(day)] 
       tempMonthStat[day] = data.count
 
       if (MONTHNAMES[month] != tempMonthName){
@@ -44,22 +39,6 @@ function filterActualActivity(activData){
       result[tempMonthName] = tempMonthStat 
     return result
   }
-
-  const DAYSINWEEK = 7
-//   const MONTHNAMES = [
-//     'Январь',
-//     'Февраль',
-//     'Март',
-//     'Апрель',
-//     'Май',
-//     'Июнь',
-//     'Июль',
-//     'Август',
-//     'Сентябрь',
-//     'Октябрь',
-//     'Ноябрь',
-//     'Декабрь'
-//  ];
  const MONTHNAMES = [
   "Jan",
   "Feb",

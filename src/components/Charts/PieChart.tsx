@@ -22,6 +22,7 @@ const options = (lables: string[], props: PropType) => {
             pie: {
                 startAngle: -90,
                 endAngle: 270,
+                expandOnClick: false
             }
         },
         noData: {
