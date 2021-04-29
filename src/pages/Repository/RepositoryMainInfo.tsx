@@ -36,7 +36,7 @@ const RepositoryMainInfo: React.FC<PropsType> = props => {
                 <div className="ownerPanel">
                     <span className="header">owner</span>
                     <img src={data.ownerAvatar} alt="ownerAvatar" />
-                    <span>{data.ownerName}</span>
+                    <span className="ownerName">{data.ownerName}</span>
                 </div>
                 <div className="separator"></div>
                 <div className="infoPanel">

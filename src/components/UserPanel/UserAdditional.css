@@ -59,12 +59,12 @@ a:hover {
 .small,
 .small + a,
 .small span {
-    font-size: 1.2vw;
+    font-size: 1.15vw;
 }
 
 .small + span, 
 .small + a {
-    font-size: 0.9vw;
+    font-size: 0.8vw;
 }
 
 .small img{

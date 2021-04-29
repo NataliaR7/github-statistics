@@ -39,6 +39,13 @@
     font-size: 0.8vw;
 }
 
+.ownerName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 7vw;
+} 
+
 .contributors {
     display: flex;
     flex-direction: row;
