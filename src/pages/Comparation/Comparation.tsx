@@ -53,12 +53,12 @@ const Comparation: React.FC<PropsType> = props => {
     return (
         <div className="comparation">
             {isError && <ErrorNotFound backPage={setIsError} />}
-            {!isError && props.compareNickname.length === 0
+            {!isError && (props.compareNickname.length === 0
                 ? showNicknameForm()
                 : <>
                     {!isLoadedData && <Loader />}
                     {isLoadedData && showComparePage()}
-                </>}
+                </>)}
         </div>
     );
 }

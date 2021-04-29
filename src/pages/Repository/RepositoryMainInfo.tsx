@@ -10,7 +10,7 @@ interface PropsType {
         forksCount: number;
         watchersCount: number;
         starsCount: number;
-        issuesCount: number;
+        size: number;
         description?: string;
     }
 }
@@ -44,7 +44,7 @@ const RepositoryMainInfo: React.FC<PropsType> = props => {
                     <span>Forks <span>{data.forksCount}</span></span>
                     <span>Stars <span>{data.starsCount}</span></span>
                     <span>Watchers <span>{data.watchersCount}</span></span>
-                    <span>Open issues <span>{data.issuesCount}</span></span>
+                    <span>Size <span>{formatBytes(data.size)}</span></span>
                 </div>
                 <div className="separator"></div>
                 <div className="contributorsPanel">
@@ -63,6 +63,16 @@ const RepositoryMainInfo: React.FC<PropsType> = props => {
         </div>
     );
 }
+
+function formatBytes(value: number) {
+    if (value > 1024 * 1024)
+      return `${(value / (1024 * 1024)).toFixed(0)}GB`
+    if (value > 1024)
+      return `${(value / 1024).toFixed(0)}MB`
+    if (value > 0)
+      return `${(value).toFixed(0)}KB`
+    return `${value}B`
+  }
 
 function getContributors(source: any[], repoName: string) {
     const currentRepo = source.find(repo => repo.repoName === repoName);

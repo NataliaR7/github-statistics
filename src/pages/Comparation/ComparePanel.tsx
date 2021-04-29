@@ -1,9 +1,9 @@
 import './ComparePanel.css';
-import ActivityChart from '../../components/UserActivity/ActivityChart';
+import ActivityChart from '../../components/ActivityChart/ActivityChart';
 import RecentActivityPanel from '../../components/RecentActivity/RecentActivityPanel';
 import PartnerPanel from '../../components/Partners/PartnerPanel';
 import RepoPanel from '../../components/RepoPanel/RepoPanel';
-import UserLanguages from '../../components/UserLanguages/UserLanguages';
+import LanguagesItem from '../../components/LanguagesItem/LanguagesItem';
 import { useEffect, useState } from 'react';
 
 interface PropsType {
@@ -49,8 +49,8 @@ function getCompareContent(location: string, currentState: number, compareName?:
         }
         case 1: {
             return location === "left" 
-                ? <UserLanguages width="530" height="300" />
-                : <UserLanguages username={compareName} width="530" height="300" />
+                ? <LanguagesItem width="530" height="300" />
+                : <LanguagesItem username={compareName} width="530" height="300" />
         }
         case 2: {
             return location === "left"

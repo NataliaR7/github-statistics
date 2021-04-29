@@ -14,7 +14,7 @@ const Loader: React.FC<PropsType> = props => {
 
     useEffect(() => {
         !props.delay && setTimeout(() => setIsStartLoader(true), props.delay);
-    }, []);
+    }, [props.delay]);
 
     return (<>
         {isStartLoader &&

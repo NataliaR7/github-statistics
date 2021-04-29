@@ -1,6 +1,6 @@
 import './MainInfo.css';
-import UserLanguages from '../../components/UserLanguages/UserLanguages';
-import ActivityChart from '../../components/UserActivity/ActivityChart';
+import LanguagesItem from '../../components/LanguagesItem/LanguagesItem';
+import ActivityChart from '../../components/ActivityChart/ActivityChart';
 import RecentActivityPanel from '../../components/RecentActivity/RecentActivityPanel';
 import RepoPanel from '../../components/RepoPanel/RepoPanel';
 import PartnerPanel from '../../components/Partners/PartnerPanel';
@@ -11,7 +11,7 @@ const MainInfo: React.FC = () => {
         <main className="mainInfo">
             <div className="userLanguages">
                 <Title title="languages" />
-                <UserLanguages width="500" height="300" />
+                <LanguagesItem width="500" height="300" />
             </div>
             <div className="partners">
                 <Title title="work partners" />

@@ -21,7 +21,7 @@ export default function changeUserSvg() {
 31 103 83 94 148 218 189 357 24 82 28 112 28 220 0 109 -4 134 -26 196 -34
 94 -64 139 -134 203 -105 97 -246 138 -404 120z" id="node2" className="node"></path>
             </g>
-            <g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)" /* fill="#FFFFFF" */ stroke="none">
+            <g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)" stroke="none">
 
             </g>
         </svg>

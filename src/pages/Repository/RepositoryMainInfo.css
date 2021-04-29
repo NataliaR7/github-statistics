@@ -30,7 +30,7 @@
 .ownerPanel, .infoPanel, .contributorsPanel {
     display: flex;
     flex-direction: column;
-    margin: 0 0.8vw;
+    margin: 0 0.9vw;
     align-items: center;
     gap: 0.3vw;
     font-size: 0.8vw;

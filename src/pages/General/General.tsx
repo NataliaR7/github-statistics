@@ -9,10 +9,12 @@ import UserPanel from '../../components/UserPanel/UserPanel';
 import MainInfo from '../MainInfo/MainInfo';
 import Repositories from '../../containers/Repositories';
 import Comparation from '../../containers/Comparation';
+import Cookies from 'js-cookie';
 
 const General: React.FC = () => {
     return (
         <div className="General">
+            {isLoggedIn() && <Redirect to="/login" />}
             <TabBar />
             <UserPanel />
 
@@ -24,6 +26,10 @@ const General: React.FC = () => {
             </Switch>
         </div>
     );
+}
+
+function isLoggedIn() {
+    return Cookies.get("isLoggedIn") && Cookies.get("isLoggedIn") !== "true" && Cookies.get("token");
 }
 
 export default General;

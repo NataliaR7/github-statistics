@@ -1,0 +1,25 @@
+.userIssues{
+    color: #454545;
+    display: grid;
+    grid-template-rows: 0.5fr 8fr;
+    grid-template-areas:
+        'head'
+        'issues';
+    overflow: hidden;
+}
+
+.userIssues .head {
+    margin-top: 1vh;
+}
+
+.userIssues .issuesStatistics {
+    grid-area: issues;
+    display: grid;
+    height: 90%;
+    width: 90%;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

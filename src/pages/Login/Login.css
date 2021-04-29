@@ -20,6 +20,7 @@
     border: #505050 solid 0.1vw;
     border-radius: 4vh;
     padding: 3vw;
+    padding-top: 2.8vw;
 }
 
 .welcomeForm a,
@@ -32,6 +33,10 @@
 .titleForm {
     font-size: 2.5vw;
     font-weight: 600;
+}
+.titleForm + span{
+    color: #888888;
+    font-size: 1.1vw;
 }
 
 .authButton {

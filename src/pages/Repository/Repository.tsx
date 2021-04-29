@@ -3,8 +3,8 @@ import { Redirect } from "react-router-dom";
 import React, { useEffect, useState, useRef } from 'react';
 import RepositoryMainInfo from './RepositoryMainInfo';
 import RecentActivityPanel from '../../components/RecentActivity/RecentActivityPanel';
-import UserLanguages from '../../components/UserLanguages/UserLanguages';
-import IssuesPullsStat from "../../components/ReposIssues/IssuesItem";
+import LanguagesItem from '../../components/LanguagesItem/LanguagesItem';
+import IssuesItem from "../../components/IssuesItem/IssuesItem";
 import IssueBar from "../../components/IssueBar/IssueBar";
 import Loader from "../../components/Loader/Loader";
 import linkSvg from '../../resources/linkSvg';
@@ -28,6 +28,7 @@ const Repository: React.FC<PropsType> = props => {
     useEffect(() => {
         loadRepositoryData(props.activeRepoId)
             .then((repoData) => {
+                console.log(repoData);
                 setRepoData((data: any) => data = repoData);
                 return loadIssuesData(repoData.name);
             })
@@ -61,11 +62,11 @@ const Repository: React.FC<PropsType> = props => {
                     <div className="statistics">
                         <div className="languageRepo">
                             <Head title="languages" />
-                            <UserLanguages reposName={repoData.name} width={"450"} height={"250"} />
+                            <LanguagesItem reposName={repoData.name} width={"450"} height={"250"} />
                         </div>
                         <div className="issueAvgRepo">
                             <Head title="pull request and issue closings statistics" />
-                            <IssuesPullsStat reposName={repoData.name} width={"460"} height={"240"} />
+                            <IssuesItem reposName={repoData.name} width={"460"} height={"240"} />
                         </div>
                         <div className="activityRepo">
                             <Head title="recent activity" />
@@ -112,9 +113,9 @@ function getRepoMainInfo(repoData: any) {
         ownerAvatar: repoData.owner.avatar_url,
         ownerUrl: repoData.owner.html_url,
         forksCount: repoData.forks_count,
-        watchersCount: repoData.watchers_count,
+        watchersCount: repoData.subscribers_count,
         starsCount: repoData.stargazers_count,
-        issuesCount: repoData.open_issues_count,
+        size: repoData.size,
         description: repoData.description,
     }
 }

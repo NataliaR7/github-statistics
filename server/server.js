@@ -152,19 +152,17 @@ app.get('/repos', (req, res) => {
         })
         .then((response) => {
             const currEtag = response.e_tags;
-            return (
-                getRepositoriesData(currentUser, currEtag)
-                    .then((result) => {
-                        return getDetailedRepositoriesData(currentUser, result, res)
-                    })
-                    .catch((err) => {
-                        if (err.status === 304) {
-                            res.send(response.repositories);
-                            return Promise.reject('err');
-                        }
-                        console.log(err, 'reposDet');
-                    })
-            );
+            return getRepositoriesData(currentUser, currEtag)
+                .then((result) => {
+                    return getDetailedRepositoriesData(currentUser, result, res);
+                })
+                .catch((err) => {
+                    if (err.status === 304) {
+                        res.send(response.repositories);
+                        return Promise.reject('notModified');
+                    }
+                    console.log(err, 'reposDet');
+                });
         })
         .then((repositories) => {
             Promise.all(extensions.getLanguagesDataPromises(repositories, currentUser, octokit))
@@ -173,7 +171,7 @@ app.get('/repos', (req, res) => {
                     return languagesData;
                 })
                 .then((languages) => {
-                    getContributors(currentUser, additionalReposInfo, repositories, languages)
+                    getContributors(currentUser, additionalReposInfo, repositories, languages);
                 })
                 .catch((err) => console.log(err, 'additReposErr'));
         })
@@ -271,7 +269,7 @@ app.post('/repoIssuesCount', (req, res) => {
             per_page: 100,
         })
         .then((response) => {
-            res.json(extensions.getOpenClosed(response.data.filter(data => !data["pull_request"])));
+            res.json(extensions.getOpenClosed(response.data.filter((data) => !data['pull_request'])));
         })
         .catch((err) => console.log(err));
 });
@@ -318,39 +316,36 @@ app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
 
-function getRepositoriesData(currentUser, currEtag){
-    return (
-        Promise.all(extensions.getUserReposPromises(currentUser, octokit, 2, currEtag))
-            .then((responses) => {
-                let resultData = []
-                for (let response of responses){
-                    resultData.push(...response.data)
-                }
-                return Promise.resolve({ headers: responses[0].headers, data: resultData });
-            })
-    )
+function getRepositoriesData(currentUser, currEtag) {
+    return Promise.all(extensions.getUserReposPromises(currentUser, octokit, 2, currEtag)).then((responses) => {
+        let resultData = [];
+        for (let response of responses) {
+            resultData.push(...response.data);
+        }
+        return Promise.resolve({ headers: responses[0].headers, data: resultData });
+    });
 }
 
-function getDetailedRepositoriesData(currentUser, result, res){
+function getDetailedRepositoriesData(currentUser, result, res) {
     const resultData = result.data;
-    return (
-        Promise.all(
-        extensions.getDetailedRepositoryPromises(resultData, currentUser, octokit)
-    ).then((repositoriesData) => {
-        const repos = repositoriesData.map((response) => response.data);
-        const newEtag = result.headers.etag;
-        extensions.addRepositoriesToDatabase(database, currentUser, repos,
-            newEtag, true || response
-        );
-        res.json(repos);
-        return resultData;
-    }))
+    return Promise.all(extensions.getDetailedRepositoryPromises(resultData, currentUser, octokit)).then(
+        (repositoriesData) => {
+            const repos = repositoriesData.map((response) => response.data);
+            const newEtag = result.headers.etag;
+            extensions.addRepositoriesToDatabase(database, currentUser, repos, newEtag, true || response);
+            res.json(repos);
+            return resultData;
+        }
+    );
 }
 
-function getContributors(currentUser, additionalReposInfo, repositories, languages){
+function getContributors(currentUser, additionalReposInfo, repositories, languages) {
     Promise.allSettled(extensions.getContributorsPromises(repositories, currentUser, octokit)).then(
         (contributorsData) => {
             for (let i = 0; i < contributorsData.length; i++) {
+                if (contributorsData[i].status === 'rejected') {
+                    continue;
+                }
                 const dataValue = contributorsData[i].value;
                 const repositoryName = `${dataValue.url}`.match(/\/([^/]+)\/contributors/)[1];
                 if (!additionalReposInfo.has(repositoryName)) {
