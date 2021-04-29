@@ -75,7 +75,7 @@ async function loadReposData() {
             generalLanguage: additional && Object.keys(additional.languages)[0],
             contributorsCount: additional?.contributors?.length || 0,
             forksCount: repo.forks_count,
-            watchersCount: repo.watchers_count,
+            watchersCount: repo.subscribers_count,
             starsCount: repo.stargazers_count,
             updateDate: new Date(repo.pushed_at || repo.created_at),
             cloneUrl: repo.clone_url
