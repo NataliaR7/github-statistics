@@ -6,6 +6,7 @@ const extensions = require('./extensions');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const activityParser = require('./activityparser');
+const fetch = require("node-fetch");
 
 const auth = createOAuthAppAuth({
     clientId: '9607ea01165c834b3511',
@@ -188,15 +189,14 @@ app.get('/activity', (req, res) => {
             if (response.activity && extensions.isDataActual(Number(response['repos_last_update']))) {
                 res.send(response.activity);
             } else {
-                octokit
-                    .request('GET https://github-contributions.now.sh/api/v1/{username}', {
-                        username: currentUser,
-                    })
+                fetch(`https://github-contributions.now.sh/api/v1/${currentUser}`)
                     .then((result) => {
-                        let activityData = activityParser.getActivityStatistics(result.data);
+                        result.json().then((data) => {
+                        let activityData = activityParser.getActivityStatistics(data);
                         database.updateUserActivity(currentUser, activityData);
-                        res.json(activityData);
+                        res.json(activityData);})
                     });
+                
             }
         })
         .catch((err) => console.log(err, 'activity'));

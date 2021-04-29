@@ -13,7 +13,7 @@ function addUserDataToDatabase(database, username, data, isUserExist) {
 }
 
 function isDataActual(lastDateInMilliseconds) {
-    const delay = 5 * 60 * 1000;
+    const delay = 10 * 1000;
     return Date.now() - lastDateInMilliseconds < delay;
 }
 
