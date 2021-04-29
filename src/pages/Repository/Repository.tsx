@@ -28,7 +28,6 @@ const Repository: React.FC<PropsType> = props => {
     useEffect(() => {
         loadRepositoryData(props.activeRepoId)
             .then((repoData) => {
-                console.log(repoData);
                 setRepoData((data: any) => data = repoData);
                 return loadIssuesData(repoData.name);
             })
