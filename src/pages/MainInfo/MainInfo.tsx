@@ -11,7 +11,7 @@ const MainInfo: React.FC = () => {
         <main className="mainInfo">
             <div className="userLanguages">
                 <Title title="languages" />
-                <LanguagesItem width="500" height="300" />
+                <LanguagesItem width="550" height="325" />
             </div>
             <div className="partners">
                 <Title title="work partners" />

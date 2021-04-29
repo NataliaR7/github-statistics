@@ -49,8 +49,8 @@ function getCompareContent(location: string, currentState: number, compareName?:
         }
         case 1: {
             return location === "left" 
-                ? <LanguagesItem width="530" height="300" />
-                : <LanguagesItem username={compareName} width="530" height="300" />
+                ? <LanguagesItem width="540" height="330" />
+                : <LanguagesItem username={compareName} width="540" height="330" />
         }
         case 2: {
             return location === "left"

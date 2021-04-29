@@ -4,7 +4,7 @@ interface PropsType {
     title: string;
 }
 
-const Head: React.FC<PropsType> = (props) => {
+const Title: React.FC<PropsType> = (props) => {
     return (
         <div className="head">
             <span>{props.title}</span>
@@ -12,4 +12,4 @@ const Head: React.FC<PropsType> = (props) => {
     );
 }
 
-export default Head;
+export default Title;

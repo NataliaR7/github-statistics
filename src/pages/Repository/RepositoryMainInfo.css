@@ -3,13 +3,16 @@
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 'info about';
     margin: 1.5vw;
-    gap: 8vw;
+    column-gap: 3vw;
+    width: 90%;
+    align-self: center;
 }
 
 .repoAbout {
     grid-area: about;
     display: flex;
     flex-direction: column;
+    /* justify-self: center; */
 }
 
 .repoAbout .title{
@@ -76,6 +79,9 @@
     font-variant: small-caps;
     font-size: 1.1vw;
     margin-bottom: 0.4vw;
+}
+.repoInfoComponent .info {
+    margin-bottom: 0;
 }
 
 .repositoryDescription {

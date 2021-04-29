@@ -10,7 +10,7 @@ import Loader from "../../components/Loader/Loader";
 import linkSvg from '../../resources/linkSvg';
 import { getStylizedDate } from '../../extentions/extentions';
 import { cloneRepo } from '../../extentions/extentions';
-import Head from "../../components/Title/Title";
+import Title from "../../components/Title/Title";
 
 interface PropsType {
     activeRepoId: number;
@@ -61,15 +61,15 @@ const Repository: React.FC<PropsType> = props => {
                     <RepositoryMainInfo data={getRepoMainInfo(repoData)} />
                     <div className="statistics">
                         <div className="languageRepo">
-                            <Head title="languages" />
-                            <LanguagesItem reposName={repoData.name} width={"450"} height={"250"} />
+                            <Title title="languages" />
+                            <LanguagesItem reposName={repoData.name} width={"460"} height={"240"} />
                         </div>
                         <div className="issueAvgRepo">
-                            <Head title="pull request and issue closings statistics" />
-                            <IssuesItem reposName={repoData.name} width={"460"} height={"240"} />
+                            <Title title="pull request and issue closings statistics" />
+                            <IssuesItem reposName={repoData.name} width={"485"} height={"235"} />
                         </div>
                         <div className="activityRepo">
-                            <Head title="recent activity" />
+                            <Title title="recent activity" />
                             <RecentActivityPanel type="repo" repoName={repoData.name} />
                         </div>
                         <div className="issueCountRepo">

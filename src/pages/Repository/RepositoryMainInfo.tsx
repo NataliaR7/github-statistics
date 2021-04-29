@@ -40,7 +40,7 @@ const RepositoryMainInfo: React.FC<PropsType> = props => {
                 </div>
                 <div className="separator"></div>
                 <div className="infoPanel">
-                    <span className="header">info</span>
+                    <span className="header info">info</span>
                     <span>Forks <span>{data.forksCount}</span></span>
                     <span>Stars <span>{data.starsCount}</span></span>
                     <span>Watchers <span>{data.watchersCount}</span></span>
