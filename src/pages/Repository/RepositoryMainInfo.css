@@ -12,7 +12,6 @@
     grid-area: about;
     display: flex;
     flex-direction: column;
-    /* justify-self: center; */
 }
 
 .repoAbout .title{
@@ -66,6 +65,9 @@
 
 .repoInfoComponent .header ~ span {
     color: #888888;
+}
+
+.infoPanel .header ~ span {
     align-self: flex-start;
 }
 
